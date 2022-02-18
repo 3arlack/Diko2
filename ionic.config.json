@@ -1,0 +1,7 @@
+{
+  "name": "diko",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
