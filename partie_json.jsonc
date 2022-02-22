@@ -1,0 +1,33 @@
+{
+    "joueur": [
+            {   
+                "id_joueur":1,
+                "nom_joueur": "joueur 1",
+                "score_joueur": 0,
+                "avatar_joueur":"red"
+            }
+
+    ],
+    "manche": [
+        {
+            "tour":[
+                {
+                    "mot_choisi":"",
+                    "id_mj":0,
+                    "resultat":[
+                        {
+                            "definition":"",
+                            "id_joueur":0,
+                            "id_vote":0 
+                        }
+                        
+                    ]
+                }
+            ]
+        }
+
+    ]
+    
+}
+
+// id_vote : pour qui le joueur en question vote 
