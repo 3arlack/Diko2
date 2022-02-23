@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+// import { AddJoueurComponent } from './add-joueur/add-joueur.component';
 
 const routes: Routes = [
   {
@@ -11,6 +12,10 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'add-joueur',
+    loadChildren: () => import('./add-joueur/add-joueur.module').then( m => m.AddJoueurPageModule)
+  }
 ];
 
 @NgModule({

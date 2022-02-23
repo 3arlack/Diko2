@@ -1,0 +1,33 @@
+<ion-content>
+    <ion-grid>
+      <ion-row class="ion-justify-content-center">
+        <ion-col class="ion-text-center" size="8">
+          <h1>NOMBRE DE JOUEURS</h1>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="8">
+          <ion-range min="1" max="12" step="1" snaps="true" [pin]="true" (ionChange)="log(pouet.value)" #pouet>
+            <ion-label slot="start"><h3>1</h3></ion-label>
+            <ion-label slot="end"><h3>12</h3></ion-label>
+          </ion-range>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngFor="let joueur of tableauJoueurs;let index =index">
+        <ion-col>
+          <ion-item>
+            <ion-label>Nom du joueur {{index+1}}</ion-label>
+            <ion-input id="{{'Joueur' + index}}"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+  
+      <ion-row class="ion-justify-content-end">
+        <ion-col size="2">
+          <ion-button (click)="OK()">OK</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  
+  </ion-content>
