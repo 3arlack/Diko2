@@ -1,16 +1,50 @@
-<ion-header [translucent]="true">
+<!-- <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
       Diko 2, le retour rsgrg
     </ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="fond">
 
 
   <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+<ion-grid>
+  <ion-row class="ion-justify-content-center">
+    <ion-col size="6">
+      <ion-img src="../../assets/dikologo.png"></ion-img>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-justify-content-center">
+    <ion-col size="6">
+      <ion-button id="trigger-button" expand="block">Nouvelle partie</ion-button>
+      <ion-button expand="block">Reprendre la partie</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+<ion-modal
+trigger="trigger-button"
+[swipeToClose]="true"
+>
+  <ng-template>
+    <ion-content>
+      <ion-grid>
+        <ion-row class="ion-justify-content-center">
+          <ion-col size="6">
+            <ion-button>Mode Connecté</ion-button>
+            <p>Joue en ligne avec tes amis, 
+              chacun joue sur son téléphone !</p>
+            <ion-button>Mode Déconnecté</ion-button>
+            <p>Joue avec tes amis sur un seul
+              téléphone !</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      
+    </ion-content>
+  </ng-template>
+</ion-modal>
+</div>
 </ion-content>
