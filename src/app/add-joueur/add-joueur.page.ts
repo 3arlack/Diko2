@@ -1,4 +1,5 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Joueur } from '../classes/joueur';
 import { OfflineService } from '../services/offline.service';
 
 @Component({
@@ -24,8 +25,9 @@ export class AddJoueurPage implements OnInit {
 
   OK(){
       for(let i=0;i<this.tableauJoueurs.length;i++){
-        console.log();
-      }
+        this.service.joueurs.push(new Joueur(i,(<HTMLInputElement>document.getElementById("Joueur"+i)).value,0,""));
+    }
+    console.log(this.service.joueurs);
   }
 
 }

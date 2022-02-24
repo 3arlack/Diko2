@@ -15,6 +15,14 @@ const routes: Routes = [
   {
     path: 'add-joueur',
     loadChildren: () => import('./add-joueur/add-joueur.module').then( m => m.AddJoueurPageModule)
+  },
+  {
+    path: 'add-manche',
+    loadChildren: () => import('./add-manche/add-manche.module').then( m => m.AddManchePageModule)
+  },
+  {
+    path: 'current-manche',
+    loadChildren: () => import('./current-manche/current-manche.module').then( m => m.CurrentManchePageModule)
   }
 ];
 

@@ -1,0 +1,22 @@
+<ion-content>
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <h1>Nombre de manches</h1>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-range min="1" max="12" step="1" snaps="true" [pin]="true" #pouet>
+                    <ion-label slot="start"><h3>1</h3></ion-label>
+                    <ion-label slot="end"><h3>10</h3></ion-label>
+                </ion-range>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="6">
+                <ion-img routerLink="/current-manche" (click)="nbManches(pouet.value)"  src="../../assets/choix_manches.png"></ion-img>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

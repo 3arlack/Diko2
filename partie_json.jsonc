@@ -8,9 +8,9 @@
             }
 
     ],
-    "manche": [
+    "manches": [
         {
-            "tour":[
+            "tours":[
                 {
                     "mot_choisi":"",
                     "id_mj":0,
