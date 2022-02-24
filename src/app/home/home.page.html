@@ -27,7 +27,7 @@ trigger="trigger-button"
             <ion-button>Mode Connecté</ion-button>
             <p>Joue en ligne avec tes amis, 
               chacun joue sur son téléphone !</p>
-            <ion-button routerLink="/add-joueur">Mode Déconnecté</ion-button>
+            <ion-button routerLink="/add-joueur" (click)="dismiss()">Mode Déconnecté</ion-button>
             <p>Joue avec tes amis sur un seul
               téléphone !</p>
           </ion-col>
