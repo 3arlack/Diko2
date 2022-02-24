@@ -1,4 +1,5 @@
 import { Resultat } from "./resultat";
+import { Joueur } from "./joueur";
 
 export class Tour {
     "mot_choisi":string;
@@ -10,4 +11,9 @@ export class Tour {
         this.id_mj = id_mj;
         this.resultat = resultat;
     }
+
+    // randomMJ(nbJoueurs:number){
+    //     this.id_mj = Math.floor(Math.random()*nbJoueurs);
+    //     console.log("ID du MJ : "+this.id_mj)
+    // }
 }

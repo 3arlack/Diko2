@@ -8,12 +8,12 @@ import { OfflineService } from '../services/offline.service';
 })
 export class CurrentManchePage implements OnInit {
 
-
+  mancheEnCours:number;
 
   constructor(private service:OfflineService) { }
 
   ngOnInit() {
-
+    this.mancheEnCours = this.service.mancheEnCours;
   }
 
 }

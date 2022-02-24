@@ -20,9 +20,9 @@ export class AddManchePage implements OnInit {
   nbManches(value:any){
     this.service.manches.splice(0,this.service.manches.length);
       for (let i=0;i<value;i++){
-        let manche = new Manche([new Tour("",0,[new Resultat("",0,0)])]);
+        let manche = new Manche([new Tour("",i,[new Resultat("",0,0)])]);
         for (let y=1;y<this.service.joueurs.length;y++){
-          manche.tours.push(new Tour("",0,[new Resultat("",0,0)]));
+          manche.tours.push(new Tour("",y,[new Resultat("",0,0)]));
         }
         this.service.manches.push(manche);
       }

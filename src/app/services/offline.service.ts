@@ -11,7 +11,8 @@ export class OfflineService {
   joueurs:Array<Joueur>=[];
   manches:Array<Manche>=[];
 
-  mancheEnCours:number;
+  mancheEnCours:number=0;
+  toursEnCours:number=0;
 
   constructor() { }
 }

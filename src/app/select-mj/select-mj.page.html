@@ -1,0 +1,59 @@
+<ion-content>
+<ion-grid id="pouet">
+    <ion-row>
+        <ion-col>
+            <h1>Joueur {{idMJ+1}}</h1>
+            <h2>Nom du Joueur : {{nomMJ}}</h2>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col size="8">
+            <ion-img src="../../assets/maitre_jeu.png"></ion-img>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+            <h2>Tu es le maître du jeu !</h2>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+            <p>Prend le téléphone en main ...</p>
+        </ion-col>
+    </ion-row>
+</ion-grid>
+
+<ion-modal
+trigger="pouet"
+backdropDismiss=false
+>
+  <ng-template>
+    <ion-content>
+      <ion-grid>
+        <ion-row class="ion-justify-content-center">
+          <ion-col size="6" class="ion-text-center">
+              Le mot est :
+          </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="ion-text-center">
+                <h1>ABATOR</h1>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="ion-text-center">
+                <ion-button>Change de mot</ion-button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="ion-text-center">
+                <h3>Lis-le à haute voix et clique sur l’écran</h3>
+            </ion-col>
+        </ion-row>
+      </ion-grid>
+      
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+</ion-content>

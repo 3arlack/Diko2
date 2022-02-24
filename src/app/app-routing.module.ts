@@ -23,6 +23,10 @@ const routes: Routes = [
   {
     path: 'current-manche',
     loadChildren: () => import('./current-manche/current-manche.module').then( m => m.CurrentManchePageModule)
+  },
+  {
+    path: 'select-mj',
+    loadChildren: () => import('./select-mj/select-mj.module').then( m => m.SelectMjPageModule)
   }
 ];
 
