@@ -7,17 +7,21 @@
       </ion-row>
       <ion-row class="ion-justify-content-center">
         <ion-col size="8">
-          <ion-range min="1" max="12" step="1" snaps="true" [pin]="true" (ionChange)="log(pouet.value)" #pouet>
-            <ion-label slot="start"><h3>1</h3></ion-label>
+          <!-- Use ion-Range to display a slider to select number of players. ionChange will execute a method at each change of slider's value.  -->
+          <ion-range min="2" max="12" step="1" snaps="true" [pin]="true" (ionChange)="nbJoueurs(range.value)" value="2" #range>
+            <ion-label slot="start"><h3>2</h3></ion-label>
             <ion-label slot="end"><h3>12</h3></ion-label>
           </ion-range>
+
         </ion-col>
       </ion-row>
 
+      <!-- For each player created with the slider, we create an input field to enter player's name. -->
       <ion-row *ngFor="let joueur of tableauJoueurs;let index =index">
         <ion-col>
           <ion-item>
             <ion-label>Nom du joueur {{index+1}}</ion-label>
+            <!-- Attribute a single ID to every input to retrieve values later -->
             <ion-input id="{{'Joueur' + index}}"></ion-input>
           </ion-item>
         </ion-col>

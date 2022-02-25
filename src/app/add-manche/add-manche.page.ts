@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { RangeValue } from '@ionic/core';
-import { OfflineService } from '../services/offline.service';
+import { OfflineService } from '../services/offline.service'; // import service
+
+//import classes :
 import { Manche } from '../classes/manche';
 import { Tour } from '../classes/tour';
 import { Resultat } from '../classes/resultat';
@@ -12,27 +13,36 @@ import { Resultat } from '../classes/resultat';
 })
 export class AddManchePage implements OnInit {
 
-  constructor(private service:OfflineService) { }
+  constructor(private service:OfflineService) { } //inject service
 
   ngOnInit() {
   }
 
+  // Sets the number of rounds and creates the necessary objects
   nbManches(value:any){
-    this.service.manches.splice(0,this.service.manches.length);
-      for (let i=0;i<value;i++){
-        let manche = new Manche([new Tour("",i,[new Resultat("",0,0)])]);
-        for (let b=1;b<this.service.joueurs.length;b++){
-            manche.tours[0].resultat.push(new Resultat("",0,0));
-          }
-        for (let y=1;y<this.service.joueurs.length;y++){
-          manche.tours.push(new Tour("",y,[new Resultat("",0,0)]));
-          for (let k=1;k<this.service.joueurs.length;k++){
-            manche.tours[y].resultat.push(new Resultat("",0,0));
-          }
-        }
-        this.service.manches.push(manche);
-      }
-    console.log(this.service.manches);
+
+    this.service.manches.splice(0,this.service.manches.length); // empties array of rounds
+
+    // declares temporary arrays
+    let resultats = [];
+    let tours = [];
+
+    // first loop : creates an empty "Resultats" object for every player, in temp array "resultats"
+    for (let i=0;i<this.service.joueurs.length;i++){
+      resultats.push(new Resultat("",0,0));
+    }
+
+    // second loop : creates an empty "Tour" object for every player, in temp array "tours", each including the "resultats" array
+    for (let u=0;u<this.service.joueurs.length;u++){
+      tours.push(new Tour("",0,resultats));
+    }
+    
+    //third loop : creates an empty "Manche" object for selected number of rounds, each including the "tours" array
+    for (let y=0;y<value;y++){
+      this.service.manches.push(new Manche(tours)); //puts the rounds in the service !
+    }
+
+    // console.log(this.service.manches);
   }
 
 }

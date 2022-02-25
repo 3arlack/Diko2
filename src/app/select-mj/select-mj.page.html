@@ -1,5 +1,5 @@
 <ion-content>
-<ion-grid id="pouet">
+<ion-grid id="mainGrid">
     <ion-row>
         <ion-col>
             <h1>Joueur {{idMJ+1}}</h1>
@@ -23,8 +23,9 @@
     </ion-row>
 </ion-grid>
 
+<!-- Modal to select word for this round. MJ can randomly select a new one. backdropDismiss=false to prevent user from leaving Modal -->
 <ion-modal
-trigger="pouet"
+trigger="mainGrid"
 backdropDismiss=false
 >
   <ng-template>
@@ -37,6 +38,7 @@ backdropDismiss=false
         </ion-row>
         <ion-row>
             <ion-col class="ion-text-center">
+                <!-- Display a random word by default. -->
                 <h1>{{mot}}</h1>
             </ion-col>
         </ion-row>

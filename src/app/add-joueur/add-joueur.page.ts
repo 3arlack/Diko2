@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Joueur } from '../classes/joueur';
-import { OfflineService } from '../services/offline.service';
+import { OfflineService } from '../services/offline.service'; //import our offline data service
 
 @Component({
   selector: 'app-add-joueur',
@@ -9,25 +9,24 @@ import { OfflineService } from '../services/offline.service';
 })
 export class AddJoueurPage implements OnInit {
 
-    nbJoueurs:number;
-    tableauJoueurs:Array<string>=[];
+    tableauJoueurs:Array<string>=[]; //local array of player names
 
-  constructor(private service:OfflineService) { }
+  constructor(private service:OfflineService) { } //inject the service
 
   ngOnInit() {
+    this.tableauJoueurs.length = 2;
   }
 
-  log(value){
+  // Executed each time the slider changes value, sets the length of tableauJoueurs array
+  nbJoueurs(value:any){
     this.tableauJoueurs.length = value;
-    console.log(this.tableauJoueurs);
-    console.log(value);
   }
 
+  // When user clicks OK, add each player name to the "joueurs" Array in the service
   OK(){
       for(let i=0;i<this.tableauJoueurs.length;i++){
         this.service.joueurs.push(new Joueur(i,(<HTMLInputElement>document.getElementById("Joueur"+i)).value,0,""));
     }
-    console.log(this.service.joueurs);
   }
 
 }

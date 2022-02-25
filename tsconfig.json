@@ -13,8 +13,8 @@
     "target": "es2015",
     "module": "es2020",
     "lib": ["es2018", "dom"],
-    "resolveJsonModule": true,
-    "esModuleInterop": true
+    "resolveJsonModule": true, //added to enable JSON file reading
+    "esModuleInterop": true //added to enable JSON file reading
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

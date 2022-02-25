@@ -1,9 +1,9 @@
 import { Tour } from "./tour"
 
 export class Manche {
-    "tours":[Tour]
+    "tours":Array<Tour>;
 
-    constructor(tours:[Tour]){
+    constructor(tours:Array<Tour>){
         this.tours = tours;
     }
 }
