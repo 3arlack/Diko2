@@ -1,0 +1,39 @@
+<ion-content>
+    <ion-modal *ngFor="let joueur of joueurs;let index = index"
+    [swipeToClose]="false"
+    [isOpen]="true"
+    >
+      <ng-template>
+        <ion-content>
+          <ion-grid>
+            <ion-row class="ion-justify-content-center">
+              <ion-col size="6">
+                  <h1 id="{{joueur.id_joueur}}">Joueur : {{joueur.nom_joueur}}, id : {{joueur.id_joueur}}</h1>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-justify-content-center">
+                <ion-col size="6">
+                    <h2>{{mot}}</h2>
+                </ion-col>
+              </ion-row>
+              <ion-row class="ion-justify-content-center">
+                <ion-col size="6">
+                    Quelle est ta définition ?
+                </ion-col>
+              </ion-row>
+              <ion-row class="ion-justify-content-center">
+                <ion-col size="6">
+                    <ion-textarea id="{{'definition' + index}}" inputmode="text"></ion-textarea>
+                </ion-col>
+              </ion-row>
+              <ion-row class="ion-justify-content-center">
+                <ion-col size="6">
+                    <ion-button (click)="dismiss(index)">Valider</ion-button>
+                </ion-col>
+              </ion-row>
+          </ion-grid>
+          
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+</ion-content>

@@ -37,17 +37,22 @@ backdropDismiss=false
         </ion-row>
         <ion-row>
             <ion-col class="ion-text-center">
-                <h1>ABATOR</h1>
+                <h1>{{mot}}</h1>
             </ion-col>
         </ion-row>
         <ion-row>
             <ion-col class="ion-text-center">
-                <ion-button>Change de mot</ion-button>
+                <ion-icon name="dice-outline" class="logode" (click)="randomWord()"></ion-icon>
             </ion-col>
         </ion-row>
         <ion-row>
             <ion-col class="ion-text-center">
-                <h3>Lis-le à haute voix et clique sur l’écran</h3>
+                <h3>Lis-le à haute voix et valide</h3>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="ion-text-center">
+                <ion-icon class="valide" name="checkmark-circle-outline" routerLink="/definition-joueur" (click)="dismiss()"></ion-icon>
             </ion-col>
         </ion-row>
       </ion-grid>

@@ -21,8 +21,14 @@ export class AddManchePage implements OnInit {
     this.service.manches.splice(0,this.service.manches.length);
       for (let i=0;i<value;i++){
         let manche = new Manche([new Tour("",i,[new Resultat("",0,0)])]);
+        for (let b=1;b<this.service.joueurs.length;b++){
+            manche.tours[0].resultat.push(new Resultat("",0,0));
+          }
         for (let y=1;y<this.service.joueurs.length;y++){
           manche.tours.push(new Tour("",y,[new Resultat("",0,0)]));
+          for (let k=1;k<this.service.joueurs.length;k++){
+            manche.tours[y].resultat.push(new Resultat("",0,0));
+          }
         }
         this.service.manches.push(manche);
       }

@@ -27,6 +27,18 @@ const routes: Routes = [
   {
     path: 'select-mj',
     loadChildren: () => import('./select-mj/select-mj.module').then( m => m.SelectMjPageModule)
+  },
+  {
+    path: 'definition-joueur',
+    loadChildren: () => import('./definition-joueur/definition-joueur.module').then( m => m.DefinitionJoueurPageModule)
+  },
+  {
+    path: 'propositions',
+    loadChildren: () => import('./propositions/propositions.module').then( m => m.PropositionsPageModule)
+  },
+  {
+    path: 'vote-joueur',
+    loadChildren: () => import('./propositions/vote-joueur/vote-joueur.module').then( m => m.VoteJoueurComponentModule)
   }
 ];
 
