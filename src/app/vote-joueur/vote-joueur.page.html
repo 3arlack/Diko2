@@ -1,3 +1,35 @@
 <ion-content>
-
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <h1>Définition n°{{indexDefinition+1}}</h1>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <h2>{{mot}}</h2>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <p>{{definition}}</p>
+            </ion-col>
+        </ion-row>
+        <!-- for every entry in current Tour's resultats, we create a line so we can enter votes -->
+        <ion-row>
+            <ng-container *ngFor="let joueur of joueurs; let index = index">
+                <!-- Only create element if player is NOT MJ -->
+                <ion-col *ngIf="idMj!=joueur.id_joueur"> 
+                    <ion-chip (click)="click(joueur.id_joueur)">
+                        <ion-avatar>
+                            <img src="../../assets/avatarexemple.jpg">
+                        </ion-avatar>
+                        <ion-label>
+                            {{joueur.nom_joueur}}
+                        </ion-label>
+                    </ion-chip>
+                </ion-col>
+            </ng-container>
+        </ion-row>
+    </ion-grid>
 </ion-content>

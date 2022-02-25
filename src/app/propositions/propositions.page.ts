@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { OfflineService } from '../services/offline.service'; // import service
 import { ModalController } from '@ionic/angular'; // import ModalController 
 
+//import classes
+import { Resultat } from '../classes/resultat';
+
 @Component({
   selector: 'app-propositions',
   templateUrl: './propositions.page.html',
@@ -10,7 +13,8 @@ import { ModalController } from '@ionic/angular'; // import ModalController
 export class PropositionsPage implements OnInit {
 
     mot:string;
-    resultats:Array<{definition:string,id_joueur:number,id_vote:number}>;
+    resultats:Array<Resultat>;
+    idMj:number;
 
   constructor(private ModalController:ModalController, private service:OfflineService) { } //inject service and modalController
 
@@ -18,11 +22,18 @@ export class PropositionsPage implements OnInit {
     // At startup, retrieve the chosen word
     this.mot = this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].mot_choisi;
 
+    // Retrieve current Game Master (MJ)
+    this.idMj = this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].id_mj;
+
     // Also retrieve the "resultats" Array, containing each player's definition
     this.resultats = this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].resultat
 
-    // We remove the last entry from local "resultats" Array, because it's empty (the Game Master doesn't have any definition in resultats) 
-    this.resultats.pop();
+    // Loop to find resultat of id_mj and insert real definition instead
+    for (let i=0;i<this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].resultat.length;i++){
+        if (this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].resultat[i].id_joueur == this.idMj){
+            this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].resultat[i].definition = this.service.definition;
+        }
+    }
   }
 
   // dismiss Modal

@@ -16,6 +16,7 @@ export class OfflineService {
 
   joueurs:Array<Joueur>=[]; //Player Array
   manches:Array<Manche>=[]; //Round Array
+  definition:string;
 
   mancheEnCours:number=0;
   toursEnCours:number=0;

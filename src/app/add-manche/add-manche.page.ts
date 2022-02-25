@@ -29,7 +29,7 @@ export class AddManchePage implements OnInit {
 
     // first loop : creates an empty "Resultats" object for every player, in temp array "resultats"
     for (let i=0;i<this.service.joueurs.length;i++){
-      resultats.push(new Resultat("",0,0));
+      resultats.push(new Resultat("",0,[]));
     }
 
     // second loop : creates an empty "Tour" object for every player, in temp array "tours", each including the "resultats" array

@@ -31,11 +31,14 @@ export class SelectMjPage implements OnInit {
     let randomIndex = Math.floor(Math.random()*this.service.data.data.length); //Generates a random number from 1 to database length
     
     // gets word from database and sets it in current tour in service, and also locally to display it
-    this.service.manches[this.service.mancheEnCours].tours[this.tourEnCours].mot_choisi, this.mot = this.service.data.data[randomIndex].word;
+    this.service.manches[this.service.mancheEnCours].tours[this.tourEnCours].mot_choisi = this.service.data.data[randomIndex].word;
+    this.mot = this.service.data.data[randomIndex].word;
+    this.service.definition = this.service.data.data[randomIndex].def;
   }
 
   // Dismiss modal
   dismiss(){
+      console.log(this.service.joueurs);
     this.modalController.dismiss(); //Calls dismiss method from ModalController
   }
 }

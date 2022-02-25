@@ -6,7 +6,6 @@
                 "score_joueur": 0,
                 "avatar_joueur":"red"
             }
-
     ],
     "manches": [
         {
@@ -18,7 +17,9 @@
                         {
                             "definition":"",
                             "id_joueur":0,
-                            "id_vote":0 
+                            "id_vote":[
+                                0,1,2
+                            ]
                         }
                         
                     ]

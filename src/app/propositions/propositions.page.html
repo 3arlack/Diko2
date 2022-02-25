@@ -16,7 +16,7 @@
             </ion-col>
         </ion-row>
         <!-- for every entry in current Tour's resultats, we create a line so we can enter votes -->
-        <ion-row *ngFor="let resultat of resultats; let index = index">
+        <ion-row *ngFor="let resultat of resultats; let index = index" routerLink="/vote-joueur" [queryParams]="{ indexDefinition : [index]}" >
             <ion-col>
                 <h4>Définition n°{{index+1}}</h4>
             </ion-col>

@@ -13,6 +13,8 @@ export class DefinitionJoueurPage implements OnInit {
 
     joueurs:Array<Joueur>;
     mot:string;
+    idMj:number;
+    indexJoueur:number=0;
 
   // inject service, ModalController (to dismiss modals) and router (to navigate to new route at the end)
   constructor(private service:OfflineService, public modalController:ModalController, private router: Router) { }
@@ -22,18 +24,13 @@ export class DefinitionJoueurPage implements OnInit {
     this.mot = this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].mot_choisi;
     // Retrieve array of players
     this.joueurs = this.service.joueurs;
-    // Check every player
-    for (let i=0;i<this.joueurs.length;i++){
-      // if player is game master...
-      if (this.joueurs[i].id_joueur == this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].id_mj){
-          this.joueurs.splice(i,1); //...we remove the player from local array of players
-      }
-    }
+    //Retrieve id of current Game Master (MJ)
+    this.idMj = this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].id_mj;
   }
 
   //on dismiss Modal
   dismiss(index:any){
-
+    this.indexJoueur++; // increment indexJoueur
     // We retrieve current player's definition and put it in the service
     this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].resultat[index].definition = (<HTMLIonTextareaElement>document.getElementById("definition"+index)).value;
 
@@ -41,8 +38,8 @@ export class DefinitionJoueurPage implements OnInit {
     this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].resultat[index].id_joueur = 
     this.joueurs[index].id_joueur;
     
-    //Check : if we get to the "last" modal (reverse order), we navigate to next page and dismiss modal ; else, just dismiss current modal.
-    if(index == 0){
+    //Check : if we get to the last modal, we navigate to next page and dismiss modal ; else, just dismiss current modal.
+    if(this.indexJoueur == this.joueurs.length -1){
       this.router.navigate(['/','propositions']);
       this.modalController.dismiss();
     } else{
