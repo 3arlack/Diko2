@@ -47,6 +47,10 @@ export class VoteJoueurPage implements OnInit {
   ngAfterViewInit() {
     // Retrieves votes
     let arrayVote = this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].resultat[this.indexDefinition].id_vote;
+    
+    // Retrieves all the "resultat" arrays
+    let resultatTemp = this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours];
+    
     // Browses ion-chips, if chip is in arrayVote (has been voted already), color it ;
     this.chips.forEach((chip,index) => {
       for(let y=0;y<arrayVote.length;y++){
@@ -57,6 +61,15 @@ export class VoteJoueurPage implements OnInit {
       // Also, if chip is Game Master's (MJ), disable it 
       if (this.idMj == index){
         chip.disabled = true;
+      }
+
+      // Check votes in each "resultat" array ; if we find a vote corresponding to current chip index AND not in current "resultat" array, we disable it
+      for (let i=0;i<resultatTemp.resultat.length;i++){
+        for (let y=0;y<resultatTemp.resultat[i].id_vote.length;y++){
+          if (resultatTemp.resultat[i].id_vote[y] == index && i !== this.indexDefinition){
+            chip.disabled = true;
+          }
+        }
       }
     });
   }
