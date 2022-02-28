@@ -13,14 +13,14 @@ import { IonChip } from '@ionic/angular';
 })
 export class VoteJoueurPage implements OnInit {
 
-    joueurs:Array<Joueur>;
-    indexDefinition:number;
-    mot:string;
-    definition:string;
-    idMj:number;
+  joueurs:Array<Joueur>;
+  indexDefinition:number;
+  mot:string;
+  definition:string;
+  idMj:number;
 
-    //View Children Decorator : retrieve all IonChip Elements as a QueryList (looks like an array)
-    @ViewChildren(IonChip) chips:QueryList<HTMLIonChipElement>;
+  //View Children Decorator : retrieve all IonChip Elements as a QueryList (looks like an array)
+  @ViewChildren(IonChip) chips:QueryList<HTMLIonChipElement>;
 
   constructor(private route:ActivatedRoute, private service:OfflineService) { // inject service, and ActivatedRoute to retrieve Route queryparams
 
@@ -49,12 +49,12 @@ export class VoteJoueurPage implements OnInit {
     let arrayVote = this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].resultat[this.indexDefinition].id_vote;
     // Browses ion-chips, if chip is in arrayVote (has been voted already), color it ;
     this.chips.forEach((chip,index) => {
-      for(let y=0;y<this.joueurs.length;y++){
+      for(let y=0;y<arrayVote.length;y++){
         if(arrayVote[y] == index){
           chip.color="success";
         }
       }
-      // Also, if chip is Game Master (MJ), disable it 
+      // Also, if chip is Game Master's (MJ), disable it 
       if (this.idMj == index){
         chip.disabled = true;
       }
