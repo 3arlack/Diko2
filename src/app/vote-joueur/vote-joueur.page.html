@@ -19,7 +19,7 @@
         <ion-row>
             <ng-container *ngFor="let joueur of joueurs; let index = index">
                 <!-- Only create element if player is NOT MJ -->
-                <ion-col *ngIf="idMj!=joueur.id_joueur"> 
+                <ion-col>
                     <ion-chip (click)="click(joueur.id_joueur)">
                         <ion-avatar>
                             <img src="../../assets/avatarexemple.jpg">

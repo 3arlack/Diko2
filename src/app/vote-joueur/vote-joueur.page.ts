@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren,ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'; // import ActiveRoute
 import { OfflineService } from '../services/offline.service'; // import service
 
@@ -19,7 +19,8 @@ export class VoteJoueurPage implements OnInit {
     definition:string;
     idMj:number;
 
-    @ViewChildren(IonChip) container:QueryList<HTMLIonChipElement>;
+    //View Children Decorator : retrieve all IonChip Elements as a QueryList (looks like an array)
+    @ViewChildren(IonChip) chips:QueryList<HTMLIonChipElement>;
 
   constructor(private route:ActivatedRoute, private service:OfflineService) { // inject service, and ActivatedRoute to retrieve Route queryparams
 
@@ -30,28 +31,32 @@ export class VoteJoueurPage implements OnInit {
 
     // retrieve "query parameter" in the route to get index number of definition
     this.route.queryParams.subscribe(param => {
-        this.indexDefinition = parseInt(param['indexDefinition']);
+      this.indexDefinition = parseInt(param['indexDefinition']);
 
-        //retrieve word definition
-        this.definition = this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].resultat[this.indexDefinition].definition;
+      //retrieve word definition
+      this.definition = this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].resultat[this.indexDefinition].definition;
       })
   }
 
   ngOnInit() {
     // retrieve list of players
     this.joueurs = this.service.joueurs;
-}
-
+  }
+  
+  // ViewChildren's QueryList is accessible only starting from this method
   ngAfterViewInit() {
+    // Retrieves votes
     let arrayVote = this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].resultat[this.indexDefinition].id_vote;
-    console.log(arrayVote);
-    this.container.forEach((chip,index=1) => {
-
-      for(let y=0;y<arrayVote.length;y++){
-        // if(arrayVote[y] == index){
+    // Browses ion-chips, if chip is in arrayVote (has been voted already), color it ;
+    this.chips.forEach((chip,index) => {
+      for(let y=0;y<this.joueurs.length;y++){
+        if(arrayVote[y] == index){
           chip.color="success";
-        //   console.log(index);
-        // }
+        }
+      }
+      // Also, if chip is Game Master (MJ), disable it 
+      if (this.idMj == index){
+        chip.disabled = true;
       }
     });
   }
@@ -62,9 +67,10 @@ export class VoteJoueurPage implements OnInit {
 
     if (index !== -1) { //if value exists in array
       this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].resultat[this.indexDefinition].id_vote.splice(index, 1); //delete it
+      this.chips.get(id_joueur).color = ""; // removes color from chip
     } else { //else, add it to the array
       this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].resultat[this.indexDefinition].id_vote.push(id_joueur);
+      this.chips.get(id_joueur).color = "success"; // sets color on chip
     }
-    // console.log(this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].resultat[this.indexDefinition]);
   }
 }
