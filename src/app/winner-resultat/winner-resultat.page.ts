@@ -28,19 +28,15 @@ export class WinnerResultatPage implements OnInit {
           if (this.joueurs[i].id_joueur !== this.service.manches[p].tours[x].id_mj){
             for (let y=0;y<this.service.manches[p].tours[x].resultat.length;y++){
               for (let z=0;z<this.service.manches[p].tours[x].resultat[y].id_vote.length;z++){
-
                 //Check bonne définition
                 if(this.service.manches[p].tours[x].id_mj == this.service.manches[p].tours[x].resultat[y].id_joueur && this.joueurs[i].id_joueur == this.service.manches[p].tours[x].resultat[y].id_vote[z]){
                   console.log("point bonne définition accordé à : "+this.joueurs[i].nom_joueur)
                   this.joueurs[i].score_joueur++;
-                }
-
-                // si le joueur a voté pour la définition ET que ce n'est pas la sienne
-                if (this.joueurs[i].id_joueur == this.service.manches[p].tours[x].resultat[y].id_vote[z] && this.joueurs[i].id_joueur !== this.service.manches[p].tours[x].resultat[y].id_joueur){
-                  console.log("point vote accordé à : "+this.joueurs[i].nom_joueur+", tour : "+x+", resultat : "+y);
+                // sinon, si le joueur a voté pour la définition ET que ce n'est pas la sienne...
+                } else if (this.joueurs[i].id_joueur == this.service.manches[p].tours[x].resultat[y].id_vote[z] && this.joueurs[i].id_joueur !== this.service.manches[p].tours[x].resultat[y].id_joueur){
+                  console.log("point vote accordé à : "+this.joueurs[this.service.manches[p].tours[x].resultat[y].id_joueur].nom_joueur+", tour : "+x+", resultat : "+y);
                   // this.joueurs[i].score_joueur++;
                   this.joueurs[this.service.manches[p].tours[x].resultat[y].id_joueur].score_joueur++;
-
                 }
               }
             }
@@ -48,8 +44,16 @@ export class WinnerResultatPage implements OnInit {
         }
       }
     }
-    console.log(this.service.joueurs);
-    console.log(this.service.manches);
+
+    // Sort player array to find winner
+    this.joueurs.sort((a,b)=>{
+      return b.score_joueur - a.score_joueur;
+    });
+    this.winner = this.joueurs[0].nom_joueur;
+
+    // Reset all values
+    this.service.mancheEnCours=0;
+    this.service.toursEnCours=0;
   }
 
   dismiss(){

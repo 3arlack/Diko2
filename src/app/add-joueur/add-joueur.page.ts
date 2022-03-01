@@ -14,6 +14,9 @@ export class AddJoueurPage implements OnInit {
   constructor(private service:OfflineService) { } //inject the service
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter(){
     this.tableauJoueurs.length = 2;
   }
 
@@ -24,6 +27,7 @@ export class AddJoueurPage implements OnInit {
 
   // When user clicks OK, add each player name to the "joueurs" Array in the service
   OK(){
+      this.service.joueurs.length=0;
       for(let i=0;i<this.tableauJoueurs.length;i++){
         this.service.joueurs.push(new Joueur(i,(<HTMLInputElement>document.getElementById("Joueur"+i)).value,0,""));
     }
