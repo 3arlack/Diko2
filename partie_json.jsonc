@@ -31,4 +31,4 @@
     
 }
 
-// id_vote : pour qui le joueur en question vote 
+// id_vote : tableau des id des joueurs qui ont voté pour cette définition
