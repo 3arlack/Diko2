@@ -34,15 +34,13 @@ export class AddManchePage implements OnInit {
 
     // second loop : creates an empty "Tour" object for every player, in temp array "tours", each including the "resultats" array
     for (let u=0;u<this.service.joueurs.length;u++){
-      tours.push(new Tour("",u,resultats));
+      tours.push(new Tour("",u,JSON.parse(JSON.stringify(resultats)))); //TODO JSON Parse & stringify : temp solution to do a deep copy of source array, needs better alternative
     }
     
     //third loop : creates an empty "Manche" object for selected number of rounds, each including the "tours" array
-    for (let y=0;y<value;y++){
-      this.service.manches.push(new Manche(tours)); //puts the rounds in the service !
+    for (let y=0;y<value;y++){ //puts the rounds in the service !
+        this.service.manches.push(new Manche(JSON.parse(JSON.stringify(tours)))); //TODO JSON Parse & stringify : temp solution to do a deep copy of source array, needs better alternative
     }
-
-    // console.log(this.service.manches);
   }
 
 }
