@@ -13,6 +13,9 @@ export class CurrentManchePage implements OnInit {
   constructor(private service:OfflineService) { } //inject service
 
   ngOnInit() {
+}
+
+ionViewWillEnter(){
     this.mancheEnCours = this.service.mancheEnCours; //gets current Round from service and sets local variable
   }
 

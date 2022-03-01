@@ -40,6 +40,7 @@ export class DefinitionJoueurPage implements OnInit {
     
     //Check : if we get to the last modal, we navigate to next page and dismiss modal ; else, just dismiss current modal.
     if(this.indexJoueur == this.joueurs.length -1){
+      this.indexJoueur = 0;
       this.router.navigate(['/','propositions']);
       this.modalController.dismiss();
     } else{

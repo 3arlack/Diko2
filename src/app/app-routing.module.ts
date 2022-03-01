@@ -38,6 +38,14 @@ const routes: Routes = [
   {
     path: 'vote-joueur',
     loadChildren: () => import('./vote-joueur/vote-joueur.module').then( m => m.VoteJoueurPageModule)
+  },
+  {
+    path: 'reponse',
+    loadChildren: () => import('./reponse/reponse.module').then( m => m.ReponsePageModule)
+  },
+  {
+    path: 'winner-resultat',
+    loadChildren: () => import('./winner-resultat/winner-resultat.module').then( m => m.WinnerResultatPageModule)
   }
 ];
 

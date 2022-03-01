@@ -4,6 +4,7 @@ import { ModalController } from '@ionic/angular'; // import ModalController
 
 //import classes
 import { Resultat } from '../classes/resultat';
+import { Joueur } from '../classes/joueur';
 
 @Component({
   selector: 'app-propositions',
@@ -15,8 +16,11 @@ export class PropositionsPage implements OnInit {
     mot:string;
     resultats:Array<Resultat>;
     idMj:number;
+    joueurs:Array<Joueur>;
 
-  constructor(private ModalController:ModalController, private service:OfflineService) { } //inject service and modalController
+  constructor(private ModalController:ModalController, private service:OfflineService) {
+      this.joueurs = this.service.joueurs; // retrieve players
+  } //inject service and modalController
 
   ngOnInit() {
     // At startup, retrieve the chosen word
@@ -38,6 +42,6 @@ export class PropositionsPage implements OnInit {
 
   // dismiss Modal
   dismiss(){
-      this.ModalController.dismiss();
+    this.ModalController.dismiss();
   }
 }

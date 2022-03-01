@@ -24,17 +24,17 @@ export class AddManchePage implements OnInit {
     this.service.manches.splice(0,this.service.manches.length); // empties array of rounds
 
     // declares temporary arrays
-    let resultats = [];
-    let tours = [];
+    let resultats = new Array;
+    let tours = new Array;
 
     // first loop : creates an empty "Resultats" object for every player, in temp array "resultats"
     for (let i=0;i<this.service.joueurs.length;i++){
-      resultats.push(new Resultat("",0,[]));
+      resultats.push(new Resultat("",i,[]));
     }
 
     // second loop : creates an empty "Tour" object for every player, in temp array "tours", each including the "resultats" array
     for (let u=0;u<this.service.joueurs.length;u++){
-      tours.push(new Tour("",0,resultats));
+      tours.push(new Tour("",u,resultats));
     }
     
     //third loop : creates an empty "Manche" object for selected number of rounds, each including the "tours" array
