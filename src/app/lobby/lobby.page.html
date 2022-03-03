@@ -5,26 +5,26 @@
                 <h1>JOUEURS CONNECTES</h1>
             </ion-col>
         </ion-row>
-        <ion-row>
+        <ion-row *ngFor="let joueur of joueurs;let index = index">
             <ion-col class="ion-text-center">
                 <ion-chip>
                     <ion-avatar>
                         <img src="../../assets/avatarexemple.jpg">
                     </ion-avatar>
                     <ion-label>
-                        Nom du joueur
+                        {{joueur.nom_joueur}}
                     </ion-label>
                 </ion-chip>
             </ion-col>
         </ion-row>
         <ion-row>
             <ion-col class="ion-text-center">
-                4/10
+                {{joueurs.length}}/10
             </ion-col>
         </ion-row>
         <ion-row>
             <ion-col class="ion-text-center">
-                <ion-button routerLink="/current-manche">Démarrer</ion-button>
+                <ion-button routerLink="/current-manche-online">Démarrer</ion-button>
             </ion-col>
         </ion-row>
     </ion-grid>

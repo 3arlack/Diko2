@@ -2,7 +2,7 @@
     <ion-grid>
         <ion-row>
             <ion-col>
-            <h1>Définition n°1</h1>
+            <h1>Définition n°{{indexDefinition+1}}</h1>
             </ion-col>
         </ion-row>
         <ion-row>
@@ -19,8 +19,8 @@
         <ion-row>
             <!-- Only create element if player is NOT MJ -->
             <ion-col class="ion-text-center">
-                <ion-button>Choisir cette définition</ion-button>
-                <ion-button>Retour</ion-button>
+                <ion-button (click)="validate()">Choisir cette définition</ion-button>
+                <ion-button (click)="goBack()">Retour</ion-button>
             </ion-col>
         </ion-row>
     </ion-grid>

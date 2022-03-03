@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Joueur } from '../classes/joueur';
+import { ServiceApiService } from '../services/service-api.service';
 
 @Component({
   selector: 'app-lobby',
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LobbyPage implements OnInit {
 
-  constructor() { }
+  joueurs:Array<Joueur>;
+
+  constructor(private service:ServiceApiService) {
+    this.joueurs = this.service.mesJoueurs;
+  }
 
   ngOnInit() {
   }

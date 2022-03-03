@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ServiceApiService } from '../services/service-api.service';
 
 @Component({
   selector: 'app-loading',
@@ -7,13 +9,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoadingPage implements OnInit {
 
-    message:string;
+  message:string;
 
-  constructor() {
-      this.message = "En attente des autres réponses...";
+  constructor(private route:ActivatedRoute, private service:ServiceApiService) {
+
+    this.route.queryParams.subscribe(param => {
+      switch(param["status"]){
+        case "definitionOK":
+          this.message = "En attente des autres joueurs..."
+          break;
+        default:
+          break;
+      }
+    });
   }
 
   ngOnInit() {
   }
 
+  ionViewWillEnter(){
+    // Looping code here to check periodically if all players have answered
+  }
 }
