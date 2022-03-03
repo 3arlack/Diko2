@@ -1,0 +1,46 @@
+<ion-content>
+    <ion-grid>
+
+        <ion-row>
+            <ion-col>
+                <h1>Propositions</h1>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col>
+                <h2>{{mot}}</h2>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col>
+                <p>Clique sur les définitions pour les lire et vote pour celle qui te paraît être la bonne !</p>
+            </ion-col>
+        </ion-row>
+
+        <!-- for every entry in current Tour's resultats, we create a line so we can enter votes -->
+        <ion-row routerLink="/vote-joueur" [queryParams]="{ indexDefinition : [0]}" >
+            <ion-col>
+                <h4>Définition n°1</h4>
+            </ion-col>
+            <ion-col>
+                <ion-chip>
+                    <ion-avatar>
+                        <img src="../../assets/avatarexemple.jpg">
+                    </ion-avatar>
+                    <ion-label>
+                        Nom du joueur
+                        <!-- {{joueurs[vote].nom_joueur}} -->
+                    </ion-label>
+                </ion-chip>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col>
+                <ion-button routerLink="/reponse">Valider les votes</ion-button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
