@@ -54,6 +54,26 @@ const routes: Routes = [
   {
     path: 'lobby',
     loadChildren: () => import('./lobby/lobby.module').then( m => m.LobbyPageModule)
+  },
+  {
+    path: 'loading',
+    loadChildren: () => import('./loading/loading.module').then( m => m.LoadingPageModule)
+  },
+  {
+    path: 'current-manche-online',
+    loadChildren: () => import('./current-manche-online/current-manche-online.module').then( m => m.CurrentMancheOnlinePageModule)
+  },
+  {
+    path: 'online-definition',
+    loadChildren: () => import('./online-definition/online-definition.module').then( m => m.OnlineDefinitionPageModule)
+  },
+  {
+    path: 'online-proposition',
+    loadChildren: () => import('./online-proposition/online-proposition.module').then( m => m.OnlinePropositionPageModule)
+  },
+  {
+    path: 'online-vote',
+    loadChildren: () => import('./online-vote/online-vote.module').then( m => m.OnlineVotePageModule)
   }
 ];
 

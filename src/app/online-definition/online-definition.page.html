@@ -1,0 +1,34 @@
+<ion-content>
+    <ion-grid>
+        <ion-row>
+            <ion-col class="ion-text-center">
+                <h1>Joueur</h1>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="ion-text-center">
+                <h2>{{mot}}</h2>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="ion-text-center">
+                Quelle est ta définition ?
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="8">
+                <ion-textarea inputmode="text" #definition></ion-textarea>
+            </ion-col>
+        </ion-row>
+        <ion-row class="ion-justify-content-center">
+            <ion-col size="8">
+                <ion-button (click)="onClick()">Valider</ion-button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <img src="../../assets/joueur2.png">
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
