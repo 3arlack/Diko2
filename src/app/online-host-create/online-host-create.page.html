@@ -1,0 +1,45 @@
+<ion-content>
+    <ion-grid>
+        <ion-row class="ion-justify-content-center">
+            <ion-col class="ion-text-center" size="8">
+            <h1>NOMBRE DE JOUEURS</h1>
+            </ion-col>
+        </ion-row>
+        <ion-row class="ion-justify-content-center">
+            <ion-col size="8">
+            <!-- Use ion-Range to display a slider to select number of players. ionChange will execute a method at each change of slider's value.  -->
+            <ion-range min="2" max="12" step="1" snaps="true" [pin]="true" value="2" #playerCount>
+                <ion-label slot="start"><h3>2</h3></ion-label>
+                <ion-label slot="end"><h3>12</h3></ion-label>
+            </ion-range>
+            </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-justify-content-center">
+            <ion-col size="8">
+                <ion-input placeholder="Votre nom" #playername></ion-input>        
+            </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-justify-content-center">
+            <ion-col class="ion-text-center" size="8">
+                <h1>NOMBRE DE MANCHES</h1>
+            </ion-col>
+        </ion-row>
+        <ion-row class="ion-justify-content-center">
+            <ion-col size="8">
+                <!-- Use ion-Range to display a slider to select number of rounds. We set the value at 1, so if user doesn't interact with slider, we still have at least 1 round ! -->
+                <ion-range min="1" max="10" step="1" snaps="true" [pin]="true" #range value="1">
+                    <ion-label slot="start"><h3>1</h3></ion-label>
+                    <ion-label slot="end"><h3>10</h3></ion-label>
+                </ion-range>
+            </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-justify-content-end">
+            <ion-col size="2">
+            <ion-button routerLink="/lobby" (click)="OK()">OK</ion-button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

@@ -46,6 +46,14 @@ const routes: Routes = [
   {
     path: 'winner-resultat',
     loadChildren: () => import('./winner-resultat/winner-resultat.module').then( m => m.WinnerResultatPageModule)
+  },
+  {
+    path: 'online-host-create',
+    loadChildren: () => import('./online-host-create/online-host-create.module').then( m => m.OnlineHostCreatePageModule)
+  },
+  {
+    path: 'lobby',
+    loadChildren: () => import('./lobby/lobby.module').then( m => m.LobbyPageModule)
   }
 ];
 

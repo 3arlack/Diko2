@@ -25,7 +25,7 @@ trigger="trigger-button"
       <ion-grid>
         <ion-row class="ion-justify-content-center">
           <ion-col size="6">
-            <ion-button>Mode Connecté</ion-button>
+            <ion-button routerLink="/online-host-create" (click)="dismiss()">Mode Connecté</ion-button>
             <p>Joue en ligne avec tes amis, 
               chacun joue sur son téléphone !</p>
             <ion-button routerLink="/add-joueur" (click)="dismiss()">Mode Déconnecté</ion-button>
