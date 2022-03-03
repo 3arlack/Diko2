@@ -82,7 +82,6 @@ export class WinnerResultatPage implements OnInit {
       return b.score_joueur - a.score_joueur;
     });
     this.winner = this.joueurs[0].nom_joueur;
-    
   });
   }
 

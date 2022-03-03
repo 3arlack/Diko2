@@ -10,6 +10,7 @@ import { ServiceApiService } from '../services/service-api.service';
 export class LoadingPage implements OnInit {
 
   message:string;
+  progress:number;
 
   constructor(private route:ActivatedRoute, private service:ServiceApiService, private router:Router) {
 
@@ -30,6 +31,12 @@ export class LoadingPage implements OnInit {
   ionViewWillEnter(){
     // Looping code here to check periodically if all players have answered
     // Temp code to simulate waiting for answers
-    setTimeout(()=>this.router.navigate(["online-proposition"]),2000);
+    setTimeout(()=>this.progress=1/4,200);
+    setTimeout(()=>this.progress=2/4,700);
+    setTimeout(()=>this.progress=3/4,1200);
+    setTimeout(()=>{
+      this.progress=1;
+      this.router.navigate(["online-proposition"]);
+    },2000);
   }
 }
