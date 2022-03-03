@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ServiceApiService } from '../services/service-api.service';
 
 @Component({
@@ -11,7 +11,7 @@ export class LoadingPage implements OnInit {
 
   message:string;
 
-  constructor(private route:ActivatedRoute, private service:ServiceApiService) {
+  constructor(private route:ActivatedRoute, private service:ServiceApiService, private router:Router) {
 
     this.route.queryParams.subscribe(param => {
       switch(param["status"]){
@@ -29,5 +29,7 @@ export class LoadingPage implements OnInit {
 
   ionViewWillEnter(){
     // Looping code here to check periodically if all players have answered
+    // Temp code to simulate waiting for answers
+    setTimeout(()=>this.router.navigate(["online-proposition"]),2000);
   }
 }

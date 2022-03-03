@@ -14,17 +14,17 @@ export class OnlineDefinitionPage implements OnInit {
     mot:string;
 
   constructor(private service:ServiceApiService) {
-    this.mot = this.service.maManche[this.service.mancheEnCours].tours[this.service.tourEnCours].mot_choisi;
   }
-
+  
   ngOnInit() {
   }
-
+  
   onClick(){
-      console.log(this.definition.value);
+    console.log(this.definition.value);
   }
-
+  
   ionViewWillEnter(){
+    this.mot = this.service.maManche[this.service.mancheEnCours].tours[this.service.tourEnCours].mot_choisi;
   }
 
 }

@@ -41,16 +41,16 @@
                 <p>Votes en cours : {{votes}}/{{joueurs.length}}</p>
             </ion-col>
         </ion-row>
-
+        <!-- Display progress bar with current completed votes -->
         <ion-row>
             <ion-col>
-                <ion-progress-bar [value]=""></ion-progress-bar>
+                <ion-progress-bar [value]="votes/joueurs.length"></ion-progress-bar>
             </ion-col>
         </ion-row>
 
         <ion-row>
             <ion-col>
-                <ion-button routerLink="/reponse">Valider les votes</ion-button>
+                <ion-button routerLink="/reponse" [queryParams]="{status:'online'}">Valider les votes</ion-button>
             </ion-col>
         </ion-row>
     </ion-grid>
