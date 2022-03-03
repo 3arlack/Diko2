@@ -42,7 +42,7 @@ export class ReponsePage implements OnInit {
         if (this.onlineService.tourEnCours == this.onlineService.mesJoueurs.length -1){
           // if there are no more rounds left, we display the winner
           if (this.onlineService.mancheEnCours == this.onlineService.maManche.length -1){
-            this.route.navigate(['winner-resultat']);
+            this.route.navigate(['winner-resultat'],{queryParams: {status:"online"}});
           } else { // else, we go to a new round & reset the game turns counter
             this.onlineService.mancheEnCours++;
             this.onlineService.tourEnCours=0;
