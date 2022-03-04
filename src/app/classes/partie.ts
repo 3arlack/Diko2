@@ -3,6 +3,7 @@ import { Manche } from "./manche";
 
 
 export interface Partie {
+    id:number;
     joueur: Array<Joueur>;
     manche: Array<Manche>;
     mancheEnCours : number;

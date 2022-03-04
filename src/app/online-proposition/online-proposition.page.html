@@ -25,12 +25,12 @@
                 <h4>Définition n°{{index+1}}</h4>
             </ion-col>
             <ion-col>
-                <ion-chip *ngFor="let vote of def.id_vote;let z = index" [attr.data-index]="z">
+                <ion-chip *ngFor="let vote of def.id_vote;let z = index;" [attr.data-index]="z">
                     <ion-avatar>
-                        <img src="../../assets/avatarexemple.jpg">
+						<img src="../../assets/avatarexemple.jpg">
                     </ion-avatar>
                     <ion-label>
-                        {{joueurs[vote].nom_joueur}}
+						{{findPlayerName(vote)}}
                     </ion-label>
                 </ion-chip>
             </ion-col>

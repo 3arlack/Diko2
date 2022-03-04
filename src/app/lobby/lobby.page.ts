@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Joueur } from '../classes/joueur';
+import { Partie } from '../classes/partie';
+import { PartieService } from '../services/partie.service';
 import { ServiceApiService } from '../services/service-api.service';
 
 @Component({
@@ -9,10 +11,17 @@ import { ServiceApiService } from '../services/service-api.service';
 })
 export class LobbyPage implements OnInit {
 
-  joueurs:Array<Joueur>;
+  joueurs:Array<Joueur>=[];
+  partie:Partie[];
 
-  constructor(private service:ServiceApiService) {
-    this.joueurs = this.service.mesJoueurs;
+  constructor(private service:PartieService) {
+    this.service.getPartie().subscribe(u => {
+      this.partie = u;
+      // console.log(u);
+      this.joueurs = u[0].joueur;
+      // console.log(this.joueurs);
+    });
+
   }
 
   ngOnInit() {

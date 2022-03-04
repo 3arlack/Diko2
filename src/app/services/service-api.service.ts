@@ -26,6 +26,7 @@ export class ServiceApiService implements InMemoryDbService {
   createDb() {
       const PARTIE : Partie[] = [
       {
+        id:0,
         joueur : [
           {id_joueur : 12, nom_joueur: "Pierre", score_joueur: 0, avatar_joueur: "vert"},
           {id_joueur : 13, nom_joueur: "Marie", score_joueur: 0, avatar_joueur: "rouge"},

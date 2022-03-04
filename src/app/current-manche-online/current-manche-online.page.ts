@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ServiceApiService } from '../services/service-api.service';
+import { Partie } from '../classes/partie';
+import { PartieService } from '../services/partie.service';
 
 @Component({
   selector: 'app-current-manche-online',
@@ -8,15 +9,19 @@ import { ServiceApiService } from '../services/service-api.service';
 })
 export class CurrentMancheOnlinePage implements OnInit {
 
-    mancheEnCours:number;
+    mancheEnCours:number=0;
+    partie:Partie[];
 
-  constructor(private service:ServiceApiService) { }
+  constructor(private service:PartieService) { }
 
   ngOnInit() {
   }
 
   ionViewWillEnter(){
-    this.mancheEnCours = this.service.mancheEnCours; //gets current Round from service and sets local variable
+    this.service.getPartie().subscribe(u => {
+      this.partie = u;
+      this.mancheEnCours = u[0].mancheEnCours;
+    });
   }
 
 }

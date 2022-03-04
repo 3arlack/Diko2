@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { PartieService } from '../services/partie.service';
 import { ServiceApiService } from '../services/service-api.service';
 
 @Component({
@@ -14,12 +15,14 @@ export class OnlineVotePage implements OnInit {
   definition:string;
   indexDefinition:number;
 
-  constructor(private route:ActivatedRoute,private service:ServiceApiService,private NavCtrl:NavController) {
+  constructor(private route:ActivatedRoute,private service:PartieService,private NavCtrl:NavController) {
     
     this.route.queryParams.subscribe(param => {
       this.indexDefinition = parseInt(param["indexDefinition"]);
-      this.mot = this.service.maManche[this.service.mancheEnCours].tours[this.service.tourEnCours].mot_choisi;
-      this.definition = this.service.maManche[this.service.mancheEnCours].tours[this.service.tourEnCours].resultat[this.indexDefinition].definition;
+        this.service.getPartie().subscribe(u => {
+        this.mot = u[0].manche[u[0].mancheEnCours].tours[u[0].tourEnCours].mot_choisi;
+        this.definition = u[0].manche[u[0].mancheEnCours].tours[u[0].tourEnCours].resultat[this.indexDefinition].definition;
+      });
     });
   }
 

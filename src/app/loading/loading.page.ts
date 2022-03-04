@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PartieService } from '../services/partie.service';
 import { ServiceApiService } from '../services/service-api.service';
 
 @Component({
@@ -12,16 +13,18 @@ export class LoadingPage implements OnInit {
   message:string;
   progress:number;
   counter:number;
-  counter2:number;
+  counter2:number=0;
 
-  constructor(private route:ActivatedRoute, private service:ServiceApiService, private router:Router) {
+  constructor(private route:ActivatedRoute, private service:PartieService, private router:Router) {
     this.counter = 0;
     this.counter2 = 0;
     this.route.queryParams.subscribe(param => {
       switch(param["status"]){
         case "definitionOK":
           this.message = "En attente des autres joueurs...";
-          this.counter2 = this.service.mesJoueurs.length;
+          this.service.getPartie().subscribe(u => {
+            this.counter2 = u[0].joueur.length;
+          });
           break;
         default:
           break;

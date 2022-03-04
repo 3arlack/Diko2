@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { Joueur } from '../classes/joueur';
 import { OfflineService } from '../services/offline.service';
+import { PartieService } from '../services/partie.service';
 import { ServiceApiService } from '../services/service-api.service';
 
 @Component({
@@ -12,11 +13,11 @@ import { ServiceApiService } from '../services/service-api.service';
 })
 export class WinnerResultatPage implements OnInit {
 
-  joueurs:Array<Joueur>;
+  joueurs:Array<Joueur>=[];
   winner:string;
   status:string;
 
-  constructor(private service:OfflineService, private modalController:ModalController, private currentRoute:ActivatedRoute, private onlineService:ServiceApiService) {
+  constructor(private service:OfflineService, private modalController:ModalController, private currentRoute:ActivatedRoute, private onlineService:PartieService) {
    }
 
   ngOnInit() {
@@ -26,26 +27,37 @@ export class WinnerResultatPage implements OnInit {
     this.currentRoute.queryParams.subscribe(param => {
       this.status = param["status"];
       if (this.status == "online"){
-
-        this.joueurs = this.onlineService.mesJoueurs;
-        for(let i=0;i<this.joueurs.length;i++){
-          for (let p=0;p<this.onlineService.maManche.length;p++){
-            for (let x=0;x<this.onlineService.maManche[p].tours.length;x++){
-              for (let y=0;y<this.onlineService.maManche[p].tours[x].resultat.length;y++){
-                for (let z=0;z<this.onlineService.maManche[p].tours[x].resultat[y].id_vote.length;z++){
-                  if (this.joueurs[i].id_joueur == this.onlineService.maManche[p].tours[x].resultat[y].id_vote[z] && this.joueurs[i].id_joueur !== this.onlineService.maManche[p].tours[x].resultat[y].id_joueur){
-                  console.log("point vote accordé à : "+this.joueurs[this.onlineService.maManche[p].tours[x].resultat[y].id_joueur].nom_joueur+", tour : "+x+", resultat : "+y);
-                  this.joueurs[this.onlineService.maManche[p].tours[x].resultat[y].id_joueur].score_joueur++;
+        this.onlineService.getPartie().subscribe(u=>{
+          this.joueurs = u[0].joueur;
+          for(let i=0;i<this.joueurs.length;i++){
+            for (let p=0;p<u[0].manche.length;p++){
+              for (let x=0;x<u[0].manche[p].tours.length;x++){
+                for (let y=0;y<u[0].manche[p].tours[x].resultat.length;y++){
+                  for (let z=0;z<u[0].manche[p].tours[x].resultat[y].id_vote.length;z++){
+                    if (this.joueurs[i].id_joueur == u[0].manche[p].tours[x].resultat[y].id_vote[z] && this.joueurs[i].id_joueur !== u[0].manche[p].tours[x].resultat[y].id_joueur){
+                      this.joueurs.find((joueur)=>joueur.id_joueur === u[0].manche[p].tours[x].resultat[y].id_joueur).score_joueur++;
+                      this.onlineService.updateScore(u[0]).subscribe(()=>{
+                        this.joueurs.sort((a,b)=>{
+                          return b.score_joueur - a.score_joueur;
+                        });
+                        this.winner = this.joueurs[0].nom_joueur;              
+                      })
+                    }
                   }
                 }
               }
             }
           }
-        }
 
         // Reset all values
-        this.onlineService.mancheEnCours=0;
-        this.onlineService.tourEnCours=0;
+        u[0].mancheEnCours = 0;
+        u[0].tourEnCours = 0;
+        this.onlineService.updateManche(u[0]).subscribe(()=>{
+          this.onlineService.updateTour(u[0]);
+        })
+
+
+        });
 
       } else {
       this.joueurs = this.service.joueurs;
@@ -75,13 +87,14 @@ export class WinnerResultatPage implements OnInit {
       // Reset all values
       this.service.mancheEnCours=0;
       this.service.toursEnCours=0;
+      this.joueurs.sort((a,b)=>{
+        return b.score_joueur - a.score_joueur;
+      });
+      this.winner = this.joueurs[0].nom_joueur;
     }
 
     // Sort player array to find winner
-    this.joueurs.sort((a,b)=>{
-      return b.score_joueur - a.score_joueur;
-    });
-    this.winner = this.joueurs[0].nom_joueur;
+
   });
   }
 
