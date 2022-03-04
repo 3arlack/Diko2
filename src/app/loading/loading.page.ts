@@ -27,6 +27,9 @@ export class LoadingPage implements OnInit {
           });
           break;
         default:
+          this.service.getPartie().subscribe(u => { //Retrieve total player count
+            console.log(u[0].joueur);
+          });
           break;
       }
     });

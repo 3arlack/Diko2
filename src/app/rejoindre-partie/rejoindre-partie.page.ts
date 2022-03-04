@@ -21,10 +21,13 @@ export class RejoindrePartiePage implements OnInit {
 
   //Check if game exists, else displays an error message
   OK(){
+
     // Gets game sessions from DB
-    this.service.getPartie().subscribe(u=>{
+    this.service.getPartie().subscribe((u)=>{
       if (u[this.partie.value]){ // If game exists
-        this.route.navigate(['/add-name']); // Route to next component
+
+        this.route.navigate(['/add-name'],{queryParams: {numPartie: this.partie.value}}); // Route to next component
+
       } else {
         //Displays an error message
         this.alert.create({

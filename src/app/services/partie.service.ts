@@ -35,4 +35,9 @@ export class PartieService {
     return this.http.put(this.partieUrl, joueur, this.httpOptions);
   }
 
+  addJoueur(joueur:Partie):Observable<any>{
+    return this.http.put(this.partieUrl, joueur, this.httpOptions);
+
+  }
+
 }
