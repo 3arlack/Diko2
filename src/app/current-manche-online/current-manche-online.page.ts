@@ -19,6 +19,7 @@ export class CurrentMancheOnlinePage implements OnInit {
     // Get current Round from DB
     this.service.getPartie().subscribe(u => {
       this.mancheEnCours = u[0].mancheEnCours;
+      
     });
   }
 

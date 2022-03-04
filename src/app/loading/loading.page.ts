@@ -27,9 +27,7 @@ export class LoadingPage implements OnInit {
           });
           break;
         default:
-          this.service.getPartie().subscribe(u => { //Retrieve total player count
-            console.log(u[0].joueur);
-          });
+ 
           break;
       }
     });
@@ -39,15 +37,38 @@ export class LoadingPage implements OnInit {
   }
 
   ionViewWillEnter(){
-    // Looping code here to check periodically if all players have answered
-    // Temp code to simulate waiting for answers
-    setTimeout(()=>{this.counter++;this.progress=this.counter/this.counter2;},200);
-    setTimeout(()=>{this.counter++;this.progress=this.counter/this.counter2;},900);
-    setTimeout(()=>{this.counter++;this.progress=this.counter/this.counter2;},1200);
-    setTimeout(()=>{this.counter++;this.progress=this.counter/this.counter2;},1900);
-    setTimeout(()=>{
-      this.progress=1;
-      this.router.navigate(["online-proposition"]);
-    },2000);
+   
+   
+
+    //Retrieve param in current Route to switch status
+    this.route.queryParams.subscribe(param => {
+
+      //When player has entered his definition
+      // Looping code here to check periodically if all players have answered
+      // Temp code to simulate waiting for answers
+      setTimeout(()=>{this.counter++;this.progress=this.counter/this.counter2;},200);
+      setTimeout(()=>{this.counter++;this.progress=this.counter/this.counter2;},900);
+      setTimeout(()=>{this.counter++;this.progress=this.counter/this.counter2;},1200);
+      setTimeout(()=>{this.counter++;this.progress=this.counter/this.counter2;},1900);
+
+      switch(param["status"]){
+        case "definitionOK": 
+
+          setTimeout(()=>{
+            this.progress=1;
+            this.router.navigate(["online-proposition"]);
+          },2000);
+
+          break;
+        default:
+
+          setTimeout(()=>{
+            this.progress=1;
+            this.router.navigate(["current-manche-online"]);
+          },2000);
+ 
+          break;
+      }
+    });
   }
 }

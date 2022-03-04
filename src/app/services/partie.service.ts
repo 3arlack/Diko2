@@ -11,6 +11,8 @@ export class PartieService {
 
   private partieUrl = 'api/PARTIE';  // URL to web api
 
+  partieEnCours:number;
+
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
