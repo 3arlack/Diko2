@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonTextarea } from '@ionic/angular';
 import { PartieService } from '../services/partie.service';
-import { ServiceApiService } from '../services/service-api.service';
 
 @Component({
   selector: 'app-online-definition',
@@ -21,16 +20,15 @@ export class OnlineDefinitionPage implements OnInit {
   }
   
   onClick(){
-    // console.log(this.definition.value);
+    // NOT IMPLEMENTED, need to add logic to POST definition for player
+    console.log(this.definition.value);
   }
   
   ionViewWillEnter(){
-
+    // Retrieve current word from DB
     this.service.getPartie().subscribe(u => {
       this.mot = u[0].manche[u[0].mancheEnCours].tours[u[0].tourEnCours].mot_choisi;
     });
-
-    // this.mot = this.service.maManche[this.service.mancheEnCours].tours[this.service.tourEnCours].mot_choisi;
   }
 
 }

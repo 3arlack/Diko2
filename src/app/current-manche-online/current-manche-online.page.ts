@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Partie } from '../classes/partie';
 import { PartieService } from '../services/partie.service';
 
 @Component({
@@ -10,7 +9,6 @@ import { PartieService } from '../services/partie.service';
 export class CurrentMancheOnlinePage implements OnInit {
 
     mancheEnCours:number=0;
-    partie:Partie[];
 
   constructor(private service:PartieService) { }
 
@@ -18,8 +16,8 @@ export class CurrentMancheOnlinePage implements OnInit {
   }
 
   ionViewWillEnter(){
+    // Get current Round from DB
     this.service.getPartie().subscribe(u => {
-      this.partie = u;
       this.mancheEnCours = u[0].mancheEnCours;
     });
   }

@@ -24,9 +24,11 @@ export class WinnerResultatPage implements OnInit {
   }
 
   ionViewWillEnter(){
+    //Get status from route param : online or offline
     this.currentRoute.queryParams.subscribe(param => {
       this.status = param["status"];
       if (this.status == "online"){
+        // Retrieve game informations from DB
         this.onlineService.getPartie().subscribe(u=>{
           this.joueurs = u[0].joueur;
           for(let i=0;i<this.joueurs.length;i++){
@@ -35,7 +37,10 @@ export class WinnerResultatPage implements OnInit {
                 for (let y=0;y<u[0].manche[p].tours[x].resultat.length;y++){
                   for (let z=0;z<u[0].manche[p].tours[x].resultat[y].id_vote.length;z++){
                     if (this.joueurs[i].id_joueur == u[0].manche[p].tours[x].resultat[y].id_vote[z] && this.joueurs[i].id_joueur !== u[0].manche[p].tours[x].resultat[y].id_joueur){
+                      // If player's definition has been voted
+                      // Find player by its id_joueur key rather than by index, and increment his score
                       this.joueurs.find((joueur)=>joueur.id_joueur === u[0].manche[p].tours[x].resultat[y].id_joueur).score_joueur++;
+                      // Update score in DB, compute scores by descending order
                       this.onlineService.updateScore(u[0]).subscribe(()=>{
                         this.joueurs.sort((a,b)=>{
                           return b.score_joueur - a.score_joueur;
@@ -52,6 +57,7 @@ export class WinnerResultatPage implements OnInit {
         // Reset all values
         u[0].mancheEnCours = 0;
         u[0].tourEnCours = 0;
+        // Update resetted values in DB
         this.onlineService.updateManche(u[0]).subscribe(()=>{
           this.onlineService.updateTour(u[0]);
         })

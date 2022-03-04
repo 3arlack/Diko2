@@ -24,9 +24,11 @@ export class ReponsePage implements OnInit {
   }
 
   ionViewWillEnter(){
+    // Get param from current Route
     this.currentRoute.queryParams.subscribe(param => {
         this.status = param["status"];
         if(this.status == "online"){
+          // Get from DB : current word, correct definition
           this.onlineService.getPartie().subscribe(u => {
             this.mot = u[0].manche[u[0].mancheEnCours].tours[u[0].tourEnCours].mot_choisi;
             this.definition = "Bonne définition";
@@ -51,6 +53,7 @@ export class ReponsePage implements OnInit {
             } else { // else, we go to a new round & reset the game turns counter
               u[0].mancheEnCours++;
               u[0].tourEnCours=0;
+              // update in service, then navigate once it's done
               this.onlineService.updateManche(u[0]).subscribe(()=>{
                 this.route.navigate(['current-manche-online'])
               });
@@ -58,8 +61,8 @@ export class ReponsePage implements OnInit {
             }
           } else { // else, if there ARE game turns left, we go to the next game turn
             u[0].tourEnCours++;
+            //update in service, then navigate
             this.onlineService.updateTour(u[0]).subscribe(()=>{
-              // console.log(u);
               this.route.navigate(['online-definition']);
             })
 

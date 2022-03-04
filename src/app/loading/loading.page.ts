@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PartieService } from '../services/partie.service';
-import { ServiceApiService } from '../services/service-api.service';
 
 @Component({
   selector: 'app-loading',
@@ -18,11 +17,12 @@ export class LoadingPage implements OnInit {
   constructor(private route:ActivatedRoute, private service:PartieService, private router:Router) {
     this.counter = 0;
     this.counter2 = 0;
+    //Retrieve param in current Route to switch status
     this.route.queryParams.subscribe(param => {
       switch(param["status"]){
-        case "definitionOK":
+        case "definitionOK": //When player has entered his definition
           this.message = "En attente des autres joueurs...";
-          this.service.getPartie().subscribe(u => {
+          this.service.getPartie().subscribe(u => { //Retrieve total player count
             this.counter2 = u[0].joueur.length;
           });
           break;
