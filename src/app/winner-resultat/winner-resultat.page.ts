@@ -4,7 +4,6 @@ import { ModalController } from '@ionic/angular';
 import { Joueur } from '../classes/joueur';
 import { OfflineService } from '../services/offline.service';
 import { PartieService } from '../services/partie.service';
-import { ServiceApiService } from '../services/service-api.service';
 
 @Component({
   selector: 'app-winner-resultat',
