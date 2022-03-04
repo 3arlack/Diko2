@@ -74,7 +74,15 @@ const routes: Routes = [
   {
     path: 'online-vote',
     loadChildren: () => import('./online-vote/online-vote.module').then( m => m.OnlineVotePageModule)
+  },  {
+    path: 'rejoindre-partie',
+    loadChildren: () => import('./rejoindre-partie/rejoindre-partie.module').then( m => m.RejoindrePartiePageModule)
+  },
+  {
+    path: 'add-name',
+    loadChildren: () => import('./add-name/add-name.module').then( m => m.AddNamePageModule)
   }
+
 ];
 
 @NgModule({
