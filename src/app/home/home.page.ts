@@ -8,6 +8,7 @@ import { ModalController } from '@ionic/angular'; //Import ModalController
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+ 
 
   constructor(public modalController:ModalController) {} //Need to inject modalController to call it below
 
@@ -15,4 +16,6 @@ export class HomePage {
   dismiss(){
     this.modalController.dismiss(); // Call the dismiss() method of ModalController
   }
+
+ 
 }
