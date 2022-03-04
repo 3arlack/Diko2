@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ServiceApiService } from '../services/service-api.service';
 
 @Component({
   selector: 'app-current-manche-online',
@@ -8,11 +9,14 @@ import { Component, OnInit } from '@angular/core';
 export class CurrentMancheOnlinePage implements OnInit {
 
     mancheEnCours:number;
-  constructor() {
-      this.mancheEnCours = 0;
-  }
+
+  constructor(private service:ServiceApiService) { }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter(){
+    this.mancheEnCours = this.service.mancheEnCours; //gets current Round from service and sets local variable
   }
 
 }
