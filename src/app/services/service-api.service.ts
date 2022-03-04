@@ -74,7 +74,9 @@ export class ServiceApiService implements InMemoryDbService {
                 ] },
             ]
           }
-        ]
+        ],
+        mancheEnCours : 0,
+        tourEnCours : 0,
       }
     ];
    

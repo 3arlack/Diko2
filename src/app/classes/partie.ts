@@ -5,6 +5,8 @@ import { Manche } from "./manche";
 export interface Partie {
     joueur: Array<Joueur>;
     manche: Array<Manche>;
+    mancheEnCours : number;
+    tourEnCours : number;
  
 
 
