@@ -2,7 +2,7 @@ import { Joueur } from "./joueur";
 import { Manche } from "./manche";
 
 
-export interface Partie {
+export class Partie {
     id:number;
     joueur: Array<Joueur>;
     manche: Array<Manche>;

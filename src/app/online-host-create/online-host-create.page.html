@@ -29,7 +29,7 @@
         <ion-row class="ion-justify-content-center">
             <ion-col size="8">
                 <!-- Use ion-Range to display a slider to select number of rounds. We set the value at 1, so if user doesn't interact with slider, we still have at least 1 round ! -->
-                <ion-range min="1" max="10" step="1" snaps="true" [pin]="true" #range value="1">
+                <ion-range min="1" max="10" step="1" snaps="true" [pin]="true" #nbrManche value="1">
                     <ion-label slot="start"><h3>1</h3></ion-label>
                     <ion-label slot="end"><h3>10</h3></ion-label>
                 </ion-range>
@@ -38,7 +38,7 @@
 
         <ion-row class="ion-justify-content-end">
             <ion-col size="2">
-            <ion-button routerLink="/lobby" (click)="OK()">OK</ion-button>
+            <ion-button (click)="OK()">OK</ion-button>
             </ion-col>
         </ion-row>
     </ion-grid>

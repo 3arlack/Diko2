@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { IonChip } from '@ionic/angular';
 import { Joueur } from '../classes/joueur';
 import { PartieService } from '../services/partie.service';
 
@@ -9,12 +10,19 @@ import { PartieService } from '../services/partie.service';
 })
 export class LobbyPage implements OnInit {
 
+
+  @ViewChildren(IonChip) chips:QueryList<IonChip>;
+  votes : number;
+
   joueurs:Array<Joueur>=[]; // initialize array
+  partieEnCours : number;
 
   constructor(private service:PartieService) {
+    this.partieEnCours = this.service.partieEnCours;
     // retrieve player list from DB
     this.service.getPartie().subscribe(u => {
-      this.joueurs = u[0].joueur;
+      this.joueurs = u[this.partieEnCours].joueur;
+      this.votes = this.chips.length;
     });
 
   }
@@ -22,4 +30,8 @@ export class LobbyPage implements OnInit {
   ngOnInit() {
   }
 
+  OK(){
+
+
+  }
 }

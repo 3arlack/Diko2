@@ -7,7 +7,7 @@
         </ion-row>
         <ion-row *ngFor="let joueur of joueurs;let index = index">
             <ion-col class="ion-text-center">
-                <ion-chip>
+                <ion-chip *ngIf="joueur != undefined">
                     <ion-avatar>
                         <img src="../../assets/avatarexemple.jpg">
                     </ion-avatar>
@@ -19,12 +19,12 @@
         </ion-row>
         <ion-row>
             <ion-col class="ion-text-center">
-                {{joueurs.length}}/10
+                {{votes}}/{{joueurs.length}}
             </ion-col>
         </ion-row>
         <ion-row>
             <ion-col class="ion-text-center">
-                <ion-button routerLink="/current-manche-online">Démarrer</ion-button>
+                <ion-button (click)="OK()" routerLink="/current-manche-online">Démarrer</ion-button>
             </ion-col>
         </ion-row>
     </ion-grid>

@@ -40,7 +40,7 @@ export class WinnerResultatPage implements OnInit {
                       // Find player by its id_joueur key rather than by index, and increment his score
                       this.joueurs.find((joueur)=>joueur.id_joueur === u[0].manche[p].tours[x].resultat[y].id_joueur).score_joueur++;
                       // Update score in DB, compute scores by descending order
-                      this.onlineService.updateScore(u[0]).subscribe(()=>{
+                      this.onlineService.update(u[0]).subscribe(()=>{
                         this.joueurs.sort((a,b)=>{
                           return b.score_joueur - a.score_joueur;
                         });
@@ -57,8 +57,8 @@ export class WinnerResultatPage implements OnInit {
         u[0].mancheEnCours = 0;
         u[0].tourEnCours = 0;
         // Update resetted values in DB
-        this.onlineService.updateManche(u[0]).subscribe(()=>{
-          this.onlineService.updateTour(u[0]);
+        this.onlineService.update(u[0]).subscribe(()=>{
+          this.onlineService.update(u[0]);
         })
 
 
