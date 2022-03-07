@@ -39,7 +39,7 @@ export class OnlineHostCreatePage implements OnInit {
       maPartie.tourEnCours = 0;
       maPartie.joueur = [];
 
-      maPartie.joueur.length = Number(this.nbr_joueur.value);
+      
 
       let monJoueur = new Joueur(0,"",0,"");
       this.service.joueurEnCours = 0;
@@ -47,6 +47,7 @@ export class OnlineHostCreatePage implements OnInit {
       monJoueur.nom_joueur = String(this.name_joueur.value);
       
       maPartie.joueur.push(monJoueur);
+      maPartie.joueur.length = Number(this.nbr_joueur.value);
       this.service.partieEnCours = maPartie.id;
 
       maPartie.manche = [];

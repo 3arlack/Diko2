@@ -29,11 +29,4 @@ export class OfflineService {
     this.data = data; //Loads "data" from JSON word file in service's data variable.
   }
 
-  // Gets a random word from JSON database
-  randomWord(){
-    let randomIndex = Math.floor(Math.random()*this.data.data.length); //Generates a random number from 1 to database length
-
-    // gets word from database and sets it in current tour in service, and also locally to display it
-    return this.data.data[randomIndex].word;
-  }
 }

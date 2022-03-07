@@ -13,8 +13,10 @@ export class LoadingPage implements OnInit {
   progress:number;
   counter:number;
   counter2:number=0;
+  partieEncours:number;
 
   constructor(private route:ActivatedRoute, private service:PartieService, private router:Router) {
+    this.partieEncours = this.service.partieEnCours;
     this.counter = 0;
     this.counter2 = 0;
     //Retrieve param in current Route to switch status
@@ -23,7 +25,7 @@ export class LoadingPage implements OnInit {
         case "definitionOK": //When player has entered his definition
           this.message = "En attente des autres joueurs...";
           this.service.getPartie().subscribe(u => { //Retrieve total player count
-            this.counter2 = u[0].joueur.length;
+            this.counter2 = u[this.partieEncours].joueur.length;
           });
           break;
         default:

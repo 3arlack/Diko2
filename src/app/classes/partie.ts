@@ -9,7 +9,7 @@ export class Partie {
     mancheEnCours : number;
     tourEnCours : number;
  
-
+    
 
     // constructor(joueur:Array<Joueur>,manche:Array<Manche>){
     //     this.joueur = joueur;

@@ -45,7 +45,7 @@ export class OnlineDefinitionPage implements OnInit {
   ionViewWillEnter(){
     // Retrieve current word from DB
     this.service.getPartie().subscribe(u => {
-      this.mot = u[0].manche[u[this.partie].mancheEnCours].tours[u[this.partie].tourEnCours].mot_choisi;
+      this.mot = u[this.partie].manche[u[this.partie].mancheEnCours].tours[u[this.partie].tourEnCours].mot_choisi;
     });
   }
 

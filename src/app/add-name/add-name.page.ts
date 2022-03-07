@@ -50,9 +50,6 @@ export class AddNamePage implements OnInit {
         u[this.service.partieEnCours].joueur.push(this.monJoueur);
 
 
-        //choose a new word (with the random function) and set it to the current round
-        this.monTour.mot_choisi = this.OfflineService.randomWord();
-
         // for (let y=0; y<u[param['numPartie']].joueur.length; y++){
         //   this.monTour.resultat.push(this.monResultat);
         // }
