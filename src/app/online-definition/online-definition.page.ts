@@ -27,8 +27,9 @@ export class OnlineDefinitionPage implements OnInit {
   
   onClick(){
     // NOT IMPLEMENTED, need to add logic to POST definition for player
-    console.log(this.definition.value);
+  
     this.service.getPartie().subscribe(u => {
+      //get the player's definition from the input and set it in the current resultat with the player id. Then, we push it in the current tour
       this.monResultat.definition = this.definition.value;
       this.monResultat.id_joueur = this.service.joueurEnCours;
       u[this.service.partieEnCours].manche[u[this.partie].mancheEnCours].tours[u[this.partie].tourEnCours].resultat.push(this.monResultat);

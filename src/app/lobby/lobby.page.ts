@@ -22,7 +22,7 @@ export class LobbyPage implements OnInit {
     // retrieve player list from DB
     this.service.getPartie().subscribe(u => {
       this.joueurs = u[this.partieEnCours].joueur;
-      this.votes = this.chips.length;
+      this.votes = this.chips.length; //Retrieves total number of votes from total number of ion-chip elements
     });
 
   }

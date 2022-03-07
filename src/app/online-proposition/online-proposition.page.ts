@@ -26,9 +26,6 @@ export class OnlinePropositionPage implements OnInit {
     this.partieEnCours = this.service.partieEnCours;
 
 
-
-
-    
   }
   
   ngOnInit() {

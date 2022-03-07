@@ -15,9 +15,11 @@ export class WinnerResultatPage implements OnInit {
   joueurs:Array<Joueur>=[];
   winner:string;
   status:string;
+  partieEnCours : number;
 
   constructor(private service:OfflineService, private modalController:ModalController, private currentRoute:ActivatedRoute, private onlineService:PartieService) {
-   }
+  this.partieEnCours = this.onlineService.partieEnCours;
+  }
 
   ngOnInit() {
   }
@@ -29,18 +31,18 @@ export class WinnerResultatPage implements OnInit {
       if (this.status == "online"){
         // Retrieve game informations from DB
         this.onlineService.getPartie().subscribe(u=>{
-          this.joueurs = u[0].joueur;
+          this.joueurs = u[this.partieEnCours].joueur;
           for(let i=0;i<this.joueurs.length;i++){
-            for (let p=0;p<u[0].manche.length;p++){
-              for (let x=0;x<u[0].manche[p].tours.length;x++){
-                for (let y=0;y<u[0].manche[p].tours[x].resultat.length;y++){
-                  for (let z=0;z<u[0].manche[p].tours[x].resultat[y].id_vote.length;z++){
-                    if (this.joueurs[i].id_joueur == u[0].manche[p].tours[x].resultat[y].id_vote[z] && this.joueurs[i].id_joueur !== u[0].manche[p].tours[x].resultat[y].id_joueur){
+            for (let p=0;p<u[this.partieEnCours].manche.length;p++){
+              for (let x=0;x<u[this.partieEnCours].manche[p].tours.length;x++){
+                for (let y=0;y<u[this.partieEnCours].manche[p].tours[x].resultat.length;y++){
+                  for (let z=0;z<u[this.partieEnCours].manche[p].tours[x].resultat[y].id_vote.length;z++){
+                    if (this.joueurs[i].id_joueur == u[this.partieEnCours].manche[p].tours[x].resultat[y].id_vote[z] && this.joueurs[i].id_joueur !== u[this.partieEnCours].manche[p].tours[x].resultat[y].id_joueur){
                       // If player's definition has been voted
                       // Find player by its id_joueur key rather than by index, and increment his score
-                      this.joueurs.find((joueur)=>joueur.id_joueur === u[0].manche[p].tours[x].resultat[y].id_joueur).score_joueur++;
+                      this.joueurs.find((joueur)=>joueur.id_joueur === u[this.partieEnCours].manche[p].tours[x].resultat[y].id_joueur).score_joueur++;
                       // Update score in DB, compute scores by descending order
-                      this.onlineService.update(u[0]).subscribe(()=>{
+                      this.onlineService.update(u[this.partieEnCours]).subscribe(()=>{
                         this.joueurs.sort((a,b)=>{
                           return b.score_joueur - a.score_joueur;
                         });

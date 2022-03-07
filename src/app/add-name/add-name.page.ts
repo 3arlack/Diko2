@@ -31,20 +31,26 @@ export class AddNamePage implements OnInit {
   }
 
   OK(){
+    //set the value from this input "name" to nom_joueur in the player array
     this.monJoueur.nom_joueur = String(this.playerName.value);
-    
+
       this.service.getPartie().subscribe(u => {
-      
+        //sort all the id from the player array and take the highest..
         u[this.service.partieEnCours].joueur.sort((a,b)=>{
           return b.id_joueur - a.id_joueur;
         })
         let id = u[this.service.partieEnCours].joueur[0].id_joueur;
+        //increment the id ...
         id++;
+        //set the id 
         this.monJoueur.id_joueur = id;
         this.service.joueurEnCours = id;
-        // console.log(this.monJoueur);
+
+        //push the new player to the current game
         u[this.service.partieEnCours].joueur.push(this.monJoueur);
 
+
+        //choose a new word (with the random function) and set it to the current round
         this.monTour.mot_choisi = this.OfflineService.randomWord();
 
         // for (let y=0; y<u[param['numPartie']].joueur.length; y++){
