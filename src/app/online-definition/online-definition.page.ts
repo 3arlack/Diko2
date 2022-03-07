@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { IonTextarea } from '@ionic/angular';
 import { Resultat } from '../classes/resultat';
 import { PartieService } from '../services/partie.service';
@@ -16,7 +17,7 @@ export class OnlineDefinitionPage implements OnInit {
     monResultat:Resultat;
     partie:number;
 
-  constructor(private service:PartieService) {
+  constructor(private service:PartieService, private router : Router) {
     this.monResultat = new Resultat("",0,[]);
     this.partie = this.service.partieEnCours;
   }
@@ -28,8 +29,16 @@ export class OnlineDefinitionPage implements OnInit {
     // NOT IMPLEMENTED, need to add logic to POST definition for player
     console.log(this.definition.value);
     this.service.getPartie().subscribe(u => {
+      this.monResultat.definition = this.definition.value;
+      this.monResultat.id_joueur = this.service.joueurEnCours;
       u[this.service.partieEnCours].manche[u[this.partie].mancheEnCours].tours[u[this.partie].tourEnCours].resultat.push(this.monResultat);
-    }
+
+      this.service.update(u[this.partie]).subscribe(()=>{
+        console.log(u[this.partie])
+        this.router.navigate(['loading'], {queryParams: {status:"definitionOK"}});
+        })
+
+    })
   }
   
   ionViewWillEnter(){
@@ -40,3 +49,4 @@ export class OnlineDefinitionPage implements OnInit {
   }
 
 }
+

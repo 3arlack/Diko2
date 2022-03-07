@@ -12,12 +12,22 @@ export class PartieService {
   private partieUrl = 'api/PARTIE';  // URL to web api
 
   partieEnCours:number;
+  joueurEnCours:number;
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
   constructor(private http: HttpClient) { }
+
+  // Function to retrieve player name by its id_joueur
+  findPlayerName(id_vote:number, joueur:Array<Joueur>):string{
+    for (let i=0;i<joueur.length;i++){
+    if (joueur[i].id_joueur == id_vote){
+        return joueur[i].nom_joueur;
+    }
+    }
+  }
 
   getPartie(): Observable<Partie[]> {
     return this.http.get<Partie[]>(this.partieUrl);
@@ -39,7 +49,10 @@ export class PartieService {
 
   addJoueur(joueur:Partie):Observable<any>{
     return this.http.put(this.partieUrl, joueur, this.httpOptions);
+  }
 
+  update(partie:Partie):Observable<any>{
+    return this.http.put(this.partieUrl, partie, this.httpOptions);
   }
 
 }

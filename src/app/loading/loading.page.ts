@@ -37,9 +37,6 @@ export class LoadingPage implements OnInit {
   }
 
   ionViewWillEnter(){
-   
-   
-
     //Retrieve param in current Route to switch status
     this.route.queryParams.subscribe(param => {
 

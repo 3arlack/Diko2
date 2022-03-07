@@ -32,6 +32,7 @@ export class ServiceApiService implements InMemoryDbService {
           {id_joueur : 13, nom_joueur: "Marie", score_joueur: 0, avatar_joueur: "rouge"},
           {id_joueur : 14, nom_joueur: "Paul", score_joueur: 0, avatar_joueur: "bleu"},
           {id_joueur : 15, nom_joueur: "Sophie", score_joueur: 0, avatar_joueur: "jaune"}
+          
   
         ],
         manche : [
@@ -83,6 +84,7 @@ export class ServiceApiService implements InMemoryDbService {
    
       return {PARTIE};
   }
+
   
   // genId(joueur: Joueur[]): number {
   //   return joueur.length > 0 ? Math.max(...joueur.map(joueur => joueur.id_joueur)) + 1 : 11;

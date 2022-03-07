@@ -41,6 +41,7 @@ export class AddNamePage implements OnInit {
         let id = u[this.service.partieEnCours].joueur[0].id_joueur;
         id++;
         this.monJoueur.id_joueur = id;
+        this.service.joueurEnCours = id;
         // console.log(this.monJoueur);
         u[this.service.partieEnCours].joueur.push(this.monJoueur);
 
@@ -58,7 +59,7 @@ export class AddNamePage implements OnInit {
         }
 
 
-        this.service.addJoueur(u[this.service.partieEnCours]).subscribe(()=>{
+        this.service.update(u[this.service.partieEnCours]).subscribe(()=>{
           this.router.navigate(['loading']);
         })
       })

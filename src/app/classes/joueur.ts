@@ -11,5 +11,8 @@ export class Joueur {
         this.avatar_joueur = avatar_joueur;
     }
 
+    
+
+
 }
 

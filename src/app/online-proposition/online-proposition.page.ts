@@ -1,4 +1,5 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Router } from '@angular/router';
 import { IonChip } from '@ionic/angular';
 import { Joueur } from '../classes/joueur';
 import { Resultat } from '../classes/resultat';
@@ -17,16 +18,17 @@ export class OnlinePropositionPage implements OnInit {
     definitions:Array<Resultat>=[];
     joueurs:Array<Joueur>=[];
     votes:number;
+    partieEnCours:number;
+    
 
 
-  constructor(private service:PartieService) {
-    // Retrieve from DB : current word, list of definitions, list of players
-    this.service.getPartie().subscribe(u => {
-      this.mot = u[0].manche[u[0].mancheEnCours].tours[u[0].tourEnCours].mot_choisi;
-      this.joueurs = u[0].joueur;
-      this.definitions = u[0].manche[u[0].mancheEnCours].tours[u[0].tourEnCours].resultat;
+  constructor(public service:PartieService, private router : Router) {
+    this.partieEnCours = this.service.partieEnCours;
 
-    });
+
+
+
+    
   }
   
   ngOnInit() {
@@ -35,15 +37,16 @@ export class OnlinePropositionPage implements OnInit {
   ionViewWillEnter(){
     //Retrieves total number of votes from total number of ion-chip elements
     this.votes = this.chips.length;
+    
+    // Retrieve from DB : current word, list of definitions, list of players
+    this.service.getPartie().subscribe(u => {
+      this.mot = u[this.partieEnCours].manche[u[this.partieEnCours].mancheEnCours].tours[u[this.partieEnCours].tourEnCours].mot_choisi;
+      this.joueurs = u[this.partieEnCours].joueur;
+      this.definitions = u[this.partieEnCours].manche[u[this.partieEnCours].mancheEnCours].tours[u[this.partieEnCours].tourEnCours].resultat;
+
+    
+    });
   }
 
-  // Function to retrieve player name by its id_joueur
-  findPlayerName(id_vote:number):string{
-    for (let i=0;i<this.joueurs.length;i++){
-      if (this.joueurs[i].id_joueur == id_vote){
-        return this.joueurs[i].nom_joueur;
-      }
-    }
-  }
 
 }
