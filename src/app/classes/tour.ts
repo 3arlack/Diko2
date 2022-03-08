@@ -23,4 +23,10 @@ export class Tour {
         // gets word from database and sets it in current tour in service, and also locally to display it
         return data.data.data[randomIndex].word;
     }
+
+    goodDefinition?(word){
+
+        let index = data.data.data.findIndex(element => element.word == word);
+        return data.data.data[index].def;
+    }
 }

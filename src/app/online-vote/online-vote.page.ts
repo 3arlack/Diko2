@@ -27,8 +27,8 @@ export class OnlineVotePage implements OnInit {
       // Get from DB : current word, current definition
         this.service.getPartie().subscribe(u => {
         this.partie = u[this.partieEnCours];
-        this.mot = u[0].manche[u[0].mancheEnCours].tours[u[0].tourEnCours].mot_choisi;
-        this.definition = u[0].manche[u[0].mancheEnCours].tours[u[0].tourEnCours].resultat[this.indexDefinition].definition;
+        this.mot = u[this.partieEnCours].manche[u[this.partieEnCours].mancheEnCours].tours[u[this.partieEnCours].tourEnCours].mot_choisi;
+        this.definition = u[this.partieEnCours].manche[u[this.partieEnCours].mancheEnCours].tours[u[this.partieEnCours].tourEnCours].resultat[this.indexDefinition].definition;
       });
     });
   }

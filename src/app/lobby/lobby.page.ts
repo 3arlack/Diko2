@@ -67,12 +67,15 @@ export class LobbyPage implements OnInit {
         this.maPartie.manche[y] = new Manche(_.cloneDeep(tours));
         for (let r =0; r<this.maPartie.manche[y].tours.length; r++){
           this.maPartie.manche[y].tours[r].mot_choisi = this.maPartie.manche[y].tours[r].randomWord();
+          this.maPartie.manche[y].tours[r].resultat.push(new Resultat(this.maPartie.manche[y].tours[r].goodDefinition(this.maPartie.manche[y].tours[r].mot_choisi),999,[]));
         }
     }
 
     console.log(this.maPartie);
+    this.service.update(this.maPartie).subscribe(()=>{
+      this.router.navigate(['current-manche-online']);
+    })
 
-    this.router.navigate(['current-manche-online']);
 
   }
 }

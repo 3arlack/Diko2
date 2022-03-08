@@ -9,8 +9,11 @@ import { PartieService } from '../services/partie.service';
 export class CurrentMancheOnlinePage implements OnInit {
 
     mancheEnCours:number=0;
+    partieEnCours:number;
 
-  constructor(private service:PartieService) { }
+  constructor(private service:PartieService) { 
+    this.partieEnCours = this.service.partieEnCours;
+  }
 
   ngOnInit() {
   }
@@ -18,7 +21,7 @@ export class CurrentMancheOnlinePage implements OnInit {
   ionViewWillEnter(){
     // Get current Round from DB
     this.service.getPartie().subscribe(u => {
-      this.mancheEnCours = u[0].mancheEnCours;
+      this.mancheEnCours = u[this.partieEnCours].mancheEnCours;
       
     });
   }

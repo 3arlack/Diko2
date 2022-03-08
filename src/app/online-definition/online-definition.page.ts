@@ -32,7 +32,7 @@ export class OnlineDefinitionPage implements OnInit {
       //get the player's definition from the input and set it in the current resultat with the player id. Then, we push it in the current tour
       this.monResultat.definition = this.definition.value;
       this.monResultat.id_joueur = this.service.joueurEnCours;
-      u[this.service.partieEnCours].manche[u[this.partie].mancheEnCours].tours[u[this.partie].tourEnCours].resultat.push(this.monResultat);
+      u[this.partie].manche[u[this.partie].mancheEnCours].tours[u[this.partie].tourEnCours].resultat[this.monResultat.id_joueur] = this.monResultat;
 
       this.service.update(u[this.partie]).subscribe(()=>{
         console.log(u[this.partie])
@@ -45,6 +45,7 @@ export class OnlineDefinitionPage implements OnInit {
   ionViewWillEnter(){
     // Retrieve current word from DB
     this.service.getPartie().subscribe(u => {
+      console.log(u[this.partie]);
       this.mot = u[this.partie].manche[u[this.partie].mancheEnCours].tours[u[this.partie].tourEnCours].mot_choisi;
     });
   }

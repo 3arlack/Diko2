@@ -15,9 +15,10 @@ export class ReponsePage implements OnInit {
   mot:string;
   definition:string;
   status:string;
+  partieEnCours:number;
 
   constructor(private service:OfflineService, private route:Router, private onlineService:PartieService,private currentRoute:ActivatedRoute) { // inject Router & Services
-
+    this.partieEnCours = this.onlineService.partieEnCours;
   }
   
   ngOnInit() {
@@ -30,8 +31,8 @@ export class ReponsePage implements OnInit {
         if(this.status == "online"){
           // Get from DB : current word, correct definition
           this.onlineService.getPartie().subscribe(u => {
-            this.mot = u[0].manche[u[0].mancheEnCours].tours[u[0].tourEnCours].mot_choisi;
-            this.definition = "Bonne définition";
+            this.mot = u[this.partieEnCours].manche[u[this.partieEnCours].mancheEnCours].tours[u[this.partieEnCours].tourEnCours].mot_choisi;
+            this.definition = this.onlineService.findDefinition(u[this.partieEnCours].manche[u[this.partieEnCours].mancheEnCours].tours[u[this.partieEnCours].tourEnCours].resultat);
           });      
           // this.mot = this.onlineService.maManche[this.onlineService.mancheEnCours].tours[this.onlineService.tourEnCours].mot_choisi;
           // Need to add correct definition in Onlineservice
@@ -46,23 +47,23 @@ export class ReponsePage implements OnInit {
   check(){
       if(this.status == "online"){
         this.onlineService.getPartie().subscribe(u => {
-          if (u[0].tourEnCours == u[0].joueur.length -1){
+          if (u[this.partieEnCours].tourEnCours == u[this.partieEnCours].joueur.length -1){
             // if there are no more rounds left, we display the winner
-            if (u[0].mancheEnCours == u[0].manche.length -1){
+            if (u[this.partieEnCours].mancheEnCours == u[this.partieEnCours].manche.length -1){
               this.route.navigate(['winner-resultat'],{queryParams: {status:"online"}});
             } else { // else, we go to a new round & reset the game turns counter
-              u[0].mancheEnCours++;
-              u[0].tourEnCours=0;
+              u[this.partieEnCours].mancheEnCours++;
+              u[this.partieEnCours].tourEnCours=0;
               // update in service, then navigate once it's done
-              this.onlineService.update(u[0]).subscribe(()=>{
+              this.onlineService.update(u[this.partieEnCours]).subscribe(()=>{
                 this.route.navigate(['current-manche-online'])
               });
               
             }
           } else { // else, if there ARE game turns left, we go to the next game turn
-            u[0].tourEnCours++;
+            u[this.partieEnCours].tourEnCours++;
             //update in service, then navigate
-            this.onlineService.update(u[0]).subscribe(()=>{
+            this.onlineService.update(u[this.partieEnCours]).subscribe(()=>{
               this.route.navigate(['online-definition']);
             })
 

@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Joueur } from '../classes/joueur';
 import { Observable, of } from 'rxjs';
 import { Partie } from '../classes/partie';
+import { Resultat } from '../classes/resultat';
 
 @Injectable({
   providedIn: 'root'
@@ -23,9 +24,17 @@ export class PartieService {
   // Function to retrieve player name by its id_joueur
   findPlayerName(id_vote:number, joueur:Array<Joueur>):string{
     for (let i=0;i<joueur.length;i++){
-    if (joueur[i].id_joueur == id_vote){
-        return joueur[i].nom_joueur;
+      if (joueur[i].id_joueur == id_vote){
+          return joueur[i].nom_joueur;
+      }
     }
+  }
+
+  findDefinition(resultat:Array<Resultat>):string{
+    for (let i=0; i<resultat.length;i++){
+      if (resultat[i].id_joueur == 999){
+        return resultat[i].definition;
+      }
     }
   }
 

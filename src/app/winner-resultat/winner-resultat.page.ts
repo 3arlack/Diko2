@@ -40,7 +40,11 @@ export class WinnerResultatPage implements OnInit {
                     if (this.joueurs[i].id_joueur == u[this.partieEnCours].manche[p].tours[x].resultat[y].id_vote[z] && this.joueurs[i].id_joueur !== u[this.partieEnCours].manche[p].tours[x].resultat[y].id_joueur){
                       // If player's definition has been voted
                       // Find player by its id_joueur key rather than by index, and increment his score
-                      this.joueurs.find((joueur)=>joueur.id_joueur === u[this.partieEnCours].manche[p].tours[x].resultat[y].id_joueur).score_joueur++;
+                      if (u[this.partieEnCours].manche[p].tours[x].resultat[y].id_joueur != 999){
+                        this.joueurs.find((joueur)=>joueur.id_joueur === u[this.partieEnCours].manche[p].tours[x].resultat[y].id_joueur).score_joueur++;
+                      }else{
+                        this.joueurs[i].score_joueur++;
+                      }
                       // Update score in DB, compute scores by descending order
                       this.onlineService.update(u[this.partieEnCours]).subscribe(()=>{
                         this.joueurs.sort((a,b)=>{
@@ -56,11 +60,11 @@ export class WinnerResultatPage implements OnInit {
           }
 
         // Reset all values
-        u[0].mancheEnCours = 0;
-        u[0].tourEnCours = 0;
+        u[this.partieEnCours].mancheEnCours = 0;
+        u[this.partieEnCours].tourEnCours = 0;
         // Update resetted values in DB
-        this.onlineService.update(u[0]).subscribe(()=>{
-          this.onlineService.update(u[0]);
+        this.onlineService.update(u[this.partieEnCours]).subscribe(()=>{
+          this.onlineService.update(u[this.partieEnCours]);
         })
 
 
