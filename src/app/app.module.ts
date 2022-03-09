@@ -21,12 +21,13 @@ import { ServiceApiService } from './services/service-api.service';
             HttpClientModule, 
             HttpClientInMemoryWebApiModule,
 
-            // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
-            // and returns simulated server responses.
-            // Remove it when a real server is ready to receive requests.
-            HttpClientInMemoryWebApiModule.forRoot(
-              ServiceApiService, { dataEncapsulation: false }
-            )],
+            // // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
+            // // and returns simulated server responses.
+            // // Remove it when a real server is ready to receive requests.
+            // HttpClientInMemoryWebApiModule.forRoot(
+            //   ServiceApiService, { dataEncapsulation: false }
+            // )
+          ],
 
   providers: [{ provide: RouteReuseStrategy, 
                 useClass: IonicRouteStrategy }],

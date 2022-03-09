@@ -30,8 +30,9 @@ export class OnlineHostCreatePage implements OnInit {
       u.sort((a,b)=>{
         return b.id - a.id;
       })
-
+      // console.log(u[0]);
       let id_partie = u[0].id;
+      // console.log(id_partie);
       id_partie++;
       maPartie.id = id_partie;
 

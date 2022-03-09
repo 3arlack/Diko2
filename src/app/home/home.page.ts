@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { ModalController } from '@ionic/angular'; //Import ModalController
+import { PartieService } from '../services/partie.service';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +11,9 @@ import { ModalController } from '@ionic/angular'; //Import ModalController
 export class HomePage {
  
 
-  constructor(public modalController:ModalController) {} //Need to inject modalController to call it below
+  constructor(public modalController:ModalController, private service:PartieService) {
+    // this.service.getPartie().subscribe(reponse=>console.log(reponse))
+  } //Need to inject modalController to call it below
 
   //Method called when creating a new game, to dismiss modal (else, it will stay on-screen even when changing route)
   dismiss(){
