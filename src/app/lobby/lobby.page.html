@@ -7,7 +7,7 @@
         </ion-row>
         <ion-row *ngFor="let joueur of joueurs;let index = index">
             <ion-col class="ion-text-center">
-                <ion-chip *ngIf="joueur != undefined">
+                <ion-chip *ngIf="joueur.nom_joueur != null">
                     <ion-avatar>
                         <img src="../../assets/avatarexemple.jpg">
                     </ion-avatar>

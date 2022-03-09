@@ -47,7 +47,7 @@ export class OnlineVotePage implements OnInit {
     this.partie.manche[this.partie.mancheEnCours].tours[this.partie.tourEnCours].resultat[this.indexDefinition].id_vote.push(this.joueurEnCours);
     
     
-    this.service.update(this.partie).subscribe(()=>{
+    this.service.updatePartie(this.partie).subscribe(()=>{
       this.goBack();
     })
 

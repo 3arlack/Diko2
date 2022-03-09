@@ -28,6 +28,7 @@ export class LobbyPage implements OnInit {
     this.partieEnCours = this.service.partieEnCours;
     // retrieve player list from DB
     this.service.getPartie().subscribe(u => {
+      this.partieEnCours = u.findIndex(pouet=>pouet.id == this.partieEnCours);
       this.joueurs = u[this.partieEnCours].joueur;
       this.maPartie = u[this.partieEnCours];
       this.votes = this.chips.length; //Retrieves total number of votes from total number of ion-chip elements
@@ -46,10 +47,9 @@ export class LobbyPage implements OnInit {
     let resultats = new Array;
     let tours = new Array;
 
-    const result = this.joueurs.filter(joueur => joueur != undefined);
- 
+    // const result = this.joueurs.filter(joueur => joueur.nom_joueur != null);
 
-    this.maPartie.joueur = result;
+    // this.maPartie.joueur = result;
     
     // first loop : creates an empty "Resultats" object for every player, in temp array "resultats"
     for (let i=0;i<this.maPartie.joueur.length;i++){
@@ -72,7 +72,7 @@ export class LobbyPage implements OnInit {
     }
 
     console.log(this.maPartie);
-    this.service.update(this.maPartie).subscribe(()=>{
+    this.service.launchPartie(this.maPartie).subscribe(()=>{
       this.router.navigate(['current-manche-online']);
     })
 

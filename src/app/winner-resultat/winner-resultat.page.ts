@@ -46,7 +46,7 @@ export class WinnerResultatPage implements OnInit {
                         this.joueurs[i].score_joueur++;
                       }
                       // Update score in DB, compute scores by descending order
-                      this.onlineService.update(u[this.partieEnCours]).subscribe(()=>{
+                      this.onlineService.updatePartie(u[this.partieEnCours]).subscribe(()=>{
                         this.joueurs.sort((a,b)=>{
                           return b.score_joueur - a.score_joueur;
                         });
@@ -63,8 +63,8 @@ export class WinnerResultatPage implements OnInit {
         u[this.partieEnCours].mancheEnCours = 0;
         u[this.partieEnCours].tourEnCours = 0;
         // Update resetted values in DB
-        this.onlineService.update(u[this.partieEnCours]).subscribe(()=>{
-          this.onlineService.update(u[this.partieEnCours]);
+        this.onlineService.updatePartie(u[this.partieEnCours]).subscribe(()=>{
+          this.onlineService.updatePartie(u[this.partieEnCours]);
         })
 
 

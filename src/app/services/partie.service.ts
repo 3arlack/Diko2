@@ -43,9 +43,19 @@ export class PartieService {
     return this.http.get<Partie[]>("http://ubvs6386.odns.fr/diko/services/ws_getParties.php");
   }
 
-  update(partie:Partie):Observable<any>{
+  createPartie(partie:Partie):Observable<any>{
     // return this.http.put(this.partieUrl, partie, this.httpOptions);
-    return this.http.put("http://ubvs6386.odns.fr/diko/services/ws_update.php", partie, this.httpOptions);
+    return this.http.put("http://ubvs6386.odns.fr/diko/services/ws_createPartie.php", partie, this.httpOptions);
+  }
+
+  updatePartie(partie:Partie):Observable<any>{
+    // return this.http.put(this.partieUrl, partie, this.httpOptions);
+    return this.http.put("http://ubvs6386.odns.fr/diko/services/ws_updatePartie.php", partie, this.httpOptions);
+  }
+
+  launchPartie(partie:Partie):Observable<any>{
+    // return this.http.put(this.partieUrl, partie, this.httpOptions);
+    return this.http.put("http://ubvs6386.odns.fr/diko/services/ws_launchPartie.php", partie, this.httpOptions);
   }
 
 }

@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IonInput } from '@ionic/angular';
 import { Joueur } from '../classes/joueur';
-import { Resultat } from '../classes/resultat';
 import { Tour } from '../classes/tour';
 import { OfflineService } from '../services/offline.service';
 import { PartieService } from '../services/partie.service';
@@ -62,7 +61,7 @@ export class AddNamePage implements OnInit {
         }
 
 
-        this.service.update(u[this.service.partieEnCours]).subscribe(()=>{
+        this.service.updatePartie(u[this.service.partieEnCours]).subscribe(()=>{
           this.router.navigate(['loading']);
         })
       })

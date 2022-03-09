@@ -16,9 +16,7 @@ export class OnlineHostCreatePage implements OnInit {
   @ViewChild('playername') name_joueur: IonInput;
   @ViewChild('nbrManche') nbr_manche : IonRange;
 
-  constructor(private service : PartieService, private router : Router) {
-   
-   }
+  constructor(private service : PartieService, private router : Router) {}
 
   ngOnInit() {
   }
@@ -55,7 +53,7 @@ export class OnlineHostCreatePage implements OnInit {
       maPartie.manche.length = Number(this.nbr_manche.value);
 
       console.log(maPartie);
-      this.service.update(maPartie).subscribe(()=>{
+      this.service.createPartie(maPartie).subscribe(()=>{
         this.router.navigate(['lobby']);
       })
     });

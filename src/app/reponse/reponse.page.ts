@@ -55,7 +55,7 @@ export class ReponsePage implements OnInit {
               u[this.partieEnCours].mancheEnCours++;
               u[this.partieEnCours].tourEnCours=0;
               // update in service, then navigate once it's done
-              this.onlineService.update(u[this.partieEnCours]).subscribe(()=>{
+              this.onlineService.updatePartie(u[this.partieEnCours]).subscribe(()=>{
                 this.route.navigate(['current-manche-online'])
               });
               
@@ -63,7 +63,7 @@ export class ReponsePage implements OnInit {
           } else { // else, if there ARE game turns left, we go to the next game turn
             u[this.partieEnCours].tourEnCours++;
             //update in service, then navigate
-            this.onlineService.update(u[this.partieEnCours]).subscribe(()=>{
+            this.onlineService.updatePartie(u[this.partieEnCours]).subscribe(()=>{
               this.route.navigate(['online-definition']);
             })
 
