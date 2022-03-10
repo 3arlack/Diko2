@@ -93,6 +93,7 @@ Class parties {
       $nouvelleManche = new manches(0,$this->getid());
       $nouvelleManche->createmanches();
     }
+    echo($this->id);
 	}
 
 	public function readparties(){
@@ -148,10 +149,26 @@ Class parties {
       $i++;
     }
 
-    foreach($this->manche as $manche){
-      $nouvelleManche = new manches(0,$this->getid());
-      $nouvelleManche->updatemanches();
+    print_r($this->joueur);
+
+    for($y=0;$y<count($this->manche);$y++){
+      for($pouet=0;$pouet<count($this->joueur);$pouet++){
+        $nouveauTour = new tours($this->manche[$y]->tours[$pouet]->_ID, $this->manche[$y]->_ID, $this->manche[$y]->tours[$pouet]->mot_choisi);
+        // print_r($nouveauTour);
+        $nouveauTour->updatetours();
+        for($index=0;$index<count($this->joueur);$index++){
+          // $nouveauTour->getresultat()[$index]->setdefinition($this->manche[$y]->tours[$pouet]->resultat[$index]->definition);
+          // print_r($this);
+          $nouveauResultat = new resultat(0, $this->manche[$y]->tours[$pouet]->resultat[$index]->definition, $this->joueur[$index]->id_joueur, $nouveauTour->get_ID(), array());
+          // echo($this->manche[$y]->tours[$pouet]->resultat[$index]->definition);
+          $nouveauResultat = $nouveauResultat->readresultat();
+          $nouveauResultat->setdefinition($this->manche[$y]->tours[$pouet]->resultat[$index]->definition);
+          print_r($nouveauResultat);
+          // $nouveauResultat->updateresultat();
+        }
+      }
     }
+
 
 	}
 
@@ -176,29 +193,27 @@ Class parties {
     $i=0;
 
     foreach($this->joueur as $joueur){
+      
       if($joueur->nom_joueur == null){
         $nouveauJoueur = new joueurs($joueur->_ID,$this->getid(),$i,$joueur->nom_joueur,$joueur->score_joueur,$joueur->avatar_joueur);
         $nouveauJoueur->deletejoueurs();
+        $this->joueur = array_splice($this->joueur,$i,1);
       } else {
         $nouveauJoueur = new joueurs(0,$this->getid(),$joueur-> id_joueur,$joueur->nom_joueur,$joueur->score_joueur,$joueur->avatar_joueur);
         $nouveauJoueur->updatejoueurs();
       }
       $i++;
     }
-
-    print_r($this->getmanche());
-    foreach($this->manche as $manche){
-      // for($pouet=0;$pouet<count($this->joueur);$pouet++){
-      //   $nouveauTour = new tours(0,0,"pas de mot !"); 
-      //   // for($index=0;$index<count($this->joueur);$index++){
-      //   //   $nouveauResultat = new resultat(0,"def",$this->joueur[$index]->id_joueur,$nouveauTour->get_ID(),array());
-      //   //   $nouveauResultat->createresultat();
-      //   // }
-      //   print_r($nouveauTour);
-      //   $nouveauTour->createtours();
-      // }
+    for($y=0;$y<count($this->manche);$y++){
+      for($pouet=0;$pouet<count($this->joueur);$pouet++){
+        $nouveauTour = new tours(0, $this->manche[$y]->_ID, $this->manche[$y]->tours[$pouet]->mot_choisi); 
+        $nouveauTour->createtours();
+        for($index=0;$index<count($this->joueur);$index++){
+          $nouveauResultat = new resultat(0, $this->manche[$y]->tours[$pouet]->resultat[$index]->definition, $this->joueur[$index]->id_joueur, $nouveauTour->get_ID(), array());
+          $nouveauResultat->createresultat();
+        }
+      }
     }
-
 	}
 
 	public function deleteparties(){

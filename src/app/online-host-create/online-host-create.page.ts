@@ -25,14 +25,14 @@ export class OnlineHostCreatePage implements OnInit {
     let maPartie = new Partie;
     this.service.getPartie().subscribe(u => {
       
-      u.sort((a,b)=>{
-        return b.id - a.id;
-      })
-      // console.log(u[0]);
-      let id_partie = u[0].id;
-      // console.log(id_partie);
-      id_partie++;
-      maPartie.id = id_partie;
+      // u.sort((a,b)=>{
+      //   return b.id - a.id;
+      // })
+      // // console.log(u[0]);
+      // let id_partie = u[0].id;
+      // // console.log(id_partie);
+      // id_partie++;
+      // maPartie.id = id_partie;
 
       maPartie.mancheEnCours = 0;
       maPartie.tourEnCours = 0;
@@ -47,13 +47,14 @@ export class OnlineHostCreatePage implements OnInit {
       
       maPartie.joueur.push(monJoueur);
       maPartie.joueur.length = Number(this.nbr_joueur.value);
-      this.service.partieEnCours = maPartie.id;
+      // this.service.partieEnCours = maPartie.id;
 
       maPartie.manche = [];
       maPartie.manche.length = Number(this.nbr_manche.value);
 
       console.log(maPartie);
-      this.service.createPartie(maPartie).subscribe(()=>{
+      this.service.createPartie(maPartie).subscribe((reponse)=>{
+        this.service.partieEnCours = reponse;
         this.router.navigate(['lobby']);
       })
     });

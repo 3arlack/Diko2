@@ -5,14 +5,16 @@ import { OfflineService } from "../services/offline.service";
 let data = new OfflineService;
 
 export class Tour {
+    "_ID"?:number;
     "mot_choisi":string;
     "id_mj":number;
     "resultat":Array<Resultat>
 
-    constructor(mot_choisi:string,id_mj:number,resultat:Array<Resultat>){
+    constructor(mot_choisi:string,id_mj:number,resultat:Array<Resultat>, _ID:number=0){
         this.mot_choisi = mot_choisi;
         this.id_mj = id_mj;
         this.resultat = resultat;
+        this._ID = _ID;
     }
 
     
