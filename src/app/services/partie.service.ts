@@ -18,6 +18,9 @@ export class PartieService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
+  httpOptions2 = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
+  };
 
   constructor(private http: HttpClient) { }
 
@@ -38,23 +41,19 @@ export class PartieService {
     }
   }
 
-  getPartie(): Observable<Partie[]> {
-    // return this.http.get<Partie[]>(this.partieUrl);
-    return this.http.get<Partie[]>("http://ubvs6386.odns.fr/diko/services/ws_getParties.php");
+  getPartie(partie?:number): Observable<JSON> {
+    return this.http.post<JSON>("http://ubvs6386.odns.fr/diko/services/ws_getPartie.php", "id_partie="+partie,this.httpOptions2);
   }
 
   createPartie(partie:Partie):Observable<any>{
-    // return this.http.put(this.partieUrl, partie, this.httpOptions);
     return this.http.put("http://ubvs6386.odns.fr/diko/services/ws_createPartie.php", partie, this.httpOptions);
   }
 
   updatePartie(partie:Partie):Observable<any>{
-    // return this.http.put(this.partieUrl, partie, this.httpOptions);
     return this.http.put("http://ubvs6386.odns.fr/diko/services/ws_updatePartie.php", partie, this.httpOptions);
   }
 
   launchPartie(partie:Partie):Observable<any>{
-    // return this.http.put(this.partieUrl, partie, this.httpOptions);
     return this.http.put("http://ubvs6386.odns.fr/diko/services/ws_launchPartie.php", partie, this.httpOptions);
   }
 

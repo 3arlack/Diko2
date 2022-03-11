@@ -25,10 +25,11 @@ export class LobbyPage implements OnInit {
   maPartie : Partie;
 
   constructor(private service:PartieService, private router : Router) {
-    // this.partieEnCours = this.service.partieEnCours;
     // retrieve player list from DB
-    this.service.getPartie().subscribe(u => {
-      this.partieEnCours = u.findIndex(pouet=>pouet.id == this.service.partieEnCours);
+    console.log(this.service.partieEnCours);
+    this.service.getPartie(this.service.partieEnCours).subscribe(u => {
+      console.log(u);
+      // this.partieEnCours = u.findIndex(pouet=>pouet.id == this.service.partieEnCours);
       this.joueurs = u[this.partieEnCours].joueur;
       this.maPartie = u[this.partieEnCours];
       this.votes = this.chips.length; //Retrieves total number of votes from total number of ion-chip elements

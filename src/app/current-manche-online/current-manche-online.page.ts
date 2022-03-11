@@ -21,7 +21,7 @@ export class CurrentMancheOnlinePage implements OnInit {
   ionViewWillEnter(){
     // Get current Round from DB
     this.service.getPartie().subscribe(u => {
-      this.partieEnCours = u.findIndex(pouet=>pouet.id == this.partieEnCours);
+      // this.partieEnCours = u.findIndex(pouet=>pouet.id == this.partieEnCours);
       this.mancheEnCours = u[this.partieEnCours].mancheEnCours;
       
     });

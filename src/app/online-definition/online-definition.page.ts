@@ -29,7 +29,7 @@ export class OnlineDefinitionPage implements OnInit {
     // NOT IMPLEMENTED, need to add logic to POST definition for player
   
     this.service.getPartie().subscribe(u => {
-      this.partie = u.findIndex(pouet=>pouet.id == this.service.partieEnCours);
+      // this.partie = u.findIndex(pouet=>pouet.id == this.service.partieEnCours);
 
       //get the player's definition from the input and set it in the current resultat with the player id. Then, we push it in the current tour
       this.monResultat.definition = this.definition.value;
@@ -47,9 +47,9 @@ export class OnlineDefinitionPage implements OnInit {
   ionViewWillEnter(){
     // Retrieve current word from DB
     this.service.getPartie().subscribe(u => {
-      this.partie = u.findIndex(pouet=>pouet.id == this.partie);
-      console.log(u[this.partie]);
-      this.mot = u[this.partie].manche[u[this.partie].mancheEnCours].tours[u[this.partie].tourEnCours].mot_choisi;
+      // this.partie = u.findIndex(pouet=>pouet.id == this.partie);
+      // console.log(u[this.partie]);
+      // this.mot = u[this.partie].manche[u[this.partie].mancheEnCours].tours[u[this.partie].tourEnCours].mot_choisi;
     });
   }
 
