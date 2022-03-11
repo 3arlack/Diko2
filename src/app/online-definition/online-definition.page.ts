@@ -14,43 +14,35 @@ export class OnlineDefinitionPage implements OnInit {
     @ViewChild(IonTextarea) definition:IonTextarea;
 
     mot:string;
-    monResultat:Resultat;
     partie:number;
 
   constructor(private service:PartieService, private router : Router) {
-    this.monResultat = new Resultat("",0,[]);
     this.partie = this.service.partieEnCours;
   }
   
   ngOnInit() {
   }
-  
-  onClick(){
-    // NOT IMPLEMENTED, need to add logic to POST definition for player
-  
-    this.service.getPartie().subscribe(u => {
-      // this.partie = u.findIndex(pouet=>pouet.id == this.service.partieEnCours);
 
-      //get the player's definition from the input and set it in the current resultat with the player id. Then, we push it in the current tour
-      this.monResultat.definition = this.definition.value;
-      this.monResultat.id_joueur = this.service.joueurEnCours;
-      u[this.partie].manche[u[this.partie].mancheEnCours].tours[u[this.partie].tourEnCours].resultat[this.monResultat.id_joueur] = this.monResultat;
-
-      this.service.updatePartie(u[this.partie]).subscribe(()=>{
-        console.log(u[this.partie]);
-        this.router.navigate(['loading'], {queryParams: {status:"definitionOK"}});
-        })
-
-    })
-  }
-  
   ionViewWillEnter(){
     // Retrieve current word from DB
-    this.service.getPartie().subscribe(u => {
-      // this.partie = u.findIndex(pouet=>pouet.id == this.partie);
-      // console.log(u[this.partie]);
-      // this.mot = u[this.partie].manche[u[this.partie].mancheEnCours].tours[u[this.partie].tourEnCours].mot_choisi;
+    this.service.getPartie(this.partie).subscribe(u => {
+      this.service.getTour(u.manche[u.mancheEnCours]._ID).subscribe(tableauTours=>{
+        this.mot = tableauTours[u.tourEnCours].mot_choisi;
+      });
     });
+  }
+
+  onClick(){
+    this.service.getPartie(this.partie).subscribe(u => {
+      this.service.getTour(u.manche[u.mancheEnCours]._ID).subscribe(tableauTours=>{
+        let idTour = tableauTours[u.tourEnCours]._ID; 
+        this.service.getResultat(idTour,this.service.joueurEnCours).subscribe(idResultat => {
+          this.service.updateResultat(idResultat,this.definition.value).subscribe(()=>{
+            this.router.navigate(['loading'], {queryParams: {status:"definitionOK"}})
+          });
+        })
+      })
+    })
   }
 
 }

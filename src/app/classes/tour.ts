@@ -6,6 +6,7 @@ let data = new OfflineService;
 
 export class Tour {
     "_ID"?:number;
+    "_ID_MANCHE"?:number;
     "mot_choisi":string;
     "id_mj":number;
     "resultat":Array<Resultat>

@@ -115,7 +115,7 @@ Class parties {
       print 'Erreur !: ' . $e->getMessage() . '<br/>';
       die();
     }
-		$monjSon = "{partie:".json_encode($singleparties->toArray($singleparties))."}";
+		$monjSon = json_encode($singleparties->toArray($singleparties));
     // // Je l'affiche
     return $monjSon;
     // return $singleparties;

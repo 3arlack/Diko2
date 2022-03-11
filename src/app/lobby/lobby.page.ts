@@ -2,12 +2,10 @@ import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonChip } from '@ionic/angular';
 import { Joueur } from '../classes/joueur';
-import { Manche } from '../classes/manche';
 import { Partie } from '../classes/partie';
 import { Resultat } from '../classes/resultat';
 import { Tour } from '../classes/tour';
 import { PartieService } from '../services/partie.service';
-import * as _ from 'lodash';
 
 @Component({
   selector: 'app-lobby',
@@ -26,12 +24,9 @@ export class LobbyPage implements OnInit {
 
   constructor(private service:PartieService, private router : Router) {
     // retrieve player list from DB
-    console.log(this.service.partieEnCours);
     this.service.getPartie(this.service.partieEnCours).subscribe(u => {
-      console.log(u);
-      // this.partieEnCours = u.findIndex(pouet=>pouet.id == this.service.partieEnCours);
-      this.joueurs = u[this.partieEnCours].joueur;
-      this.maPartie = u[this.partieEnCours];
+      this.joueurs = u.joueur;
+      this.maPartie = u;
       this.votes = this.chips.length; //Retrieves total number of votes from total number of ion-chip elements
     });
 
@@ -42,40 +37,27 @@ export class LobbyPage implements OnInit {
 
   OK(){
 
-    let maManche = new Manche ([]);
-  
-    // declares temporary arrays
-    let resultats = new Array;
-    let tours = new Array;
-
     const result = this.joueurs.filter(joueur => joueur.nom_joueur != null);
-    // this.maPartie.joueur = result;
-    
-    // first loop : creates an empty "Resultats" object for every player, in temp array "resultats"
-    for (let i=0;i<result.length;i++){
-      resultats.push(new Resultat("",i,[]));
-    }
 
-    // second loop : creates an empty "Tour" object for every player, in temp array "tours", each including the "resultats" array
-    for (let u=0;u<result.length;u++){
-      tours.push(new Tour("",u,_.cloneDeep(resultats)));
-    }
-    
-    //third loop : creates an empty "Manche" object for selected number of rounds, each including the "tours" array
-    for (let y=0;y<this.maPartie.manche.length;y++){ //puts the rounds in the service !
-      console.log(this.maPartie.manche[y]);
-      this.maPartie.manche[y] = new Manche(_.cloneDeep(tours),this.maPartie.manche[y]._ID,this.maPartie.manche[y]._ID_PARTIE);
-      for (let r =0; r<this.maPartie.manche[y].tours.length; r++){
-        this.maPartie.manche[y].tours[r].mot_choisi = this.maPartie.manche[y].tours[r].randomWord();
-        this.maPartie.manche[y].tours[r].resultat.push(new Resultat(this.maPartie.manche[y].tours[r].goodDefinition(this.maPartie.manche[y].tours[r].mot_choisi),999,[]));
+    for (let y=0;y<this.maPartie.manche.length;y++){
+      for (let u=0;u<result.length;u++){
+        let tour = new Tour("",0,[],0);
+        tour.mot_choisi = tour.randomWord();
+        tour._ID_MANCHE = this.maPartie.manche[y]._ID;
+        this.service.createTour(tour).subscribe(idTour=>{
+          for (let i=0;i<result.length;i++){
+            let resultat = new Resultat(null,i,[]);
+            resultat._ID_TOUR = Number(idTour);
+            this.service.createResultat(resultat).subscribe();
+          }
+          let goodResultat = new Resultat(tour.goodDefinition(tour.mot_choisi),999,[]);
+          goodResultat._ID_TOUR = Number(idTour);
+          this.service.createResultat(goodResultat).subscribe();
+        });
       }
     }
 
-    console.log(this.maPartie);
-    this.service.launchPartie(this.maPartie).subscribe(()=>{
-      this.router.navigate(['current-manche-online']);
-    })
-
+    this.service.deleteJoueurs(this.joueurs).subscribe(()=>this.router.navigate(['current-manche-online']));
 
   }
 }
