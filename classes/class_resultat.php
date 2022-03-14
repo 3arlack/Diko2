@@ -47,67 +47,65 @@ Class resultat {
 	}
 
 	public function createresultat(){
-        $user = 'ubvs6386'; // Identifiant de bdd
-        $pass = 'WVHXr$DAb-cC'; // Mot de passe bdd
+    $user = 'ubvs6386'; // Identifiant de bdd
+    $pass = 'WVHXr$DAb-cC'; // Mot de passe bdd
 
-        // 127.0.0.1 est l'adresse ip locale du serveur (le fichier php étant exécuté sur le serveur, l'adresse du serveur est donc l'adresse locale)
-        try {
-            // connexion à la base de donnée
-            $dbh = new PDO('mysql:host=127.0.0.1;dbname=ubvs6386_diko', $user, $pass);
+    // 127.0.0.1 est l'adresse ip locale du serveur (le fichier php étant exécuté sur le serveur, l'adresse du serveur est donc l'adresse locale)
+    try {
+      // connexion à la base de donnée
+      $dbh = new PDO('mysql:host=127.0.0.1;dbname=ubvs6386_diko', $user, $pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
 			$stmt = $dbh->prepare('INSERT INTO resultat (definition, id_joueur, id_tour) VALUES (:definition, :id_joueur, :id_tour)');
 			$stmt->bindParam(':definition', $this->_DEFINITION);
 			$stmt->bindParam(':id_joueur', $this->_ID_JOUEUR);
 			$stmt->bindParam(':id_tour', $this->_ID_TOUR);
 			$stmt->execute();//ferme la connexion à la base
-            $dbh = null;
-        } catch (PDOException $e) {
-            print 'Erreur !: ' . $e->getMessage() . '<br/>';
-            die();
-        }
+      $this->_ID = $dbh->lastInsertId(); // récupère l'id de la partie créée
+      $dbh = null;
+    } catch (PDOException $e) {
+      print 'Erreur !: ' . $e->getMessage() . '<br/>';
+      die();
+    }
 	}
 
 	public function readresultat(){
-        $user = 'ubvs6386'; // Identifiant de bdd
-        $pass = 'WVHXr$DAb-cC'; // Mot de passe bdd
+    $user = 'ubvs6386'; // Identifiant de bdd
+    $pass = 'WVHXr$DAb-cC'; // Mot de passe bdd
 
-        // 127.0.0.1 est l'adresse ip locale du serveur (le fichier php étant exécuté sur le serveur, l'adresse du serveur est donc l'adresse locale)
-        try {
-            // connexion à la base de donnée
-            $dbh = new PDO('mysql:host=127.0.0.1;dbname=ubvs6386_diko', $user, $pass);
-			$stmt = $dbh->prepare('SELECT * FROM resultat WHERE id = :id');
-			$stmt->bindParam(':id', $this->_ID);
+    // 127.0.0.1 est l'adresse ip locale du serveur (le fichier php étant exécuté sur le serveur, l'adresse du serveur est donc l'adresse locale)
+    try {
+      // connexion à la base de donnée
+      $dbh = new PDO('mysql:host=127.0.0.1;dbname=ubvs6386_diko', $user, $pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+			$stmt = $dbh->prepare('SELECT * FROM resultat WHERE id_joueur = :id_joueur AND id_tour = :id_tour');
+			$stmt->bindParam(':id_joueur', $this->_ID_JOUEUR);
+			$stmt->bindParam(':id_tour', $this->_ID_TOUR);
 			$stmt->execute();
-            $row = $stmt->fetch();
-            $singleresultat = new resultat($row['definition'], $row['id_joueur'], $row['id_tour']);//ferme la connexion à la base
-            $dbh = null;
-        } catch (PDOException $e) {
-            print 'Erreur !: ' . $e->getMessage() . '<br/>';
-            die();
-        }
-		$monjSon = '{$singleresultat:'.json_encode(array($singleresultat->toArray($singleresultat))).'}';
-        // Je l'affiche
-        return $monjSon;
+      $row = $stmt->fetch();
+      $singleresultat = new resultat($row['id'], $row['definition'], $row['id_joueur'], $row['id_tour']);//ferme la connexion à la base
+      $dbh = null;
+    } catch (PDOException $e) {
+      print 'Erreur !: ' . $e->getMessage() . '<br/>';
+      die();
+    }
+      return $singleresultat->get_ID();
 		}
 
 	public function updateresultat(){
-        $user = 'ubvs6386'; // Identifiant de bdd
-        $pass = 'WVHXr$DAb-cC'; // Mot de passe bdd
+    $user = 'ubvs6386'; // Identifiant de bdd
+    $pass = 'WVHXr$DAb-cC'; // Mot de passe bdd
 
-        // 127.0.0.1 est l'adresse ip locale du serveur (le fichier php étant exécuté sur le serveur, l'adresse du serveur est donc l'adresse locale)
-        try {
-            // connexion à la base de donnée
-            $dbh = new PDO('mysql:host=127.0.0.1;dbname=ubvs6386_diko', $user, $pass);
-			$stmt = $dbh->prepare('UPDATE resultat SET definition = :definition, id_joueur = :id_joueur, id_tour = :id_tour WHERE id = :id');
+    // 127.0.0.1 est l'adresse ip locale du serveur (le fichier php étant exécuté sur le serveur, l'adresse du serveur est donc l'adresse locale)
+    try {
+      // connexion à la base de donnée
+      $dbh = new PDO('mysql:host=127.0.0.1;dbname=ubvs6386_diko', $user, $pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+			$stmt = $dbh->prepare('UPDATE resultat SET definition = :definition WHERE id = :id');
 			$stmt->bindParam(':id', $this->_ID);
 			$stmt->bindParam(':definition', $this->_DEFINITION);
-			$stmt->bindParam(':id_joueur', $this->_ID_JOUEUR);
-			$stmt->bindParam(':id_tour', $this->_ID_TOUR);
 			$stmt->execute();//ferme la connexion à la base
-            $dbh = null;
-        } catch (PDOException $e) {
-            print 'Erreur !: ' . $e->getMessage() . '<br/>';
-            die();
-        }
+      $dbh = null;
+    } catch (PDOException $e) {
+      print 'Erreur !: ' . $e->getMessage() . '<br/>';
+      die();
+    }
 	}
 
 	public function deleteresultat(){

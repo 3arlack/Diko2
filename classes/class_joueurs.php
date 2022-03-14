@@ -3,19 +3,19 @@
 Class joueurs {
 	private $_ID;
 	private $_ID_PARTIE;
-	private $_ID_JOUEUR;
-	private $_NOM_JOUEUR;
-	private $_SCORE_JOUEUR;
-	private $_AVATAR_JOUEUR;
+	private $id_joueur;
+	private $nom_joueur;
+	private $score_joueur;
+	private $avatar_joueur;
 
 	//S'appelle automatiquement à la création d'instance
     function __construct($ID, $ID_PARTIE, $ID_JOUEUR, $NOM_JOUEUR, $SCORE_JOUEUR, $AVATAR_JOUEUR){
 		$this->_ID = $ID;
 		$this->_ID_PARTIE = $ID_PARTIE;
-		$this->_ID_JOUEUR = $ID_JOUEUR;
-		$this->_NOM_JOUEUR = $NOM_JOUEUR;
-		$this->_SCORE_JOUEUR = $SCORE_JOUEUR;
-		$this->_AVATAR_JOUEUR = $AVATAR_JOUEUR;
+		$this->id_joueur = $ID_JOUEUR;
+		$this->nom_joueur = $NOM_JOUEUR;
+		$this->score_joueur = $SCORE_JOUEUR;
+		$this->avatar_joueur = $AVATAR_JOUEUR;
 	}
 
 	public function get_ID(){
@@ -34,36 +34,36 @@ Class joueurs {
 		$this->_ID_PARTIE = $_ID_PARTIE;
 	}
 
-	public function get_ID_JOUEUR(){
-		return $this->_ID_JOUEUR;
+	public function getid_joueur(){
+		return $this->id_joueur;
 	}
 
-	public function set_ID_JOUEUR($_ID_JOUEUR){
-		$this->_ID_JOUEUR = $_ID_JOUEUR;
+	public function setid_joueur($id_joueur){
+		$this->id_joueur = $id_joueur;
 	}
 
-	public function get_NOM_JOUEUR(){
-		return $this->_NOM_JOUEUR;
+	public function getnom_joueur(){
+		return $this->nom_joueur;
 	}
 
-	public function set_NOM_JOUEUR($_NOM_JOUEUR){
-		$this->_NOM_JOUEUR = $_NOM_JOUEUR;
+	public function setnom_joueur($nom_joueur){
+		$this->nom_joueur = $nom_joueur;
 	}
 
-	public function get_SCORE_JOUEUR(){
-		return $this->_SCORE_JOUEUR;
+	public function getscore_joueur(){
+		return $this->score_joueur;
 	}
 
-	public function set_SCORE_JOUEUR($_SCORE_JOUEUR){
-		$this->_SCORE_JOUEUR = $_SCORE_JOUEUR;
+	public function setscore_joueur($score_joueur){
+		$this->score_joueur = $score_joueur;
 	}
 
-	public function get_AVATAR_JOUEUR(){
-		return $this->_AVATAR_JOUEUR;
+	public function getavatar_joueur(){
+		return $this->avatar_joueur;
 	}
 
-	public function set_AVATAR_JOUEUR($_AVATAR_JOUEUR){
-		$this->_AVATAR_JOUEUR = $_AVATAR_JOUEUR;
+	public function setavatar_joueur($avatar_joueur){
+		$this->avatar_joueur = $avatar_joueur;
 	}
 
 	public function createjoueurs(){
@@ -76,10 +76,10 @@ Class joueurs {
             $dbh = new PDO('mysql:host=127.0.0.1;dbname=ubvs6386_diko', $user, $pass);
 			$stmt = $dbh->prepare('INSERT INTO joueurs (id_partie, id_joueur, nom_joueur, score_joueur, avatar_joueur) VALUES (:id_partie, :id_joueur, :nom_joueur, :score_joueur, :avatar_joueur)');
 			$stmt->bindParam(':id_partie', $this->_ID_PARTIE);
-			$stmt->bindParam(':id_joueur', $this->_ID_JOUEUR);
-			$stmt->bindParam(':nom_joueur', $this->_NOM_JOUEUR);
-			$stmt->bindParam(':score_joueur', $this->_SCORE_JOUEUR);
-			$stmt->bindParam(':avatar_joueur', $this->_AVATAR_JOUEUR);
+			$stmt->bindParam(':id_joueur', $this->id_joueur);
+			$stmt->bindParam(':nom_joueur', $this->nom_joueur);
+			$stmt->bindParam(':score_joueur', $this->score_joueur);
+			$stmt->bindParam(':avatar_joueur', $this->avatar_joueur);
 			$stmt->execute();//ferme la connexion à la base
             $dbh = null;
         } catch (PDOException $e) {
@@ -122,10 +122,10 @@ Class joueurs {
 			$stmt = $dbh->prepare('UPDATE joueurs SET id_partie = :id_partie, id_joueur = :id_joueur, nom_joueur = :nom_joueur, score_joueur = :score_joueur, avatar_joueur = :avatar_joueur WHERE id = :id');
 			$stmt->bindParam(':id', $this->_ID);
 			$stmt->bindParam(':id_partie', $this->_ID_PARTIE);
-			$stmt->bindParam(':id_joueur', $this->_ID_JOUEUR);
-			$stmt->bindParam(':nom_joueur', $this->_NOM_JOUEUR);
-			$stmt->bindParam(':score_joueur', $this->_SCORE_JOUEUR);
-			$stmt->bindParam(':avatar_joueur', $this->_AVATAR_JOUEUR);
+			$stmt->bindParam(':id_joueur', $this->id_joueur);
+			$stmt->bindParam(':nom_joueur', $this->nom_joueur);
+			$stmt->bindParam(':score_joueur', $this->score_joueur);
+			$stmt->bindParam(':avatar_joueur', $this->avatar_joueur);
 			$stmt->execute();//ferme la connexion à la base
             $dbh = null;
         } catch (PDOException $e) {
