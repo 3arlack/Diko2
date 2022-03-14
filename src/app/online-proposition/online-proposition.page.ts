@@ -24,7 +24,7 @@ export class OnlinePropositionPage implements OnInit {
 
   constructor(public service:PartieService, private router : Router) {
     this.partieEnCours = this.service.partieEnCours;
-
+    
 
   }
   
@@ -41,10 +41,10 @@ export class OnlinePropositionPage implements OnInit {
       this.service.getTour(u.manche[u.mancheEnCours]._ID).subscribe(tableauTours=>{
         this.mot = tableauTours[u.tourEnCours].mot_choisi;
         let idTour = tableauTours[u.tourEnCours]._ID; 
-        
-        this.service.getResultat(idTour,this.service.joueurEnCours).subscribe(idResultat => {
 
-          this.definitions = tableauTours[u.tourEnCours].resultat;
+        this.service.getAllResultat(idTour).subscribe(tableauResultat => {
+          console.log(tableauResultat);
+          // this.definitions = tableauTours[u.tourEnCours].resultat;
         })
       });
       // this.mot = u.manche[u.mancheEnCours].tours[u.tourEnCours].mot_choisi;

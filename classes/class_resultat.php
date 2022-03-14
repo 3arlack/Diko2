@@ -89,6 +89,44 @@ Class resultat {
       return $singleresultat->get_ID();
 		}
 
+
+    
+	public function readAllResultat(){
+    $user = 'ubvs6386'; // Identifiant de bdd
+    $pass = 'WVHXr$DAb-cC'; // Mot de passe bdd
+    $liste_resultat = array();
+
+    // 127.0.0.1 est l'adresse ip locale du serveur (le fichier php étant exécuté sur le serveur, l'adresse du serveur est donc l'adresse locale)
+    try {
+      // connexion à la base de donnée
+      $dbh = new PDO('mysql:host=127.0.0.1;dbname=ubvs6386_diko', $user, $pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+			$stmt = $dbh->prepare('SELECT * FROM resultat WHERE id_tour = :id_tour');
+			$stmt->bindParam(':id_tour', $this->_ID_TOUR);
+			$stmt->execute();
+      while ($row = $stmt->fetch()) {
+      $singleresultat = new resultat($row['id'], $row['definition'], $row['id_joueur'], $row['id_tour']);//ferme la connexion à la base
+      array_push($liste_resultat, $singleresultat);
+    }
+      $dbh = null;
+    }catch (PDOException $e) {
+      print 'Erreur !: ' . $e->getMessage() . '<br/>';
+      die();
+    }
+    $monTab = array();
+    $i = 0;   
+
+    // on transforme l'objet en tableau (récursif sur les objets)
+    foreach($liste_resultat as $monResultat){
+      $array = $monResultat->toArray($monResultat);
+      $monTab[$i] = $array;
+      $i+=1;
+    }
+
+    $monJSON = json_encode($monTab);
+    return $monJSON;
+		}
+
+
 	public function updateresultat(){
     $user = 'ubvs6386'; // Identifiant de bdd
     $pass = 'WVHXr$DAb-cC'; // Mot de passe bdd

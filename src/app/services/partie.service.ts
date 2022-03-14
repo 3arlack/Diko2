@@ -79,6 +79,10 @@ export class PartieService {
     return this.http.post<number>(this.apiURL+"ws_getResultat.php", "id_tour="+idTour+"&&id_joueur="+idJoueur,this.httpOptions2)
   }
 
+  getAllResultat(idTour:number):Observable<Array<Resultat>>{
+    return this.http.post<Array<Resultat>>(this.apiURL+"ws_getAllResultat.php", "id_tour="+idTour,this.httpOptions2)
+  }
+
   updateResultat(idResultat:number,definition:string):Observable<any>{
     return this.http.post(this.apiURL+"ws_updateResultat.php", "id="+idResultat+"&&definition="+definition,this.httpOptions2)
   }
