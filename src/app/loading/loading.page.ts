@@ -24,8 +24,9 @@ export class LoadingPage implements OnInit {
       switch(param["status"]){
         case "definitionOK": //When player has entered his definition
           this.message = "En attente des autres joueurs...";
-          this.service.getPartie().subscribe(u => { //Retrieve total player count
-            this.counter2 = u[this.partieEncours].joueur.length;
+          this.service.getPartie(this.partieEncours).subscribe(u => { //Retrieve total player count
+      
+            this.counter2 = u.joueur.length;
           });
           break;
         default:

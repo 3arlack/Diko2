@@ -36,10 +36,20 @@ export class OnlinePropositionPage implements OnInit {
     this.votes = this.chips.length;
     
     // Retrieve from DB : current word, list of definitions, list of players
-    this.service.getPartie().subscribe(u => {
-      this.mot = u[this.partieEnCours].manche[u[this.partieEnCours].mancheEnCours].tours[u[this.partieEnCours].tourEnCours].mot_choisi;
-      this.joueurs = u[this.partieEnCours].joueur;
-      this.definitions = u[this.partieEnCours].manche[u[this.partieEnCours].mancheEnCours].tours[u[this.partieEnCours].tourEnCours].resultat;
+    this.service.getPartie(this.partieEnCours).subscribe(u => {
+      
+      this.service.getTour(u.manche[u.mancheEnCours]._ID).subscribe(tableauTours=>{
+        this.mot = tableauTours[u.tourEnCours].mot_choisi;
+        let idTour = tableauTours[u.tourEnCours]._ID; 
+        
+        this.service.getResultat(idTour,this.service.joueurEnCours).subscribe(idResultat => {
+
+          this.definitions = tableauTours[u.tourEnCours].resultat;
+        })
+      });
+      // this.mot = u.manche[u.mancheEnCours].tours[u.tourEnCours].mot_choisi;
+      // this.joueurs = u.joueur;
+      // this.definitions = u.manche[u.mancheEnCours].tours[u.tourEnCours].resultat;
 
     
     });
