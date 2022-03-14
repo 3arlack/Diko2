@@ -1,17 +1,21 @@
 <?php
 
+require_once('class_votes.php');
+
 Class resultat {
 	private $_ID;
-	private $_DEFINITION;
+	private $definition;
 	private $_ID_JOUEUR;
 	private $_ID_TOUR;
+  private $id_vote = array();
 
 	//S'appelle automatiquement à la création d'instance
     function __construct($ID, $DEFINITION, $ID_JOUEUR, $ID_TOUR){
 		$this->_ID = $ID;
-		$this->_DEFINITION = $DEFINITION;
+		$this->definition = $DEFINITION;
 		$this->_ID_JOUEUR = $ID_JOUEUR;
 		$this->_ID_TOUR = $ID_TOUR;
+    $this->id_vote=$this->getVote();
 	}
 
 	public function get_ID(){
@@ -22,12 +26,12 @@ Class resultat {
 		$this->_ID = $_ID;
 	}
 
-	public function get_DEFINITION(){
-		return $this->_DEFINITION;
+	public function getdefinition(){
+		return $this->definition;
 	}
 
-	public function set_DEFINITION($_DEFINITION){
-		$this->_DEFINITION = $_DEFINITION;
+	public function setdefinition($definition){
+		$this->definition = $definition;
 	}
 
 	public function get_ID_JOUEUR(){
@@ -46,6 +50,31 @@ Class resultat {
 		$this->_ID_TOUR = $_ID_TOUR;
 	}
 
+  function getVote(){
+    $user = 'ubvs6386'; // Identifiant de bdd
+    $pass = 'WVHXr$DAb-cC'; // Mot de passe bdd
+    $liste_vote = array();
+
+    // 127.0.0.1 est l'adresse ip locale du serveur (le fichier php étant exécuté sur le serveur, l'adresse du serveur est donc l'adresse locale)
+    try {
+      // connexion à la base de donnée
+      $dbh = new PDO('mysql:host=127.0.0.1;dbname=ubvs6386_diko', $user, $pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+			$stmt = $dbh->prepare('SELECT * FROM votes WHERE id_resultat = :id_resultat');
+			$stmt->bindParam(':id_resultat', $this->_ID);
+			$stmt->execute();
+      while ($row = $stmt->fetch()) {
+        $singlevotes = intval($row['id_vote']);//ferme la connexion à la base
+        array_push($liste_vote, $singlevotes);
+    }
+      $dbh = null;
+    }catch (PDOException $e) {
+      print 'Erreur !: ' . $e->getMessage() . '<br/>';
+      die();
+    }
+
+    return $liste_vote;
+  }
+
 	public function createresultat(){
     $user = 'ubvs6386'; // Identifiant de bdd
     $pass = 'WVHXr$DAb-cC'; // Mot de passe bdd
@@ -55,7 +84,7 @@ Class resultat {
       // connexion à la base de donnée
       $dbh = new PDO('mysql:host=127.0.0.1;dbname=ubvs6386_diko', $user, $pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
 			$stmt = $dbh->prepare('INSERT INTO resultat (definition, id_joueur, id_tour) VALUES (:definition, :id_joueur, :id_tour)');
-			$stmt->bindParam(':definition', $this->_DEFINITION);
+			$stmt->bindParam(':definition', $this->definition);
 			$stmt->bindParam(':id_joueur', $this->_ID_JOUEUR);
 			$stmt->bindParam(':id_tour', $this->_ID_TOUR);
 			$stmt->execute();//ferme la connexion à la base
@@ -137,7 +166,7 @@ Class resultat {
       $dbh = new PDO('mysql:host=127.0.0.1;dbname=ubvs6386_diko', $user, $pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
 			$stmt = $dbh->prepare('UPDATE resultat SET definition = :definition WHERE id = :id');
 			$stmt->bindParam(':id', $this->_ID);
-			$stmt->bindParam(':definition', $this->_DEFINITION);
+			$stmt->bindParam(':definition', $this->definition);
 			$stmt->execute();//ferme la connexion à la base
       $dbh = null;
     } catch (PDOException $e) {

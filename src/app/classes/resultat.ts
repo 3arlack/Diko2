@@ -1,4 +1,5 @@
 export class Resultat {
+  "_ID"?:number;
   "_ID_TOUR"?:number;
   "definition":string;
   "id_joueur":number;

@@ -29,6 +29,8 @@ export class PartieService {
 
   // Function to retrieve player name by its id_joueur
   findPlayerName(id_vote:number, joueur:Array<Joueur>):string{
+    console.log(id_vote);
+    console.log(joueur);
     for (let i=0;i<joueur.length;i++){
       if (joueur[i].id_joueur == id_vote){
           return joueur[i].nom_joueur;
@@ -92,4 +94,16 @@ export class PartieService {
     return this.http.put(this.apiURL+"ws_deleteJoueurs.php", joueurs ,this.httpOptions)
   }
 
+//VOTES
+
+  createVote(idResultat:number, idVote:number):Observable<any>{
+    return this.http.post<any>(this.apiURL+"ws_createVote.php", "idResultat="+idResultat+"&&idVote="+idVote, this.httpOptions2)
+  }
+
+  // getVote(idResultat:number):Observable<Resultat>{
+  //   return this.http.post<Resultat>(this.apiURL+"ws_getVote.php", "idResultat="+idResultat, this.httpOptions2)
+  // }
+
+
 }
+

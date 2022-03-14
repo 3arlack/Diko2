@@ -21,11 +21,9 @@ export class OnlinePropositionPage implements OnInit {
     partieEnCours:number;
     
 
-
   constructor(public service:PartieService, private router : Router) {
     this.partieEnCours = this.service.partieEnCours;
     
-
   }
   
   ngOnInit() {
@@ -37,21 +35,19 @@ export class OnlinePropositionPage implements OnInit {
     
     // Retrieve from DB : current word, list of definitions, list of players
     this.service.getPartie(this.partieEnCours).subscribe(u => {
-      
+      this.joueurs = u.joueur;
       this.service.getTour(u.manche[u.mancheEnCours]._ID).subscribe(tableauTours=>{
         this.mot = tableauTours[u.tourEnCours].mot_choisi;
         let idTour = tableauTours[u.tourEnCours]._ID; 
 
         this.service.getAllResultat(idTour).subscribe(tableauResultat => {
-          console.log(tableauResultat);
-          // this.definitions = tableauTours[u.tourEnCours].resultat;
+          this.definitions = tableauResultat;
+        
+          
+
         })
       });
-      // this.mot = u.manche[u.mancheEnCours].tours[u.tourEnCours].mot_choisi;
-      // this.joueurs = u.joueur;
-      // this.definitions = u.manche[u.mancheEnCours].tours[u.tourEnCours].resultat;
 
-    
     });
   }
 

@@ -17,6 +17,7 @@ export class OnlineVotePage implements OnInit {
   partie : Partie;
   partieEnCours:number;
   joueurEnCours: number;
+  idResultat:number;
 
   constructor(private route:ActivatedRoute,private service:PartieService,private NavCtrl:NavController) {
     this.partieEnCours = this.service.partieEnCours;
@@ -25,10 +26,20 @@ export class OnlineVotePage implements OnInit {
     this.route.queryParams.subscribe(param => {
       this.indexDefinition = parseInt(param["indexDefinition"]);
       // Get from DB : current word, current definition
-        this.service.getPartie().subscribe(u => {
-        this.partie = u[this.partieEnCours];
-        this.mot = u[this.partieEnCours].manche[u[this.partieEnCours].mancheEnCours].tours[u[this.partieEnCours].tourEnCours].mot_choisi;
-        this.definition = u[this.partieEnCours].manche[u[this.partieEnCours].mancheEnCours].tours[u[this.partieEnCours].tourEnCours].resultat[this.indexDefinition].definition;
+        this.service.getPartie(this.partieEnCours).subscribe(u => {
+        this.partie = u;
+
+        this.service.getTour(u.manche[u.mancheEnCours]._ID).subscribe(tableauTours=>{
+          this.mot = tableauTours[u.tourEnCours].mot_choisi;
+          let idTour = tableauTours[u.tourEnCours]._ID; 
+
+          this.service.getAllResultat(idTour).subscribe(tableauResultat=>{
+            this.definition = tableauResultat[this.indexDefinition].definition;
+            this.idResultat = tableauResultat[this.indexDefinition]._ID;
+
+          })
+        });
+
       });
     });
   }
@@ -42,15 +53,12 @@ export class OnlineVotePage implements OnInit {
   }
 
   validate(){
-    console.log(this.partie.manche[this.partie.mancheEnCours]);
+
     // NEED TO IMPLEMENT LOGIC TO REGISTER VOTE
-    this.partie.manche[this.partie.mancheEnCours].tours[this.partie.tourEnCours].resultat[this.indexDefinition].id_vote.push(this.joueurEnCours);
-    
-    
-    this.service.updatePartie(this.partie).subscribe(()=>{
+    this.service.createVote(this.idResultat,this.joueurEnCours).subscribe(()=>{
       this.goBack();
     })
-
+    
   
   }
 
