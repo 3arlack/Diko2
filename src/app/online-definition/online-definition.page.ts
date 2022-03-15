@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonTextarea } from '@ionic/angular';
+import { Joueur } from '../classes/joueur';
 import { Resultat } from '../classes/resultat';
 import { PartieService } from '../services/partie.service';
 
@@ -15,9 +16,13 @@ export class OnlineDefinitionPage implements OnInit {
 
     mot:string;
     partie:number;
+    joueur:string;
+    joueurEnCours:number;
 
   constructor(private service:PartieService, private router : Router) {
     this.partie = this.service.partieEnCours;
+    this.joueurEnCours = this.service.joueurEnCours;
+
   }
   
   ngOnInit() {
@@ -26,6 +31,7 @@ export class OnlineDefinitionPage implements OnInit {
   ionViewWillEnter(){
     // Retrieve current word from DB
     this.service.getPartie(this.partie).subscribe(u => {
+      this.joueur = u.joueur[this.joueurEnCours].nom_joueur;
       this.service.getTour(u.manche[u.mancheEnCours]._ID).subscribe(tableauTours=>{
         this.mot = tableauTours[u.tourEnCours].mot_choisi;
       });
