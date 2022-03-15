@@ -33,20 +33,24 @@ export class WinnerResultatPage implements OnInit {
         // Retrieve game informations from DB
         this.onlineService.getPartie(this.partieEnCours).subscribe(u => {
           this.joueurs = u.joueur;
+          console.log(u);
           for(let i=0;i<this.joueurs.length;i++){
             for (let p=0;p<u.manche.length;p++){
-              this.onlineService.getTour(u.manche[u.mancheEnCours]._ID).subscribe(tableauTours=>{
+            
+              this.onlineService.getTour(u.manche[p]._ID).subscribe(tableauTours=>{
                 let idTour = tableauTours[u.tourEnCours]._ID; 
+    
                 for (let x=0;x<tableauTours.length;x++){
                   this.onlineService.getAllResultat(idTour).subscribe(tableauResultat => {
-                    for (let y=0;y<tableauTours[u.tourEnCours].resultat.length;y++){
-                      for (let z=0;z<tableauTours[u.tourEnCours].resultat[y].id_vote.length;z++){
 
-                        if (this.joueurs[i].id_joueur == u.manche[p].tours[x].resultat[y].id_vote[z] && this.joueurs[i].id_joueur !== u.manche[p].tours[x].resultat[y].id_joueur){
+                    for (let y=0;y<tableauResultat.length;y++){
+                      for (let z=0;z<tableauResultat[y].id_vote.length;z++){
+
+                        if (this.joueurs[i].id_joueur == tableauResultat[y].id_vote[z] && this.joueurs[i].id_joueur !== tableauResultat[y].id_joueur){
                           // If player's definition has been voted
                           // Find player by its id_joueur key rather than by index, and increment his score
-                          if (u.manche[p].tours[x].resultat[y].id_joueur != 999){
-                            this.joueurs.find((joueur)=>joueur.id_joueur === u.manche[p].tours[x].resultat[y].id_joueur).score_joueur++;
+                          if (tableauResultat[y].id_joueur != 999){
+                            this.joueurs.find((joueur)=>joueur.id_joueur === tableauResultat[y].id_joueur).score_joueur++;
                           }else{
                             this.joueurs[i].score_joueur++;
                           }
