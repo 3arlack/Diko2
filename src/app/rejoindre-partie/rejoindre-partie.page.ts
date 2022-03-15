@@ -23,8 +23,9 @@ export class RejoindrePartiePage implements OnInit {
   OK(){
 
     // Gets game sessions from DB
-    this.service.getPartie().subscribe((u)=>{
-      if (u[this.partie.value]){ // If game exists
+    this.service.getPartie(Number(this.partie.value)).subscribe(u=>{
+      console.log(u);
+      if (u != undefined && u.joueur.filter(joueur => joueur.nom_joueur == null).length > 0){ // If game exists
         this.service.partieEnCours = Number(this.partie.value);
         this.route.navigate(['/add-name']); // Route to next component
 

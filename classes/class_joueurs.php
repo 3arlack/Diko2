@@ -109,29 +109,30 @@ Class joueurs {
 		$monjSon = '{$singlejoueurs:'.json_encode(array($singlejoueurs->toArray($singlejoueurs))).'}';
         // Je l'affiche
         return $monjSon;
-		}
+  }
 
-	public function updatejoueurs(){
-        $user = 'ubvs6386'; // Identifiant de bdd
-        $pass = 'WVHXr$DAb-cC'; // Mot de passe bdd
 
-        // 127.0.0.1 est l'adresse ip locale du serveur (le fichier php étant exécuté sur le serveur, l'adresse du serveur est donc l'adresse locale)
-        try {
-            // connexion à la base de donnée
-            $dbh = new PDO('mysql:host=127.0.0.1;dbname=ubvs6386_diko', $user, $pass);
-			$stmt = $dbh->prepare('UPDATE joueurs SET id_partie = :id_partie, id_joueur = :id_joueur, nom_joueur = :nom_joueur, score_joueur = :score_joueur, avatar_joueur = :avatar_joueur WHERE id = :id');
-			$stmt->bindParam(':id', $this->_ID);
-			$stmt->bindParam(':id_partie', $this->_ID_PARTIE);
-			$stmt->bindParam(':id_joueur', $this->id_joueur);
-			$stmt->bindParam(':nom_joueur', $this->nom_joueur);
-			$stmt->bindParam(':score_joueur', $this->score_joueur);
-			$stmt->bindParam(':avatar_joueur', $this->avatar_joueur);
-			$stmt->execute();//ferme la connexion à la base
-            $dbh = null;
-        } catch (PDOException $e) {
-            print 'Erreur !: ' . $e->getMessage() . '<br/>';
-            die();
-        }
+  public function updatejoueurs(){
+    $user = 'ubvs6386'; // Identifiant de bdd
+    $pass = 'WVHXr$DAb-cC'; // Mot de passe bdd
+
+    // 127.0.0.1 est l'adresse ip locale du serveur (le fichier php étant exécuté sur le serveur, l'adresse du serveur est donc l'adresse locale)
+    try {
+      // connexion à la base de donnée
+      $dbh = new PDO('mysql:host=127.0.0.1;dbname=ubvs6386_diko', $user, $pass,array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+      $stmt = $dbh->prepare('UPDATE joueurs SET nom_joueur = :nom_joueur, score_joueur = :score_joueur, avatar_joueur = :avatar_joueur WHERE id = :id');
+      $stmt->bindParam(':id', $this->_ID);
+      // $stmt->bindParam(':id_partie', $this->_ID_PARTIE);
+      // $stmt->bindParam(':id_joueur', $this->id_joueur);
+      $stmt->bindParam(':nom_joueur', $this->nom_joueur);
+      $stmt->bindParam(':score_joueur', $this->score_joueur);
+      $stmt->bindParam(':avatar_joueur', $this->avatar_joueur);
+      $stmt->execute();//ferme la connexion à la base
+      $dbh = null;
+    } catch (PDOException $e) {
+      print 'Erreur !: ' . $e->getMessage() . '<br/>';
+      die();
+    }
 	}
 
 	public function deletejoueurs(){

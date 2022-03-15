@@ -36,28 +36,31 @@ export class LobbyPage implements OnInit {
   }
 
   OK(){
+    this.service.getPartie(this.service.partieEnCours).subscribe(partie => {
 
-    const result = this.joueurs.filter(joueur => joueur.nom_joueur != null);
+      const result = partie.joueur.filter(joueur => joueur.nom_joueur != null);
 
-    for (let y=0;y<this.maPartie.manche.length;y++){
-      for (let u=0;u<result.length;u++){
-        let tour = new Tour("",0,[],0);
-        tour.mot_choisi = tour.randomWord();
-        tour._ID_MANCHE = this.maPartie.manche[y]._ID;
-        this.service.createTour(tour).subscribe(idTour=>{
-          for (let i=0;i<result.length;i++){
-            let resultat = new Resultat(null,i,[]);
-            resultat._ID_TOUR = Number(idTour);
-            this.service.createResultat(resultat).subscribe();
-          }
-          let goodResultat = new Resultat(tour.goodDefinition(tour.mot_choisi),999,[]);
-          goodResultat._ID_TOUR = Number(idTour);
-          this.service.createResultat(goodResultat).subscribe();
-        });
+      for (let y=0;y<this.maPartie.manche.length;y++){
+        for (let u=0;u<result.length;u++){
+          let tour = new Tour("",0,[],0);
+          tour.mot_choisi = tour.randomWord();
+          tour._ID_MANCHE = this.maPartie.manche[y]._ID;
+          this.service.createTour(tour).subscribe(idTour=>{
+            for (let i=0;i<result.length;i++){
+              let resultat = new Resultat(null,i,[]);
+              resultat._ID_TOUR = Number(idTour);
+              this.service.createResultat(resultat).subscribe();
+            }
+            let goodResultat = new Resultat(tour.goodDefinition(tour.mot_choisi),999,[]);
+            goodResultat._ID_TOUR = Number(idTour);
+            this.service.createResultat(goodResultat).subscribe();
+          });
+        }
       }
-    }
+      
+      this.service.deleteJoueurs(partie.joueur).subscribe(()=>this.router.navigate(['current-manche-online']));
+  });
 
-    this.service.deleteJoueurs(this.joueurs).subscribe(()=>this.router.navigate(['current-manche-online']));
 
   }
 }

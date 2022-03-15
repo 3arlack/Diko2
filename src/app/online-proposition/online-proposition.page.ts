@@ -42,9 +42,6 @@ export class OnlinePropositionPage implements OnInit {
 
         this.service.getAllResultat(idTour).subscribe(tableauResultat => {
           this.definitions = tableauResultat;
-        
-          
-
         })
       });
 

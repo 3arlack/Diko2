@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Joueur } from '../classes/joueur';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Partie } from '../classes/partie';
 import { Resultat } from '../classes/resultat';
 import { Tour } from '../classes/tour';
@@ -15,6 +15,8 @@ export class PartieService {
 
   partieEnCours:number;
   joueurEnCours:number;
+  tourEnCours:number;
+  mancheEnCours:number;
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -91,6 +93,10 @@ export class PartieService {
 //JOUEURS
   deleteJoueurs(joueurs:Array<Joueur>):Observable<any>{
     return this.http.put(this.apiURL+"ws_deleteJoueurs.php", joueurs ,this.httpOptions)
+  }
+
+  updateJoueur(nomDuJoueur:string,idJoueur:number):Observable<any>{
+    return this.http.post(this.apiURL+"ws_updateJoueur.php", "nomDuJoueur="+nomDuJoueur+"&&idJoueur="+idJoueur,this.httpOptions2)
   }
 
 //VOTES

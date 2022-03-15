@@ -30,7 +30,7 @@ export class LoadingPage implements OnInit {
           });
           break;
         default:
- 
+
           break;
       }
     });
@@ -46,10 +46,10 @@ export class LoadingPage implements OnInit {
       //When player has entered his definition
       // Looping code here to check periodically if all players have answered
       // Temp code to simulate waiting for answers
-      setTimeout(()=>{this.counter++;this.progress=this.counter/this.counter2;},200);
-      setTimeout(()=>{this.counter++;this.progress=this.counter/this.counter2;},900);
-      setTimeout(()=>{this.counter++;this.progress=this.counter/this.counter2;},1200);
-      setTimeout(()=>{this.counter++;this.progress=this.counter/this.counter2;},1900);
+      // setTimeout(()=>{this.counter++;this.progress=this.counter/this.counter2;},200);
+      // setTimeout(()=>{this.counter++;this.progress=this.counter/this.counter2;},900);
+      // setTimeout(()=>{this.counter++;this.progress=this.counter/this.counter2;},1200);
+      // setTimeout(()=>{this.counter++;this.progress=this.counter/this.counter2;},1900);
 
       switch(param["status"]){
         case "definitionOK": 
@@ -61,12 +61,22 @@ export class LoadingPage implements OnInit {
 
           break;
         default:
+          function pouet(service:PartieService,router:Router){
+            setTimeout(()=>{
+              console.log("check");
+              service.getPartie(service.partieEnCours).subscribe(partie=>{
+                const result = partie.joueur.filter(joueur => joueur.nom_joueur == null);
+                if (result.length > 0){
+                  console.log("toujours de la place");
+                  pouet(service,router);
+                } else {
+                  router.navigate(["current-manche-online"]);
+                }
+              })
+            },1000);
+          };
+        pouet(this.service,this.router);
 
-          setTimeout(()=>{
-            this.progress=1;
-            this.router.navigate(["current-manche-online"]);
-          },2000);
- 
           break;
       }
     });
