@@ -5,7 +5,7 @@ require_once('class_votes.php');
 Class resultat {
 	private $_ID;
 	private $definition;
-	private $_ID_JOUEUR;
+	private $id_joueur;
 	private $_ID_TOUR;
   private $id_vote = array();
 
@@ -13,7 +13,7 @@ Class resultat {
     function __construct($ID, $DEFINITION, $ID_JOUEUR, $ID_TOUR){
 		$this->_ID = $ID;
 		$this->definition = $DEFINITION;
-		$this->_ID_JOUEUR = $ID_JOUEUR;
+		$this->id_joueur = $ID_JOUEUR;
 		$this->_ID_TOUR = $ID_TOUR;
     $this->id_vote=$this->getVote();
 	}
@@ -34,12 +34,12 @@ Class resultat {
 		$this->definition = $definition;
 	}
 
-	public function get_ID_JOUEUR(){
-		return $this->_ID_JOUEUR;
+	public function getid_joueur(){
+		return $this->id_joueur;
 	}
 
-	public function set_ID_JOUEUR($_ID_JOUEUR){
-		$this->_ID_JOUEUR = $_ID_JOUEUR;
+	public function setid_joueur($id_joueur){
+		$this->id_joueur = $id_joueur;
 	}
 
 	public function get_ID_TOUR(){
@@ -85,7 +85,7 @@ Class resultat {
       $dbh = new PDO('mysql:host=127.0.0.1;dbname=ubvs6386_diko', $user, $pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
 			$stmt = $dbh->prepare('INSERT INTO resultat (definition, id_joueur, id_tour) VALUES (:definition, :id_joueur, :id_tour)');
 			$stmt->bindParam(':definition', $this->definition);
-			$stmt->bindParam(':id_joueur', $this->_ID_JOUEUR);
+			$stmt->bindParam(':id_joueur', $this->id_joueur);
 			$stmt->bindParam(':id_tour', $this->_ID_TOUR);
 			$stmt->execute();//ferme la connexion à la base
       $this->_ID = $dbh->lastInsertId(); // récupère l'id de la partie créée
@@ -105,7 +105,7 @@ Class resultat {
       // connexion à la base de donnée
       $dbh = new PDO('mysql:host=127.0.0.1;dbname=ubvs6386_diko', $user, $pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
 			$stmt = $dbh->prepare('SELECT * FROM resultat WHERE id_joueur = :id_joueur AND id_tour = :id_tour');
-			$stmt->bindParam(':id_joueur', $this->_ID_JOUEUR);
+			$stmt->bindParam(':id_joueur', $this->id_joueur);
 			$stmt->bindParam(':id_tour', $this->_ID_TOUR);
 			$stmt->execute();
       $row = $stmt->fetch();
