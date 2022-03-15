@@ -17,12 +17,16 @@ export class CurrentMancheOnlinePage implements OnInit {
 
   ngOnInit() {
   }
-
+  ConvertToInt(mancheEnCours){
+    return parseInt(mancheEnCours);
+  }
   ionViewWillEnter(){
     // Get current Round from DB
     this.service.getPartie(this.service.partieEnCours).subscribe(u => {
       this.mancheEnCours = u.mancheEnCours;
     });
+
+   
   }
 
 }
