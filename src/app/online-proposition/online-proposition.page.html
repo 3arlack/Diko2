@@ -1,57 +1,50 @@
 <ion-content>
-    <ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <h1>Propositions</h1>
+      </ion-col>
+    </ion-row>
 
-        <ion-row>
-            <ion-col>
-                <h1>Propositions</h1>
-            </ion-col>
-        </ion-row>
+    <ion-row>
+      <ion-col>
+        <h2>{{mot}}</h2>
+      </ion-col>
+    </ion-row>
 
-        <ion-row>
-            <ion-col>
-                <h2>{{mot}}</h2>
-            </ion-col>
-        </ion-row>
+    <ion-row>
+      <ion-col>
+        <p>Appuie sur les définitions pour les lire et vote pour celle qui te paraît être la bonne !</p>
+      </ion-col>
+    </ion-row>
 
-        <ion-row>
-            <ion-col>
-                <p>Clique sur les définitions pour les lire et vote pour celle qui te paraît être la bonne !</p>
-            </ion-col>
-        </ion-row>
+    <!-- for every entry in current Tour's resultats, we create a line so we can read definition and vote -->
+    <ion-row *ngFor="let def of definitions; let index = index"  routerLink="/online-vote" [queryParams]="{ indexDefinition : [index]}" #defrow>
+      <ion-col>
+        <h4>Définition n°{{index+1}}</h4>
+      </ion-col>
+      <ion-col>
+        <ion-chip *ngFor="let vote of def.id_vote;let z = index;" [attr.data-index]="z">
+          <ion-avatar>
+            <img src="../../assets/avatarexemple.jpg">
+          </ion-avatar>
+          <ion-label>
+            {{this.service.findPlayerName(vote,joueurs)}}
+          </ion-label>
+        </ion-chip>
+      </ion-col>
+    </ion-row>
 
-        <!-- for every entry in current Tour's resultats, we create a line so we can read definition and vote -->
-        <ion-row *ngFor="let def of definitions; let index = index"  routerLink="/online-vote" [queryParams]="{ indexDefinition : [index]}" #defrow>
-            <ion-col>
-                <h4>Définition n°{{index+1}}</h4>
-            </ion-col>
-            <ion-col>
-                <ion-chip *ngFor="let vote of def.id_vote;let z = index;" [attr.data-index]="z">
-                    <ion-avatar>
-						<img src="../../assets/avatarexemple.jpg">
-                    </ion-avatar>
-                    <ion-label>
-						{{this.service.findPlayerName(vote,joueurs)}}
-                    </ion-label>
-                </ion-chip>
-            </ion-col>
-        </ion-row>
-
-        <ion-row>
-            <ion-col>
-                <p>Votes en cours : {{votes}}/{{joueurs.length}}</p>
-            </ion-col>
-        </ion-row>
-        <!-- Display progress bar with current completed votes -->
-        <ion-row>
-            <ion-col>
-                <ion-progress-bar [value]="votes/joueurs.length"></ion-progress-bar>
-            </ion-col>
-        </ion-row>
-
-        <ion-row>
-            <ion-col>
-                <ion-button routerLink="/reponse" [queryParams]="{status:'online'}">Valider les votes</ion-button>
-            </ion-col>
-        </ion-row>
-    </ion-grid>
+    <ion-row>
+      <ion-col>
+        <p>Votes en cours : {{votes}}/{{joueurs.length}}</p>
+      </ion-col>
+    </ion-row>
+    <!-- Display progress bar with current completed votes -->
+    <ion-row>
+      <ion-col>
+        <ion-progress-bar [value]="votes/joueurs.length"></ion-progress-bar>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

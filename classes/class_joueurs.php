@@ -100,7 +100,7 @@ Class joueurs {
 			$stmt->bindParam(':id', $this->_ID);
 			$stmt->execute();
             $row = $stmt->fetch();
-            $singlejoueurs = new joueurs($row['id_partie'], $row['id_joueur'], $row['nom_joueur'], $row['score_joueur'], $row['avatar_joueur']);//ferme la connexion à la base
+            $singlejoueurs = new joueurs($row['id'], $row['id_partie'], $row['id_joueur'], $row['nom_joueur'], $row['score_joueur'], $row['avatar_joueur']);//ferme la connexion à la base
             $dbh = null;
         } catch (PDOException $e) {
             print 'Erreur !: ' . $e->getMessage() . '<br/>';

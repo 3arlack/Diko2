@@ -40,6 +40,7 @@ export class LoadingPage implements OnInit {
   }
 
   ionViewWillEnter(){
+    this.joueurs = [];
     //Retrieve param in current Route to switch status
     this.route.queryParams.subscribe(param => {
       switch(param["status"]){
@@ -75,25 +76,15 @@ export class LoadingPage implements OnInit {
   pouet2(service:PartieService,router:Router){
     setTimeout(()=>{
       console.log("check");
-
-      
-
-      service.getPartie(service.partieEnCours).subscribe(partie=>{
-        service.getTour(partie.manche[service.mancheEnCours]._ID).subscribe(tableauTours=>{
-          let idTour = tableauTours[service.tourEnCours]._ID;
-          service.getAllResultat(idTour).subscribe(tableauResultat=>{
-            const tableauResultatFiltre = tableauResultat.filter(resultat=>{resultat.definition == undefined});
-            console.log(tableauResultatFiltre);
-            // this.counter2 = tableauResultatFiltre.length-1/tableauResultat.length-1;
-            console.log(tableauResultat);
-            if (tableauResultatFiltre.length == 0){
-              this.router.navigate(["online-proposition"]);
-            } else {
-              this.pouet2(service,router);
-            }
-          })
-        })
-        
+      service.checkDefinitions(service.partieEnCours,service.mancheEnCours,service.tourEnCours).subscribe(reponse=>{
+        this.counter2 = reponse.nbJoueurs;
+        this.counter = reponse.nbJoueurs - reponse.nbDefNull;
+        this.progress = this.counter/this.counter2;
+        if (reponse.nbDefNull > 0){
+          this.pouet2(service,router);
+        }else{
+          this.router.navigate(["online-proposition"]);
+        }
       })
     },1000);
   }

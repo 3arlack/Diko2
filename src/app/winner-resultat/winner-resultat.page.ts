@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
-import { unary } from 'lodash';
 import { Joueur } from '../classes/joueur';
 import { OfflineService } from '../services/offline.service';
 import { PartieService } from '../services/partie.service';

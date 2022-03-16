@@ -52,6 +52,10 @@ Class parties {
 		$this->manche = $manche;
 	}
 
+  public function getjoueur(){
+		return $this->joueur;
+	}
+
 	public function setjoueur($joueur){
 		$this->joueur = $joueur;
 	}

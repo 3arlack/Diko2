@@ -1,15 +1,16 @@
 <?php
 
+require_once("class_tours.php");
 Class manches {
 	private $_ID;
 	private $_ID_PARTIE;
-  // private $tours;
+  private $tours;
 
 	//S'appelle automatiquement à la création d'instance
     function __construct($ID, $ID_PARTIE){
 		$this->_ID = $ID;
 		$this->_ID_PARTIE = $ID_PARTIE;
-    // $this->tours = $this->getTours();
+    $this->tours = $this->getTours();
 	}
 
 	public function get_ID(){
@@ -26,6 +27,14 @@ Class manches {
 
 	public function set_ID_PARTIE($_ID_PARTIE){
 		$this->_ID_PARTIE = $_ID_PARTIE;
+	}
+
+	public function gettour(){
+		return $this->tours;
+	}
+
+	public function settours($tours){
+		$this->tours = $tours;
 	}
 
 	public function createmanches(){

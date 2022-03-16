@@ -78,6 +78,10 @@ export class PartieService {
     return this.http.put(this.apiURL+"ws_createResultat.php", resultat ,this.httpOptions);
   }
 
+  createResultats(idTour:number,nbJoueurs:number,goodResultat:Resultat):Observable<any>{
+    return this.http.post(this.apiURL+"ws_createResultats.php", "id_tour="+idTour+"&&nbJoueurs="+nbJoueurs+"&&goodResultat="+JSON.stringify(goodResultat),this.httpOptions2);
+  }
+
   getResultat(idTour:number,idJoueur:number):Observable<number>{
     return this.http.post<number>(this.apiURL+"ws_getResultat.php", "id_tour="+idTour+"&&id_joueur="+idJoueur,this.httpOptions2)
   }
@@ -105,7 +109,11 @@ export class PartieService {
     return this.http.post<any>(this.apiURL+"ws_createVote.php", "idResultat="+idResultat+"&&idVote="+idVote, this.httpOptions2)
   }
 
- 
+//DEFINITIONS
+
+  checkDefinitions(id_partie:number, mancheEnCours:number, tourEnCours:number):Observable<{nbDefNull:number,nbJoueurs:number}>{
+    return this.http.post<{nbDefNull:number,nbJoueurs:number}>(this.apiURL+"ws_checkDefinition.php", "id="+id_partie+"&&mancheEnCours="+mancheEnCours+"&&tourEnCours="+tourEnCours, this.httpOptions2);
+  }
 
 
 }

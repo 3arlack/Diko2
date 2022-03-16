@@ -1,15 +1,18 @@
 <?php
 
+require_once("class_resultat.php");
 Class tours {
 	private $_ID;
 	private $_ID_MANCHE;
 	private $mot_choisi;
+  private $resultat;
 
 	//S'appelle automatiquement à la création d'instance
     function __construct($ID, $ID_MANCHE, $MOT_CHOISI){
 		$this->_ID = $ID;
 		$this->_ID_MANCHE = $ID_MANCHE;
 		$this->mot_choisi = $MOT_CHOISI;
+    $this->resultat = $this->getResultats();
 	}
 
 	public function get_ID(){
@@ -34,6 +37,14 @@ Class tours {
 
 	public function setmot_choisi($mot_choisi){
 		$this->mot_choisi = $mot_choisi;
+	}
+
+	public function getresultat(){
+		return $this->resultat;
+	}
+
+	public function setresultat($resultat){
+		$this->resultat = $resultat;
 	}
 
 	public function createtours(){
@@ -128,6 +139,33 @@ Class tours {
             die();
         }
 	}
+
+  function getResultats(){
+    $user = 'ubvs6386'; // Identifiant de bdd
+    $pass = 'WVHXr$DAb-cC'; // Mot de passe bdd
+    $temp = array();
+
+    // 127.0.0.1 est l'adresse ip locale du serveur (le fichier php étant exécuté sur le serveur, l'adresse du serveur est donc l'adresse locale)
+    try {
+    // connexion à la base de donnée
+      $dbh = new PDO('mysql:host=127.0.0.1;dbname=ubvs6386_diko', $user, $pass,array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8')  );
+			$stmt = $dbh->prepare('SELECT * FROM resultat WHERE id_tour = :id');
+			$stmt->bindParam(':id', $this->_ID);
+      $stmt->execute();
+
+      while ($row = $stmt->fetch()) {
+        $singleResultat = new resultat($row['id'], $row['definition'], $row['id_joueur'], $row['id_tour']);//ferme la connexion à la base
+        array_push($temp, $singleResultat);
+      }
+      //ferme la connexion à la base
+      $dbh = null;
+    } catch (PDOException $e) {
+      print 'Erreur !: ' . $e->getMessage() . '<br/>';
+      // die();
+    }
+
+    return $temp;
+  }
 
 	// permet de créer un json contenant les objets des objets
     public function toArray(){

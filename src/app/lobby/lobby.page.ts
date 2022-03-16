@@ -69,14 +69,14 @@ export class LobbyPage implements OnInit {
           tour.mot_choisi = tour.randomWord();
           tour._ID_MANCHE = this.maPartie.manche[y]._ID;
           this.service.createTour(tour).subscribe(idTour=>{
-            for (let i=0;i<result.length;i++){
-              let resultat = new Resultat(null,i,[]);
-              resultat._ID_TOUR = Number(idTour);
-              this.service.createResultat(resultat).subscribe();
-            }
-            let goodResultat = new Resultat(tour.goodDefinition(tour.mot_choisi),999,[]);
-            goodResultat._ID_TOUR = Number(idTour);
-            this.service.createResultat(goodResultat).subscribe();
+            // for (let i=0;i<result.length;i++){
+            //   let resultat = new Resultat(null,i,[]);
+              // resultat._ID_TOUR = ;
+              let goodResultat = new Resultat(tour.goodDefinition(tour.mot_choisi),999,[]);
+              goodResultat._ID_TOUR = Number(idTour);
+              this.service.createResultats(Number(idTour),partie.joueur.length,goodResultat).subscribe();
+            // }
+            // this.service.createResultat(goodResultat).subscribe();
           });
         }
       }
