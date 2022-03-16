@@ -29,24 +29,16 @@ export class ReponsePage implements OnInit {
     this.currentRoute.queryParams.subscribe(param => {
         this.status = param["status"];
         if(this.status == "online"){
-          // // Get from DB : current word, correct definition
-          // this.onlineService.getPartie().subscribe(u => {
-          //   this.mot = u[this.partieEnCours].manche[u[this.partieEnCours].mancheEnCours].tours[u[this.partieEnCours].tourEnCours].mot_choisi;
-          //   this.definition = this.onlineService.findDefinition(u[this.partieEnCours].manche[u[this.partieEnCours].mancheEnCours].tours[u[this.partieEnCours].tourEnCours].resultat);
-          // });      
-
           // Get from DB : current word, correct definition
         this.onlineService.getPartie(this.partieEnCours).subscribe(u => {
-          this.onlineService.getTour(u.manche[u.mancheEnCours]._ID).subscribe(tableauTours=>{
-          this.mot = tableauTours[u.tourEnCours].mot_choisi;
-          let idTour = tableauTours[u.tourEnCours]._ID;
+          this.onlineService.getTour(u.manche[this.onlineService.mancheEnCours]._ID).subscribe(tableauTours=>{
+          this.mot = tableauTours[this.onlineService.tourEnCours].mot_choisi;
+          let idTour = tableauTours[this.onlineService.tourEnCours]._ID;
             this.onlineService.getAllResultat(idTour).subscribe(tableauResultat => {
             this.definition = this.onlineService.findDefinition(tableauResultat);
             })
           });
         });
-        // this.mot = this.onlineService.maManche[this.onlineService.mancheEnCours].tours[this.onlineService.tourEnCours].mot_choisi;
-        // Need to add correct definition in Onlineservice
         } else {
           this.mot = this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].mot_choisi;
           this.definition = this.service.definition;
@@ -58,56 +50,20 @@ export class ReponsePage implements OnInit {
   check(){
     if(this.status == "online"){
       this.onlineService.getPartie(this.partieEnCours).subscribe(u => {
-        if (this.onlineService.joueurEnCours == u.joueur[0].id_joueur){
-          if (u.tourEnCours == u.joueur.length -1){
-            if (u.mancheEnCours == u.manche.length -1){
-              this.route.navigate(['winner-resultat'],{queryParams: {status:"online"}});
-            } else { // else, we go to a new round & reset the game turns counter
-              u.mancheEnCours++;
-              u.tourEnCours=0;
-              // update in service, then navigate once it's done
-              this.onlineService.updatePartie(u).subscribe(()=>{
-                console.log("new round, admin !");
-                this.route.navigate(['current-manche-online'])
-              });
-            };
-          } else { // else, if there ARE game turns left, we go to the next game turn
-            u.tourEnCours++;
-            //update in service, then navigate
-            this.onlineService.updatePartie(u).subscribe(()=>{
-              this.route.navigate(['online-definition']);
-            });
-          };
-        } else {
-
-          function pouet(service:PartieService,route:Router){
-            setTimeout(()=>{
-              // console.log("check");
-
-                if (service.tourEnCours == u.joueur.length -1){ //Si je suis à mon dernier tour de ma manche
-                  if (u.mancheEnCours == u.manche.length -1){ // Si je suis à ma dernière manche
-                    route.navigate(['winner-resultat'],{queryParams: {status:"online"}}); //ayé
-                  } else { // else, we go to a new round & reset the game turns counter
-                    service.tourEnCours = u.tourEnCours;
-                    service.mancheEnCours = u.mancheEnCours;
-                    // update in service, then navigate once it's done
-                    console.log("new round, user !");
-                    route.navigate(['current-manche-online'])
-                  };
-                } else { // else, if there ARE game turns left, we go to the next game turn
-                  console.log("new turn, user !");
-                  service.tourEnCours = u.tourEnCours;
-                  route.navigate(['online-definition']);
-                }
-              
-            },1000);
-            }
-
-        pouet(this.onlineService,this.route);
-
-        }
-
-
+        if (this.onlineService.tourEnCours == u.joueur.length -1){
+          if (this.onlineService.mancheEnCours == u.manche.length -1){
+            this.route.navigate(['winner-resultat'],{queryParams: {status:"online"}});
+          } else { // else, we go to a new round & reset the game turns counter
+            console.log("nouvelle manche !");
+            this.onlineService.mancheEnCours++;
+            this.onlineService.tourEnCours=0;
+            this.route.navigate(['current-manche-online']);
+          }
+        } else { // else, if there ARE game turns left, we go to the next game turn
+          console.log("nouveau tour !");
+          this.onlineService.tourEnCours++;
+          this.route.navigate(['online-definition']);
+        };
       });
     }else {
       if (this.service.toursEnCours == this.service.joueurs.length -1){

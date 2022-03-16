@@ -15,8 +15,8 @@ export class PartieService {
 
   partieEnCours:number;
   joueurEnCours:number;
-  tourEnCours:number;
-  mancheEnCours:number;
+  tourEnCours:number=0;
+  mancheEnCours:number=0;
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

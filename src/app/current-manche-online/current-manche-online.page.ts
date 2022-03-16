@@ -21,14 +21,8 @@ export class CurrentMancheOnlinePage implements OnInit {
     return parseInt(mancheEnCours);
   }
   ionViewWillEnter(){
-    // Get current Round from DB
-    this.service.getPartie(this.service.partieEnCours).subscribe(u => {
-      this.mancheEnCours = u.mancheEnCours;
-      this.service.mancheEnCours = u.mancheEnCours;
-      this.service.tourEnCours = u.tourEnCours;
-    });
-
-   
+    // Get current Round from service
+    this.mancheEnCours = this.service.mancheEnCours;
   }
 
 }
