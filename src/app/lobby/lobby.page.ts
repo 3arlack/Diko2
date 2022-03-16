@@ -1,6 +1,7 @@
-import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonChip } from '@ionic/angular';
+import { AlertController, IonButton, IonChip } from '@ionic/angular';
+import { Subject } from 'rxjs';
 import { Joueur } from '../classes/joueur';
 import { Partie } from '../classes/partie';
 import { Resultat } from '../classes/resultat';
@@ -16,26 +17,48 @@ export class LobbyPage implements OnInit {
 
 
   @ViewChildren(IonChip) chips:QueryList<IonChip>;
+  @ViewChild("button") button:IonButton;
   votes : number;
 
   joueurs:Array<Joueur>=[]; // initialize array
-  partieEnCours : number;
+  IDPartie : number;
   maPartie : Partie;
 
-  constructor(private service:PartieService, private router : Router) {
+  constructor(private service:PartieService, private router : Router, private alert:AlertController) {
     // retrieve player list from DB
     this.service.getPartie(this.service.partieEnCours).subscribe(u => {
+      this.IDPartie = u.id;
       this.joueurs = u.joueur;
       this.maPartie = u;
       this.votes = this.chips.length; //Retrieves total number of votes from total number of ion-chip elements
     });
-
   }
 
   ngOnInit() {
   }
 
+  ionViewWillEnter(){
+  this.pouet(this.service,this.router,this.chips);
+  }
+
+  click(button:boolean){
+    if (button == true){
+      this.alert.create({
+        header:"Attention",
+        subHeader:"Tous les joueurs ne sont pas encore connectés",
+        message:"Etes-vous sûr de vouloir lancer la partie avec les joueurs actuellement connectés ?",
+        buttons:[
+          {text:"J'annule et j'attends",handler:()=>{}},
+          {text:'Je confirme',handler:()=>{this.OK()}}
+        ]
+      }).then( res=>{
+        res.present();
+      })
+    }
+  }
+
   OK(){
+
     this.service.getPartie(this.service.partieEnCours).subscribe(partie => {
 
       const result = partie.joueur.filter(joueur => joueur.nom_joueur != null);
@@ -60,7 +83,24 @@ export class LobbyPage implements OnInit {
       
       this.service.deleteJoueurs(partie.joueur).subscribe(()=>this.router.navigate(['current-manche-online']));
   });
-
-
   }
+
+  pouet(service:PartieService,router:Router,chips:QueryList<IonChip>){
+    setTimeout(()=>{
+      console.log("check");
+      service.getPartie(service.partieEnCours).subscribe(partie=>
+        {
+          this.joueurs = partie.joueur;
+          this.votes = chips.length;
+          if (this.votes > 1){
+            this.button.disabled = false;
+          }
+          if(this.votes == this.joueurs.length){
+            this.OK();
+          } else {
+            this.pouet(service,router,chips);
+          }
+        });
+    },1000);
+  };
 }
