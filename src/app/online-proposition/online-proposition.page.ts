@@ -1,6 +1,6 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonChip, IonLabel, IonRow } from '@ionic/angular';
+import { IonChip} from '@ionic/angular';
 import { Joueur } from '../classes/joueur';
 import { Resultat } from '../classes/resultat';
 import { PartieService } from '../services/partie.service';

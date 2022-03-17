@@ -28,9 +28,11 @@ export class WinnerResultatPage implements OnInit {
     //Get status from route param : online or offline
     this.currentRoute.queryParams.subscribe(param => {
       this.status = param["status"];
-      if (this.status == "online"){
+      if (this.status == "online"){//if online mode
         this.onlineService.getScores(this.partieEnCours).subscribe(partie =>{
           this.joueurs = partie.joueur;
+
+          // Sort player array to find winner
           this.joueurs.sort((a,b)=>{
             return b.score_joueur - a.score_joueur;
           });
@@ -41,7 +43,7 @@ export class WinnerResultatPage implements OnInit {
           this.onlineService.tourEnCours = 0;
         })
 
-      } else {
+      } else { //if offline mode
       this.joueurs = this.service.joueurs;
       for(let i=0;i<this.joueurs.length;i++){
         for (let p=0;p<this.service.manches.length;p++){
@@ -69,13 +71,15 @@ export class WinnerResultatPage implements OnInit {
       // Reset all values
       this.service.mancheEnCours=0;
       this.service.toursEnCours=0;
+      
+      // Sort player array to find winner
       this.joueurs.sort((a,b)=>{
         return b.score_joueur - a.score_joueur;
       });
       this.winner = this.joueurs[0].nom_joueur;
     }
 
-    // Sort player array to find winner
+
 
   });
   }

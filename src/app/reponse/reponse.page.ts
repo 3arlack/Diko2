@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router'; // import Router to navigate
 import { OfflineService } from '../services/offline.service'; // import service
 import { PartieService } from '../services/partie.service';
-import { ServiceApiService } from '../services/service-api.service';
 
 @Component({
   selector: 'app-reponse',
