@@ -1,6 +1,6 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonChip } from '@ionic/angular';
+import { IonChip, IonLabel, IonRow } from '@ionic/angular';
 import { Joueur } from '../classes/joueur';
 import { Resultat } from '../classes/resultat';
 import { PartieService } from '../services/partie.service';
@@ -39,7 +39,6 @@ export class OnlinePropositionPage implements OnInit {
         let idTour = tableauTours[this.service.tourEnCours]._ID; 
         this.pouet(this.service,this.router,idTour);
       });
-
     });
   }
 
@@ -56,7 +55,4 @@ export class OnlinePropositionPage implements OnInit {
       })
     },1000);
   }
-
-
-
 }

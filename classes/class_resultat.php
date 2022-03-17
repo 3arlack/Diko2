@@ -50,6 +50,10 @@ Class resultat {
 		$this->_ID_TOUR = $_ID_TOUR;
 	}
 
+  public function getid_vote(){
+		return $this->id_vote;
+	}
+
   function getVote(){
     $user = 'ubvs6386'; // Identifiant de bdd
     $pass = 'WVHXr$DAb-cC'; // Mot de passe bdd

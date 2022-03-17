@@ -108,7 +108,7 @@ Class parties {
 			$stmt->bindParam(':id', $this->id);
 			$stmt->execute();
             $row = $stmt->fetch();
-            $singleparties = new parties($row['mancheEnCours'], $row['tourEnCours']);//ferme la connexion à la base
+            $singleparties = new parties($row['id'], $row['mancheEnCours'], $row['tourEnCours']);//ferme la connexion à la base
             $dbh = null;
         } catch (PDOException $e) {
             print 'Erreur !: ' . $e->getMessage() . '<br/>';

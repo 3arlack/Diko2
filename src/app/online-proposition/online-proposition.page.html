@@ -19,7 +19,7 @@
     </ion-row>
 
     <!-- for every entry in current Tour's resultats, we create a line so we can read definition and vote -->
-    <ion-row *ngFor="let def of definitions; let index = index"  routerLink="/online-vote" [queryParams]="{ indexDefinition : [index]}" #defrow>
+    <ion-row *ngFor="let def of definitions; let index = index" routerLink="/online-vote" [queryParams]="{ indexDefinition : [index]}">
       <ion-col>
         <h4>Définition n°{{index+1}}</h4>
       </ion-col>

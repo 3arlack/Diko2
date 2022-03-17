@@ -105,21 +105,22 @@ Class votes {
 	}
 
 	public function deletevotes(){
-        $user = 'ubvs6386'; // Identifiant de bdd
-        $pass = 'WVHXr$DAb-cC'; // Mot de passe bdd
+    $user = 'ubvs6386'; // Identifiant de bdd
+    $pass = 'WVHXr$DAb-cC'; // Mot de passe bdd
 
-        // 127.0.0.1 est l'adresse ip locale du serveur (le fichier php étant exécuté sur le serveur, l'adresse du serveur est donc l'adresse locale)
-        try {
-            // connexion à la base de donnée
-            $dbh = new PDO('mysql:host=127.0.0.1;dbname=ubvs6386_diko', $user, $pass);
-			$stmt = $dbh->prepare('DELETE FROM votes WHERE id = :id');
-			$stmt->bindParam(':id', $this->_ID);
-			$stmt->execute();//ferme la connexion à la base
-            $dbh = null;
-        } catch (PDOException $e) {
-            print 'Erreur !: ' . $e->getMessage() . '<br/>';
-            die();
-        }
+    // 127.0.0.1 est l'adresse ip locale du serveur (le fichier php étant exécuté sur le serveur, l'adresse du serveur est donc l'adresse locale)
+    try {
+      // connexion à la base de donnée
+      $dbh = new PDO('mysql:host=127.0.0.1;dbname=ubvs6386_diko', $user, $pass);
+      $stmt = $dbh->prepare('DELETE FROM votes WHERE id_resultat = :id_resultat AND id_vote = :id_vote');
+      $stmt->bindParam(':id_resultat', $this->id_resultat);
+      $stmt->bindParam(':id_vote', $this->id_vote);
+      $stmt->execute();//ferme la connexion à la base
+      $dbh = null;
+    } catch (PDOException $e) {
+      print 'Erreur !: ' . $e->getMessage() . '<br/>';
+      die();
+    }
 	}
 
 	// permet de créer un json contenant les objets des objets

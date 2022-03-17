@@ -19,7 +19,7 @@
         <ion-row>
             <!-- Only create element if player is NOT MJ -->
             <ion-col class="ion-text-center">
-                <ion-button (click)="validate()">Choisir cette définition</ion-button>
+                <ion-button [disabled]="buttondisabled" (click)="validate()" #buttonvote>{{textButton}}</ion-button>
                 <ion-button (click)="goBack()">Retour</ion-button>
             </ion-col>
         </ion-row>
