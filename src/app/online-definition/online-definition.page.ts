@@ -27,19 +27,21 @@ export class OnlineDefinitionPage implements OnInit {
   }
 
   ionViewWillEnter(){
+    //we make sur all definition input are empty.
     this.definition.value = "";
-    // Retrieve current word from DB
+    // Retrieve current game from DB
     this.service.getPartie(this.partie).subscribe(u => {
-      console.log(u);
       this.joueur = u.joueur[this.joueurEnCours].nom_joueur;
       this.service.getTour(u.manche[this.service.mancheEnCours]._ID).subscribe(tableauTours=>{
+         // Retrieve current word from DB
         this.mot = tableauTours[this.service.tourEnCours].mot_choisi;
       });
     });
   }
 
+  //button "Valider"
   onClick(){
-    if(this.definition.value == ""){
+    if(this.definition.value == ""){ //if the input is empty -> ALERT
       this.alert.create({
         header:"Erreur",
         message:"Vous devez rentrer une définition !",
@@ -47,7 +49,10 @@ export class OnlineDefinitionPage implements OnInit {
       }).then( res=>{
         res.present();
       })
-    } else {
+    } else { //if the definition is not empty
+
+
+      // A OPTIMISER ??
       this.service.getPartie(this.partie).subscribe(u => {
         this.service.getTour(u.manche[this.service.mancheEnCours]._ID).subscribe(tableauTours=>{
           let idTour = tableauTours[this.service.tourEnCours]._ID; 

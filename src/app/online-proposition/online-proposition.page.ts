@@ -37,12 +37,13 @@ export class OnlinePropositionPage implements OnInit {
       this.service.getTour(u.manche[this.service.mancheEnCours]._ID).subscribe(tableauTours=>{
         this.mot = tableauTours[this.service.tourEnCours].mot_choisi;
         let idTour = tableauTours[this.service.tourEnCours]._ID; 
-        this.pouet(this.service,this.router,idTour);
+        this.waitingForVote(this.service,this.router,idTour);
       });
     });
   }
 
-  pouet(service:PartieService,router:Router,idTour:number){
+  //waiting for all the votes : when all players have voted -> we can go to "reponse" page
+  waitingForVote(service:PartieService,router:Router,idTour:number){
     setTimeout(()=>{
       this.service.getAllResultat(idTour).subscribe(tableauResultat => {
         this.definitions = tableauResultat;
@@ -50,7 +51,7 @@ export class OnlinePropositionPage implements OnInit {
         if (this.votes == this.joueurs.length){
           router.navigate(['reponse'], {queryParams:{status:'online'}})
         }else{
-          this.pouet(service,router,idTour);
+          this.waitingForVote(service,router,idTour);
         }
       })
     },1000);

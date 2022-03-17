@@ -21,8 +21,9 @@ export class OnlineHostCreatePage implements OnInit {
   ngOnInit() {
   }
 
+  //button to validate the creation of the new game with : number of players, numbers of round and name of the game host
   OK(){
-    if (this.name_joueur.value == ""){
+    if (this.name_joueur.value == ""){//if the input is empty -> alert !
       this.alert.create({
         header:"Erreur",
         message:"Merci de saisir votre nom !",
@@ -30,15 +31,18 @@ export class OnlineHostCreatePage implements OnInit {
       }).then( res=>{
         res.present();
       })
-    } else {
+    } else { //if all input ok
+      //initialization of the new game object
       let maPartie = new Partie;
       maPartie.mancheEnCours = 0;
       maPartie.tourEnCours = 0;
       maPartie.joueur = [];
 
+      //create the Joueur object
       let monJoueur = new Joueur(0,"",0,"");
       this.service.joueurEnCours = 0;
 
+      //attribute the value of the input (name of the player)
       monJoueur.nom_joueur = String(this.name_joueur.value);
       
       maPartie.joueur.push(monJoueur);
@@ -47,7 +51,6 @@ export class OnlineHostCreatePage implements OnInit {
       maPartie.manche = [];
       maPartie.manche.length = Number(this.nbr_manche.value);
 
-      console.log(maPartie);
       this.service.createPartie(maPartie).subscribe((reponse)=>{
         this.service.partieEnCours = reponse;
         this.router.navigate(['lobby']);
