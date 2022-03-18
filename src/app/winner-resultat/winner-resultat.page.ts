@@ -28,9 +28,11 @@ export class WinnerResultatPage implements OnInit {
     //Get status from route param : online or offline
     this.currentRoute.queryParams.subscribe(param => {
       this.status = param["status"];
-      if (this.status == "online"){
+      if (this.status == "online"){//if online mode
         this.onlineService.getScores(this.partieEnCours).subscribe(partie =>{
           this.joueurs = partie.joueur;
+
+          // Sort player array to find winner
           this.joueurs.sort((a,b)=>{
             return b.score_joueur - a.score_joueur;
           });
@@ -41,24 +43,23 @@ export class WinnerResultatPage implements OnInit {
           this.onlineService.tourEnCours = 0;
         })
 
-      } else {
+      } else { //if offline mode
       this.joueurs = this.service.joueurs;
       for(let i=0;i<this.joueurs.length;i++){
         for (let p=0;p<this.service.manches.length;p++){
           for (let x=0;x<this.service.manches[p].tours.length;x++){
-            // Si mon joueur n'est pas le MJ...
+            // If the current player is not the game master
             if (this.joueurs[i].id_joueur !== this.service.manches[p].tours[x].id_mj){
               for (let y=0;y<this.service.manches[p].tours[x].resultat.length;y++){
                 for (let z=0;z<this.service.manches[p].tours[x].resultat[y].id_vote.length;z++){
-                  //Check bonne définition
+                  //If he votes for the good definition
                   if(this.service.manches[p].tours[x].id_mj == this.service.manches[p].tours[x].resultat[y].id_joueur && this.joueurs[i].id_joueur == this.service.manches[p].tours[x].resultat[y].id_vote[z]){
                     console.log("point bonne définition accordé à : "+this.joueurs[i].nom_joueur)
-                    this.joueurs[i].score_joueur++;
-                  // sinon, si le joueur a voté pour la définition ET que ce n'est pas la sienne...
+                    this.joueurs[i].score_joueur++; //1 point for the current player
+                  // If the current player votes for another defintion....
                 } else if (this.joueurs[i].id_joueur == this.service.manches[p].tours[x].resultat[y].id_vote[z] && this.joueurs[i].id_joueur !== this.service.manches[p].tours[x].resultat[y].id_joueur){
                   console.log("point vote accordé à : "+this.joueurs[this.service.manches[p].tours[x].resultat[y].id_joueur].nom_joueur+", tour : "+x+", resultat : "+y);
-                  // this.joueurs[i].score_joueur++;
-                    this.joueurs[this.service.manches[p].tours[x].resultat[y].id_joueur].score_joueur++;
+                    this.joueurs[this.service.manches[p].tours[x].resultat[y].id_joueur].score_joueur++;//1 point for the definition's player
                   }
                 }
               }
@@ -69,13 +70,15 @@ export class WinnerResultatPage implements OnInit {
       // Reset all values
       this.service.mancheEnCours=0;
       this.service.toursEnCours=0;
+      
+      // Sort player array to find winner
       this.joueurs.sort((a,b)=>{
         return b.score_joueur - a.score_joueur;
       });
       this.winner = this.joueurs[0].nom_joueur;
     }
 
-    // Sort player array to find winner
+
 
   });
   }

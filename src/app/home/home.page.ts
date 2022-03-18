@@ -12,7 +12,7 @@ export class HomePage {
  
 
   constructor(public modalController:ModalController, private service:PartieService) {
-    // this.service.getPartie().subscribe(reponse=>console.log(reponse))
+    
   } //Need to inject modalController to call it below
 
   //Method called when creating a new game, to dismiss modal (else, it will stay on-screen even when changing route)
