@@ -7,7 +7,9 @@ error_reporting(E_ALL); // affiche toutes les erreurs
 
 require_once("../classes/class_joueurs.php");
 
+// Creates a new joueurs object with POSTed input data
 $temp = new joueurs($_POST['idJoueur'],0, 0, $_POST['nomDuJoueur'], 0, "");
+// Updates the player in database (just update the player's name)
 $temp->updatejoueurs();
 
 ?>

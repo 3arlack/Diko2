@@ -7,7 +7,9 @@ error_reporting(E_ALL); // affiche toutes les erreurs
 
 require_once("../classes/class_votes.php");
 
+// Creates a new votes object with POSTed input data
 $vote = new votes(0, $_POST['idResultat'], $_POST['idVote'],);
+// We delete the vote from database
 $vote->deletevotes();
 
 ?>

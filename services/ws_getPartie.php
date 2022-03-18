@@ -7,7 +7,9 @@ error_reporting(E_ALL); // affiche toutes les erreurs
 
 require_once("../classes/class_parties.php");
 
+// Creates a new parties object with POSTed input data
 $partie = new parties($_POST["id_partie"],0,0);
+// Sends back complete game data
 echo($partie->readparties());
 
 ?>

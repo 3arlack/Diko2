@@ -7,8 +7,9 @@ error_reporting(E_ALL); // affiche toutes les erreurs
 
 require_once("../classes/class_votes.php");
 
-  $vote = new votes(0, $_POST['idResultat'], $_POST['idVote'],);
-  $vote->createvotes();
-
+// Creates a new votes object with POSTed input data
+$vote = new votes(0, $_POST['idResultat'], $_POST['idVote'],);
+// We create the vote in database
+$vote->createvotes();
 
 ?>

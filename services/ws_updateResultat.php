@@ -7,7 +7,9 @@ error_reporting(E_ALL); // affiche toutes les erreurs
 
 require_once("../classes/class_resultat.php");
 
+// Creates a new resultat object with POSTed input data
 $resultat = new resultat($_POST["id"], $_POST["definition"], 0, 0);
+// Updates the result in database (just update the definition)
 $resultat->updateresultat();
 
 ?>
