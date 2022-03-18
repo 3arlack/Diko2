@@ -7,7 +7,9 @@ error_reporting(E_ALL); // affiche toutes les erreurs
 
 require_once("../classes/class_tours.php");
 
+// Creates a new tours object with POSTed input data
 $tour = new tours(0,$_POST["id_manche"],"");
+// Sends back turn
 echo($tour->readtours());
 
 ?>
