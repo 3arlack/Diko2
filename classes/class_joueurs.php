@@ -1,5 +1,6 @@
 <?php
 
+require_once("config/config.php");
 Class joueurs {
 	private $_ID;
 	private $_ID_PARTIE;
@@ -67,13 +68,11 @@ Class joueurs {
 	}
 
 	public function createjoueurs(){
-        $user = 'ubvs6386'; // Identifiant de bdd
-        $pass = 'WVHXr$DAb-cC'; // Mot de passe bdd
 
         // 127.0.0.1 est l'adresse ip locale du serveur (le fichier php étant exécuté sur le serveur, l'adresse du serveur est donc l'adresse locale)
         try {
             // connexion à la base de donnée
-            $dbh = new PDO('mysql:host=127.0.0.1;dbname=ubvs6386_diko', $user, $pass);
+            $dbh = new PDO(DB_NAME, DB_USER, DB_PASS,array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
 			$stmt = $dbh->prepare('INSERT INTO joueurs (id_partie, id_joueur, nom_joueur, score_joueur, avatar_joueur) VALUES (:id_partie, :id_joueur, :nom_joueur, :score_joueur, :avatar_joueur)');
 			$stmt->bindParam(':id_partie', $this->_ID_PARTIE);
 			$stmt->bindParam(':id_joueur', $this->id_joueur);
@@ -89,13 +88,11 @@ Class joueurs {
 	}
 
 	public function readjoueurs(){
-        $user = 'ubvs6386'; // Identifiant de bdd
-        $pass = 'WVHXr$DAb-cC'; // Mot de passe bdd
 
         // 127.0.0.1 est l'adresse ip locale du serveur (le fichier php étant exécuté sur le serveur, l'adresse du serveur est donc l'adresse locale)
         try {
             // connexion à la base de donnée
-            $dbh = new PDO('mysql:host=127.0.0.1;dbname=ubvs6386_diko', $user, $pass);
+            $dbh = new PDO(DB_NAME, DB_USER, DB_PASS,array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
 			$stmt = $dbh->prepare('SELECT * FROM joueurs WHERE id = :id');
 			$stmt->bindParam(':id', $this->_ID);
 			$stmt->execute();
@@ -112,13 +109,11 @@ Class joueurs {
   }
 
   public function updatejoueurs(){
-    $user = 'ubvs6386'; // Identifiant de bdd
-    $pass = 'WVHXr$DAb-cC'; // Mot de passe bdd
 
     // 127.0.0.1 est l'adresse ip locale du serveur (le fichier php étant exécuté sur le serveur, l'adresse du serveur est donc l'adresse locale)
     try {
       // connexion à la base de donnée
-      $dbh = new PDO('mysql:host=127.0.0.1;dbname=ubvs6386_diko', $user, $pass,array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+      $dbh = new PDO(DB_NAME, DB_USER, DB_PASS,array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
       $stmt = $dbh->prepare('UPDATE joueurs SET nom_joueur = :nom_joueur, score_joueur = :score_joueur, avatar_joueur = :avatar_joueur WHERE id = :id');
       $stmt->bindParam(':id', $this->_ID);
       // $stmt->bindParam(':id_partie', $this->_ID_PARTIE);
@@ -135,13 +130,11 @@ Class joueurs {
 	}
 
 	public function deletejoueurs(){
-        $user = 'ubvs6386'; // Identifiant de bdd
-        $pass = 'WVHXr$DAb-cC'; // Mot de passe bdd
 
         // 127.0.0.1 est l'adresse ip locale du serveur (le fichier php étant exécuté sur le serveur, l'adresse du serveur est donc l'adresse locale)
         try {
             // connexion à la base de donnée
-            $dbh = new PDO('mysql:host=127.0.0.1;dbname=ubvs6386_diko', $user, $pass);
+            $dbh = new PDO(DB_NAME, DB_USER, DB_PASS,array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
 			$stmt = $dbh->prepare('DELETE FROM joueurs WHERE id = :id');
 			$stmt->bindParam(':id', $this->_ID);
 			$stmt->execute();//ferme la connexion à la base
