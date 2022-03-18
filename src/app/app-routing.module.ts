@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./_home/_home.module').then( m => m.HomePageModule)
   },
   {
     path: '',
@@ -13,31 +13,31 @@ const routes: Routes = [
   },
   {
     path: 'add-joueur',
-    loadChildren: () => import('./add-joueur/add-joueur.module').then( m => m.AddJoueurPageModule)
+    loadChildren: () => import('./C1_add-joueur/C1_add-joueur.module').then( m => m.AddJoueurPageModule)
   },
   {
     path: 'add-manche',
-    loadChildren: () => import('./add-manche/add-manche.module').then( m => m.AddManchePageModule)
+    loadChildren: () => import('./C2_add-manche/C2_add-manche.module').then( m => m.AddManchePageModule)
   },
   {
     path: 'current-manche',
-    loadChildren: () => import('./current-manche/current-manche.module').then( m => m.CurrentManchePageModule)
+    loadChildren: () => import('./C3_current-manche/C3_current-manche.module').then( m => m.CurrentManchePageModule)
   },
   {
     path: 'select-mj',
-    loadChildren: () => import('./select-mj/select-mj.module').then( m => m.SelectMjPageModule)
+    loadChildren: () => import('./C4_select-mj/C4_select-mj.module').then( m => m.SelectMjPageModule)
   },
   {
     path: 'definition-joueur',
-    loadChildren: () => import('./definition-joueur/definition-joueur.module').then( m => m.DefinitionJoueurPageModule)
+    loadChildren: () => import('./C5_definition-joueur/C5_definition-joueur.module').then( m => m.DefinitionJoueurPageModule)
   },
   {
     path: 'propositions',
-    loadChildren: () => import('./propositions/propositions.module').then( m => m.PropositionsPageModule)
+    loadChildren: () => import('./C6_propositions/C6_propositions.module').then( m => m.PropositionsPageModule)
   },
   {
     path: 'vote-joueur',
-    loadChildren: () => import('./vote-joueur/vote-joueur.module').then( m => m.VoteJoueurPageModule)
+    loadChildren: () => import('./C7_vote-joueur/C7_vote-joueur.module').then( m => m.VoteJoueurPageModule)
   },
   {
     path: 'reponse',
