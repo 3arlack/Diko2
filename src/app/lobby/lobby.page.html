@@ -7,11 +7,13 @@
         </ion-row>
         <ion-row>
           <ion-col class="ion-text-center">
+              <!-- Game's number to give to another players to play online-->
               <h3>Numéro de la partie : {{IDPartie}}</h3>
           </ion-col>
       </ion-row>
         <ion-row *ngFor="let joueur of joueurs;let index = index">
             <ion-col class="ion-text-center">
+                <!-- chips of all the players connected -->
                 <ion-chip *ngIf="joueur.nom_joueur != null">
                     <ion-avatar>
                         <img src="../../assets/avatarexemple.jpg">
@@ -24,11 +26,13 @@
         </ion-row>
         <ion-row>
             <ion-col class="ion-text-center">
+                <!-- number of players connected / number of players expected-->
                 {{votes}}/{{joueurs.length}}
             </ion-col>
         </ion-row>
         <ion-row>
             <ion-col class="ion-text-center">
+                <!-- the button is disabled when the game's Master is alone-->
                 <ion-button (click)="click(true)" disabled="true" #button>Démarrer</ion-button>
             </ion-col>
         </ion-row>

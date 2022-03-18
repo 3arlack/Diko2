@@ -17,9 +17,12 @@ export class CurrentMancheOnlinePage implements OnInit {
 
   ngOnInit() {
   }
+
+  //to convert the value of mancheEnCours to int
   ConvertToInt(mancheEnCours){
     return parseInt(mancheEnCours);
   }
+  
   ionViewWillEnter(){
     // Get current Round from service
     this.mancheEnCours = this.service.mancheEnCours;

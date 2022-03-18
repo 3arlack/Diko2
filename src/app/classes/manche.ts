@@ -1,5 +1,3 @@
-import { Tour } from "./tour"
-
 export class Manche {
   "_ID"?:number;
   "_ID_PARTIE"?:number;

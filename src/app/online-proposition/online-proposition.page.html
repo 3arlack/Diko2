@@ -8,6 +8,7 @@
 
     <ion-row>
       <ion-col>
+        <!-- word-->
         <h2>{{mot}}</h2>
       </ion-col>
     </ion-row>
@@ -24,11 +25,13 @@
         <h4>Définition n°{{index+1}}</h4>
       </ion-col>
       <ion-col>
+        <!-- display the chip of the player who vote for this definition-->
         <ion-chip *ngFor="let vote of def.id_vote;let z = index;" [attr.data-index]="z">
           <ion-avatar>
             <img src="../../assets/avatarexemple.jpg">
           </ion-avatar>
           <ion-label>
+            <!-- reteive the name of the player-->
             {{this.service.findPlayerName(vote,joueurs)}}
           </ion-label>
         </ion-chip>
@@ -37,6 +40,7 @@
 
     <ion-row>
       <ion-col>
+        <!-- number of players already voted / number total of players-->
         <p>Votes en cours : {{votes}}/{{joueurs.length}}</p>
       </ion-col>
     </ion-row>

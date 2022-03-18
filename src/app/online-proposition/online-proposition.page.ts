@@ -37,6 +37,7 @@ export class OnlinePropositionPage implements OnInit {
       this.service.getTour(u.manche[this.service.mancheEnCours]._ID).subscribe(tableauTours=>{
         this.mot = tableauTours[this.service.tourEnCours].mot_choisi;
         let idTour = tableauTours[this.service.tourEnCours]._ID; 
+        //waiting for all the players voted
         this.waitingForVote(this.service,this.router,idTour);
       });
     });
@@ -45,6 +46,7 @@ export class OnlinePropositionPage implements OnInit {
   //waiting for all the votes : when all players have voted -> we can go to "reponse" page
   waitingForVote(service:PartieService,router:Router,idTour:number){
     setTimeout(()=>{
+      // retreive array of resultat to display
       this.service.getAllResultat(idTour).subscribe(tableauResultat => {
         this.definitions = tableauResultat;
         this.votes = this.chips.length;

@@ -48,11 +48,14 @@ export class OnlineHostCreatePage implements OnInit {
       maPartie.joueur.push(monJoueur);
       maPartie.joueur.length = Number(this.nbr_joueur.value);
 
+      //initialise the number of round (Manche Array's length)
       maPartie.manche = [];
       maPartie.manche.length = Number(this.nbr_manche.value);
 
+      //create the game in DB
       this.service.createPartie(maPartie).subscribe((reponse)=>{
         this.service.partieEnCours = reponse;
+        //go to lobby page
         this.router.navigate(['lobby']);
       });
     }

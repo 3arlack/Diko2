@@ -1,5 +1,4 @@
 import { Resultat } from "./resultat";
-import { Joueur } from "./joueur";
 import { OfflineService } from "../services/offline.service";
 
 let data = new OfflineService;
@@ -27,6 +26,7 @@ export class Tour {
         return data.data.data[randomIndex].word;
     }
 
+    //Get the good definiton from JSON database
     goodDefinition?(word){
 
         let index = data.data.data.findIndex(element => element.word == word);

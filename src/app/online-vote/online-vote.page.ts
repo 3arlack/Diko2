@@ -46,22 +46,27 @@ export class OnlineVotePage implements OnInit {
           this.mot = tableauTours[this.service.tourEnCours].mot_choisi;
           let idTour = tableauTours[this.service.tourEnCours]._ID; 
 
+          //get all resultats
           this.service.getAllResultat(idTour).subscribe(tableauResultat=>{
 
-            for(let i = 0;i<tableauResultat.length;i++){
-              if(i != this.indexDefinition){
-                for(let y = 0;y<tableauResultat[i].id_vote.length;y++){
-                  if (tableauResultat[i].id_vote[y] == this.joueurEnCours){
+            //retreive defintion, id_resultat and id_vote from DB
+            this.definition = tableauResultat[this.indexDefinition].definition;
+            this.idResultat = tableauResultat[this.indexDefinition]._ID;
+            this.idVote = tableauResultat[this.indexDefinition].id_vote;
+
+            //only one vote for each player
+            for(let i = 0;i<tableauResultat.length;i++){ //foreach definition
+              if(i != this.indexDefinition){ //if it's not the definition index
+                for(let y = 0;y<tableauResultat[i].id_vote.length;y++){ //foreach vote array 
+                  if (tableauResultat[i].id_vote[y] == this.joueurEnCours){ //if we found current player id 
                     console.log("vote détecté !");
-                    this.buttondisabled = true;
+                    this.buttondisabled = true; // the button is disabled and the player can not vote another time
                   }
                 }
               }
             }
 
-            this.definition = tableauResultat[this.indexDefinition].definition;
-            this.idResultat = tableauResultat[this.indexDefinition]._ID;
-            this.idVote = tableauResultat[this.indexDefinition].id_vote;
+            //The player can cancel his vote 
             for (let i=0;i<this.idVote.length;i++){
               if(this.joueurEnCours == this.idVote[i]){
                 this.textButton = "Retirer mon vote";
@@ -85,6 +90,7 @@ export class OnlineVotePage implements OnInit {
 
   validate():any{
 
+    //ws to delete or create a vote when player click on the button 
     if(this.textButton == "Retirer mon vote"){
       this.service.deleteVote(this.idResultat,this.joueurEnCours).subscribe(()=>{
         this.goBack();
