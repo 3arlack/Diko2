@@ -111,7 +111,6 @@ Class joueurs {
         return $monjSon;
   }
 
-
   public function updatejoueurs(){
     $user = 'ubvs6386'; // Identifiant de bdd
     $pass = 'WVHXr$DAb-cC'; // Mot de passe bdd
