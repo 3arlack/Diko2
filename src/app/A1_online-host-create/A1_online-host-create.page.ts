@@ -60,5 +60,4 @@ export class A1_OnlineHostCreatePage implements OnInit {
       });
     }
   }
-
 }

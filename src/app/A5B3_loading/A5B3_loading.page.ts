@@ -45,7 +45,7 @@ export class A5B3_LoadingPage implements OnInit {
     this.route.queryParams.subscribe(param => {
       switch(param["status"]){
         case "definitionOK": 
-          this.waintingAllDefinition(this.service,this.router); //waiting for all definitions from all players before votes
+          this.waitingAllDefinition(this.service,this.router); //waiting for all definitions from all players before votes
           break;
         default:
           this.waitingConnectedPlayers(this.service,this.router); //
@@ -73,7 +73,7 @@ export class A5B3_LoadingPage implements OnInit {
     },1000);
   }
 
-  waintingAllDefinition(service:PartieService,router:Router){
+  waitingAllDefinition(service:PartieService,router:Router){
     setTimeout(()=>{
       console.log("check");
       service.checkDefinitions(service.partieEnCours,service.mancheEnCours,service.tourEnCours).subscribe(reponse=>{
@@ -81,7 +81,7 @@ export class A5B3_LoadingPage implements OnInit {
         this.counter = reponse.nbJoueurs - reponse.nbDefNull;//number of players who already complete the definition
         this.progress = this.counter/this.counter2; //progress bar
         if (reponse.nbDefNull > 0){ //if still definiton null, we wait until every one complete the definition
-          this.waintingAllDefinition(service,router);
+          this.waitingAllDefinition(service,router);
         }else{
           this.router.navigate(["online-proposition"]);//when it's done, go to the propositions 
         }
