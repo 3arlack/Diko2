@@ -27,18 +27,19 @@ export class ReponsePage implements OnInit {
     // Get param from current Route
     this.currentRoute.queryParams.subscribe(param => {
         this.status = param["status"];
-        if(this.status == "online"){
+        if(this.status == "online"){ //If online mode
+        
           // Get from DB : current word, correct definition
-        this.onlineService.getPartie(this.partieEnCours).subscribe(u => {
-          this.onlineService.getTour(u.manche[this.onlineService.mancheEnCours]._ID).subscribe(tableauTours=>{
-          this.mot = tableauTours[this.onlineService.tourEnCours].mot_choisi;
-          let idTour = tableauTours[this.onlineService.tourEnCours]._ID;
-            this.onlineService.getAllResultat(idTour).subscribe(tableauResultat => {
-            this.definition = this.onlineService.findDefinition(tableauResultat);
-            })
+          this.onlineService.getPartie(this.partieEnCours).subscribe(u => {
+            this.onlineService.getTour(u.manche[this.onlineService.mancheEnCours]._ID).subscribe(tableauTours=>{
+            this.mot = tableauTours[this.onlineService.tourEnCours].mot_choisi;
+            let idTour = tableauTours[this.onlineService.tourEnCours]._ID;
+              this.onlineService.getAllResultat(idTour).subscribe(tableauResultat => {
+              this.definition = this.onlineService.findDefinition(tableauResultat);
+              })
+            });
           });
-        });
-        } else {
+        } else { //If online mode
           this.mot = this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].mot_choisi;
           this.definition = this.service.definition;
         }
@@ -47,7 +48,7 @@ export class ReponsePage implements OnInit {
   
   // Routing method
   check(){
-    if(this.status == "online"){
+    if(this.status == "online"){//if online mode
       this.onlineService.getPartie(this.partieEnCours).subscribe(u => {
         if (this.onlineService.tourEnCours == u.joueur.length -1){
           if (this.onlineService.mancheEnCours == u.manche.length -1){
@@ -64,7 +65,7 @@ export class ReponsePage implements OnInit {
           this.route.navigate(['online-definition']);
         };
       });
-    }else {
+    }else {//if offline mode
       if (this.service.toursEnCours == this.service.joueurs.length -1){
         // if there are no more rounds left, we display the winner
         if (this.service.mancheEnCours == this.service.manches.length -1){

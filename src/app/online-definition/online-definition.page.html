@@ -2,11 +2,13 @@
     <ion-grid>
         <ion-row>
             <ion-col class="ion-text-center">
+                <!--player's name-->
                 <h1>{{joueur}}</h1>
             </ion-col>
         </ion-row>
         <ion-row>
             <ion-col class="ion-text-center">
+                <!-- word-->
                 <h2>{{mot}}</h2>
             </ion-col>
         </ion-row>
@@ -17,11 +19,13 @@
         </ion-row>
         <ion-row class="ion-justify-content-center">
             <ion-col size="8">
+                <!-- input to enter the definition-->
                 <ion-textarea inputmode="text"></ion-textarea>
             </ion-col>
         </ion-row>
         <ion-row>
             <ion-col class="ion-text-center">
+                <!-- button to validate the definition-->
                 <ion-button (click)="onClick()">Valider</ion-button>
             </ion-col>
         </ion-row>

@@ -17,8 +17,8 @@ export class LobbyPage implements OnInit {
 
   @ViewChildren(IonChip) chips:QueryList<IonChip>;
   @ViewChild("button") button:IonButton;
+  
   votes : number;
-
   joueurs:Array<Joueur>=[]; // initialize array
   IDPartie : number;
   maPartie : Partie;

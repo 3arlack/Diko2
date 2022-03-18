@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 import { ModalController } from '@ionic/angular'; //Import ModalController
 import { PartieService } from '../services/partie.service';
 

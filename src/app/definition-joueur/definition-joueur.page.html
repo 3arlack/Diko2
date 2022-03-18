@@ -11,11 +11,13 @@
                 <ion-grid>
                     <ion-row class="ion-justify-content-center">
                     <ion-col size="6">
-                        <h1 id="{{joueur.id_joueur}}">Joueur : {{joueur.nom_joueur}}, id : {{joueur.id_joueur}}</h1>
+                        <!--name of the current player-->
+                        <h1 id="{{joueur.id_joueur}}">{{joueur.nom_joueur}}</h1>
                     </ion-col>
                     </ion-row>
                     <ion-row class="ion-justify-content-center">
                         <ion-col size="6">
+                            <!--the word-->
                             <h2>{{mot}}</h2>
                         </ion-col>
                     </ion-row>
@@ -26,6 +28,7 @@
                     </ion-row>
                     <ion-row class="ion-justify-content-center">
                         <ion-col size="6">
+                            <!--input to enter the definition-->
                             <ion-textarea id="{{'definition' + index}}" inputmode="text"></ion-textarea>
                         </ion-col>
                     </ion-row>
