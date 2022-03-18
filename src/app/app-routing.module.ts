@@ -49,38 +49,39 @@ const routes: Routes = [
   },
   {
     path: 'online-host-create',
-    loadChildren: () => import('./online-host-create/online-host-create.module').then( m => m.OnlineHostCreatePageModule)
+    loadChildren: () => import('./A1_online-host-create/A1_online-host-create.module').then( m => m.OnlineHostCreatePageModule)
   },
   {
     path: 'lobby',
-    loadChildren: () => import('./lobby/lobby.module').then( m => m.LobbyPageModule)
+    loadChildren: () => import('./A2_lobby/A2_lobby.module').then( m => m.LobbyPageModule)
   },
   {
     path: 'loading',
-    loadChildren: () => import('./loading/loading.module').then( m => m.LoadingPageModule)
+    loadChildren: () => import('./A5B3_loading/A5B3_loading.module').then( m => m.LoadingPageModule)
   },
   {
     path: 'current-manche-online',
-    loadChildren: () => import('./current-manche-online/current-manche-online.module').then( m => m.CurrentMancheOnlinePageModule)
+    loadChildren: () => import('./A3_current-manche-online/A3_current-manche-online.module').then( m => m.CurrentMancheOnlinePageModule)
   },
   {
     path: 'online-definition',
-    loadChildren: () => import('./online-definition/online-definition.module').then( m => m.OnlineDefinitionPageModule)
+    loadChildren: () => import('./A4_online-definition/A4_online-definition.module').then( m => m.OnlineDefinitionPageModule)
   },
   {
     path: 'online-proposition',
-    loadChildren: () => import('./online-proposition/online-proposition.module').then( m => m.OnlinePropositionPageModule)
+    loadChildren: () => import('./A6_online-proposition/A6_online-proposition.module').then( m => m.OnlinePropositionPageModule)
   },
   {
     path: 'online-vote',
-    loadChildren: () => import('./online-vote/online-vote.module').then( m => m.OnlineVotePageModule)
-  },  {
+    loadChildren: () => import('./A7_online-vote/A7_online-vote.module').then( m => m.OnlineVotePageModule)
+  },
+  {
     path: 'rejoindre-partie',
-    loadChildren: () => import('./rejoindre-partie/rejoindre-partie.module').then( m => m.RejoindrePartiePageModule)
+    loadChildren: () => import('./B1_rejoindre-partie/B1_rejoindre-partie.module').then( m => m.RejoindrePartiePageModule)
   },
   {
     path: 'add-name',
-    loadChildren: () => import('./add-name/add-name.module').then( m => m.AddNamePageModule)
+    loadChildren: () => import('./B2_add-name/B2_add-name.module').then( m => m.AddNamePageModule)
   }
 
 ];
