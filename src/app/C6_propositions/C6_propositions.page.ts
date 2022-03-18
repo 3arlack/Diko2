@@ -1,0 +1,47 @@
+import { Component, OnInit } from '@angular/core';
+import { OfflineService } from '../services/offline.service'; // import service
+import { ModalController } from '@ionic/angular'; // import ModalController 
+
+//import classes
+import { Resultat } from '../classes/resultat';
+import { Joueur } from '../classes/joueur';
+
+@Component({
+  selector: 'app-propositions',
+  templateUrl: './C6_propositions.page.html',
+  styleUrls: ['./C6_propositions.page.scss'],
+})
+export class C6_PropositionsPage implements OnInit {
+
+    mot:string;
+    resultats:Array<Resultat>;
+    idMj:number;
+    joueurs:Array<Joueur>;
+
+  constructor(private ModalController:ModalController, private service:OfflineService) {
+      this.joueurs = this.service.joueurs; // retrieve players
+  } //inject service and modalController
+
+  ngOnInit() {
+    // At startup, retrieve the chosen word
+    this.mot = this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].mot_choisi;
+
+    // Retrieve current Game Master (MJ)
+    this.idMj = this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].id_mj;
+
+    // Also retrieve the "resultats" Array, containing each player's definition
+    this.resultats = this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].resultat
+
+    // Loop to find resultat of id_mj and insert real definition instead
+    for (let i=0;i<this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].resultat.length;i++){
+        if (this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].resultat[i].id_joueur == this.idMj){
+            this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].resultat[i].definition = this.service.definition;
+        }
+    }
+  }
+
+  // dismiss Modal
+  dismiss(){
+    this.ModalController.dismiss();
+  }
+}
