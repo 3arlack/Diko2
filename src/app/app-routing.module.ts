@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./_home/_home.module').then( m => m.HomePageModule)
   },
   {
     path: '',
@@ -74,7 +74,8 @@ const routes: Routes = [
   {
     path: 'online-vote',
     loadChildren: () => import('./online-vote/online-vote.module').then( m => m.OnlineVotePageModule)
-  },  {
+  },
+  {
     path: 'rejoindre-partie',
     loadChildren: () => import('./rejoindre-partie/rejoindre-partie.module').then( m => m.RejoindrePartiePageModule)
   },

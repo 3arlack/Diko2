@@ -4,10 +4,10 @@ import { PartieService } from '../services/partie.service';
 
 @Component({
   selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  templateUrl: '_home.page.html',
+  styleUrls: ['_home.page.scss'],
 })
-export class HomePage {
+export class _HomePage {
  
 
   constructor(public modalController:ModalController, private service:PartieService) {
