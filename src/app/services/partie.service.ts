@@ -59,9 +59,6 @@ export class PartieService {
     return this.http.put(this.apiURL+"ws_updatePartie.php", partie, this.httpOptions);
   }
 
-  launchPartie(partie:Partie):Observable<any>{
-    return this.http.put(this.apiURL+"ws_launchPartie.php", partie, this.httpOptions);
-  }
 
 //TOURS
   createTour(id_partie:number):Observable<any>{
