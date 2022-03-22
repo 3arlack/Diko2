@@ -178,6 +178,9 @@ Class tours {
      
   }
 
+
+
+  
 	// permet de créer un json contenant les objets des objets
     public function toArray(){
         $array = get_object_vars($this);
