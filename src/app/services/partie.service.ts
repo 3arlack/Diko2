@@ -31,7 +31,6 @@ export class PartieService {
 
   // Function to retrieve player name by its id_joueur
   findPlayerName(id_vote:number, joueur:Array<Joueur>):string{
-
     for (let i=0;i<joueur.length;i++){
       if (joueur[i].id_joueur == id_vote){
           return joueur[i].nom_joueur;
@@ -60,13 +59,10 @@ export class PartieService {
     return this.http.put(this.apiURL+"ws_updatePartie.php", partie, this.httpOptions);
   }
 
-  launchPartie(partie:Partie):Observable<any>{
-    return this.http.put(this.apiURL+"ws_launchPartie.php", partie, this.httpOptions);
-  }
 
 //TOURS
-  createTour(tour:Tour):Observable<number>{
-    return this.http.put<number>(this.apiURL+"ws_createTour.php", tour ,this.httpOptions);
+  createTour(id_partie:number):Observable<any>{
+    return this.http.post<any>(this.apiURL+"ws_createTour.php","id_partie="+id_partie ,this.httpOptions2);
   }
 
   getTour(idManche:number):Observable<Array<Tour>>{
@@ -74,14 +70,6 @@ export class PartieService {
   }
 
 //RESULTATS
-  createResultat(resultat:Resultat):Observable<any>{
-    return this.http.put(this.apiURL+"ws_createResultat.php", resultat ,this.httpOptions);
-  }
-
-  createResultats(idTour:number,nbJoueurs:number,goodResultat:Resultat):Observable<any>{
-    return this.http.post(this.apiURL+"ws_createResultats.php", "id_tour="+idTour+"&&nbJoueurs="+nbJoueurs+"&&goodResultat="+JSON.stringify(goodResultat),this.httpOptions2);
-  }
-
   getResultat(idTour:number,idJoueur:number):Observable<number>{
     return this.http.post<number>(this.apiURL+"ws_getResultat.php", "id_tour="+idTour+"&&id_joueur="+idJoueur,this.httpOptions2)
   }

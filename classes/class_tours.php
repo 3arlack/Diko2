@@ -1,6 +1,7 @@
 <?php
 
 require_once("class_resultat.php");
+require_once("config/config.php");
 Class tours {
 	private $_ID;
 	private $_ID_MANCHE;
@@ -157,6 +158,29 @@ Class tours {
     return $temp;
   }
 
+
+  public static function randomWord(){
+    $data = file_get_contents('mots_rares.json');
+    $data = json_decode($data);
+
+    $randomIndex = rand(0,count($data->data));
+
+    return $data->data[$randomIndex]->word;
+  }
+
+  //Get the good definiton from JSON database
+  public static function goodDefinition($word){
+    $data = file_get_contents('mots_rares.json');
+    $data = json_decode($data);
+
+    $index = array_search($word, array_column($data->data,'word'));
+    return $data->data[$index]->def;   
+     
+  }
+
+
+
+  
 	// permet de créer un json contenant les objets des objets
     public function toArray(){
         $array = get_object_vars($this);

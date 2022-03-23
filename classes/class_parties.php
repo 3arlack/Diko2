@@ -2,6 +2,7 @@
 
 require_once("class_joueurs.php");
 require_once("class_manches.php");
+require_once("config/config.php");
 
 
 Class parties {

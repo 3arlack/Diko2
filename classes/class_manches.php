@@ -1,6 +1,7 @@
 <?php
 
 require_once("class_tours.php");
+require_once("config/config.php");
 Class manches {
 	private $_ID;
 	private $_ID_PARTIE;

@@ -1,6 +1,7 @@
 <?php
 
 require_once('class_votes.php');
+require_once("config/config.php");
 
 Class resultat {
 	private $_ID;
