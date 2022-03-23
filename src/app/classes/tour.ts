@@ -18,6 +18,8 @@ export class Tour {
     }
 
     
+    //Those function are not used anymore. They were used before we did the same in PHP (back-end ws-createTour)
+
     // Gets a random word from JSON database
     randomWord?(){
         let randomIndex = Math.floor(Math.random()*data.data.data.length); //Generates a random number from 1 to database length
@@ -32,4 +34,5 @@ export class Tour {
         let index = data.data.data.findIndex(element => element.word == word);
         return data.data.data[index].def;
     }
+
 }
