@@ -30,5 +30,5 @@ npm-debug.log*
 /platforms
 /plugins
 /www
-classes/config/config.php
+/classes/config/config.php
 
