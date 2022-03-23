@@ -4,12 +4,9 @@ import { InMemoryDbService, RequestInfo } from 'angular-in-memory-web-api';
 
 
 //import classes
-import { Joueur } from '../classes/joueur';
-import { Manche } from '../classes/manche';
-import { Tour } from '../classes/tour';
-import { Resultat } from '../classes/resultat';
+
 import { Partie } from '../classes/partie';
-import { Observable } from 'rxjs';
+
 
 
 
