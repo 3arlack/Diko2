@@ -49,22 +49,21 @@ Class tours {
 	}
 
 	public function createtours(){
-
-    // 127.0.0.1 est l'adresse ip locale du serveur (le fichier php étant exécuté sur le serveur, l'adresse du serveur est donc l'adresse locale)
     try {
-      // connexion à la base de donnée
       $dbh = new PDO(DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
 			$stmt = $dbh->prepare('INSERT INTO tours (id_manche, mot_choisi) VALUES (:id_manche, :mot_choisi)');
 			$stmt->bindParam(':id_manche', $this->_ID_MANCHE);
 			$stmt->bindParam(':mot_choisi', $this->mot_choisi);
-			$stmt->execute();//ferme la connexion à la base
-      $this->_ID = $dbh->lastInsertId(); // récupère l'id de la partie créée
+			$stmt->execute();
+      $this->_ID = $dbh->lastInsertId(); //get the last ID
       $dbh = null;
     } catch (PDOException $e) {
       print 'Erreur !: ' . $e->getMessage() . '<br/>';
       die();
     }
 	}
+
+
 
 	public function readtours(){
     $liste_tours = array();
