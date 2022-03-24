@@ -3,8 +3,6 @@ import { Router } from '@angular/router';
 import { AlertController, IonButton, IonChip } from '@ionic/angular';
 import { Joueur } from '../classes/joueur';
 import { Partie } from '../classes/partie';
-import { Resultat } from '../classes/resultat';
-import { Tour } from '../classes/tour';
 import { PartieService } from '../services/partie.service';
 
 @Component({
