@@ -79,17 +79,15 @@ Class resultat {
   }
 
 	public function createresultat(){
-
-    // 127.0.0.1 est l'adresse ip locale du serveur (le fichier php étant exécuté sur le serveur, l'adresse du serveur est donc l'adresse locale)
     try {
-      // connexion à la base de donnée
+
       $dbh = new PDO(DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
 			$stmt = $dbh->prepare('INSERT INTO resultat (definition, id_joueur, id_tour) VALUES (:definition, :id_joueur, :id_tour)');
 			$stmt->bindParam(':definition', $this->definition);
 			$stmt->bindParam(':id_joueur', $this->id_joueur);
 			$stmt->bindParam(':id_tour', $this->_ID_TOUR);
-			$stmt->execute();//ferme la connexion à la base
-      $this->_ID = $dbh->lastInsertId(); // récupère l'id de la partie créée
+			$stmt->execute();
+      $this->_ID = $dbh->lastInsertId(); 
       $dbh = null;
     } catch (PDOException $e) {
       print 'Erreur !: ' . $e->getMessage() . '<br/>';
@@ -97,6 +95,9 @@ Class resultat {
     }
 	}
 
+
+
+  
 	public function readresultat(){
 
     // 127.0.0.1 est l'adresse ip locale du serveur (le fichier php étant exécuté sur le serveur, l'adresse du serveur est donc l'adresse locale)
