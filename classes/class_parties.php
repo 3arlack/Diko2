@@ -4,7 +4,6 @@ require_once("class_joueurs.php");
 require_once("class_manches.php");
 require_once("config/config.php");
 
-
 Class parties {
 	private $id;
 	private $mancheEnCours;
@@ -62,24 +61,14 @@ Class parties {
 	}
 
 	public function createparties(){
-
-    // 127.0.0.1 est l'adresse ip locale du serveur (le fichier php étant exécuté sur le serveur, l'adresse du serveur est donc l'adresse locale)
-    try {
-      // connexion à la base de donnée
-      $dbh = new PDO(DB_NAME, DB_USER, DB_PASS,array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
-      $stmt = $dbh->prepare('INSERT INTO parties (mancheEnCours, tourEnCours) VALUES (:mancheEnCours, :tourEnCours)');
-      $stmt->bindParam(':mancheEnCours', $this->mancheEnCours);
-      $stmt->bindParam(':tourEnCours', $this->tourEnCours);
-      $stmt->execute();//ferme la connexion à la base
-      $this->id = $dbh->lastInsertId(); // récupère l'id de la partie créée
-      $dbh = null;
-    } catch (PDOException $e) {
-      print 'Erreur !: ' . $e->getMessage() . '<br/>';
-      die();
-    }
-
+    $dbh = new PDO(DB_NAME, DB_USER, DB_PASS,array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+    $stmt = $dbh->prepare('INSERT INTO parties (mancheEnCours, tourEnCours) VALUES (:mancheEnCours, :tourEnCours)');
+    $stmt->bindParam(':mancheEnCours', $this->mancheEnCours, PDO::PARAM_INT);
+    $stmt->bindParam(':tourEnCours', $this->tourEnCours, PDO::PARAM_INT);
+    $stmt->execute();
+    $this->id = $dbh->lastInsertId(); // récupère l'id de la partie créée
+    $dbh = null;
     $i = 0; // variable index pour se repérer dans les joueurs !
-
     //Pour chaque joueur de l'objet "partie" en cours, on crée un joueur en BDD ; 
     foreach($this->joueur as $joueur){
       if($joueur->id_joueur == null){
@@ -101,124 +90,74 @@ Class parties {
 	}
 
 	public function readparties(){
-
-    // 127.0.0.1 est l'adresse ip locale du serveur (le fichier php étant exécuté sur le serveur, l'adresse du serveur est donc l'adresse locale)
-    try {
-      // connexion à la base de donnée
-      $dbh = new PDO(DB_NAME, DB_USER, DB_PASS,array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
-      $stmt = $dbh->prepare('SELECT * FROM parties WHERE id = :id');
-      $stmt->bindParam(':id', $this->id);
-      $stmt->execute();
-      $row = $stmt->fetch();
-      $singleparties = new parties($row['id'],$row['mancheEnCours'], $row['tourEnCours']);//ferme la connexion à la base
-      $dbh = null;
-    } catch (PDOException $e) {
-      print 'Erreur !: ' . $e->getMessage() . '<br/>';
-      die();
-    }
+    $dbh = new PDO(DB_NAME, DB_USER, DB_PASS,array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+    $stmt = $dbh->prepare('SELECT * FROM parties WHERE id = :id');
+    $stmt->bindParam(':id', $this->id, PDO::PARAM_INT);
+    $stmt->execute();
+    $row = $stmt->fetch();
+    $singleparties = new parties($row['id'],$row['mancheEnCours'], $row['tourEnCours']);
+    $dbh = null;
 		$monjSon = json_encode($singleparties->toArray($singleparties));
-    // // Je l'affiche
     return $monjSon;
-    // return $singleparties;
-
   }
 
-	public function updateparties(){
+	// public function updateparties(){
+  //   $dbh = new PDO(DB_NAME, DB_USER, DB_PASS,array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+  //   $stmt = $dbh->prepare('UPDATE parties SET mancheEnCours = :mancheEnCours, tourEnCours = :tourEnCours WHERE id = :id');
+  //   $stmt->bindParam(':id', $this->id, PDO::PARAM_INT);
+  //   $stmt->bindParam(':mancheEnCours', $this->mancheEnCours, PDO::PARAM_INT);
+  //   $stmt->bindParam(':tourEnCours', $this->tourEnCours, PDO::PARAM_INT);
+  //   $stmt->execute();
+  //   $dbh = null;
+	// }
 
-        // 127.0.0.1 est l'adresse ip locale du serveur (le fichier php étant exécuté sur le serveur, l'adresse du serveur est donc l'adresse locale)
-        try {
-            // connexion à la base de donnée
-            $dbh = new PDO(DB_NAME, DB_USER, DB_PASS,array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
-			$stmt = $dbh->prepare('UPDATE parties SET mancheEnCours = :mancheEnCours, tourEnCours = :tourEnCours WHERE id = :id');
-			$stmt->bindParam(':id', $this->id);
-			$stmt->bindParam(':mancheEnCours', $this->mancheEnCours);
-			$stmt->bindParam(':tourEnCours', $this->tourEnCours);
-			$stmt->execute();//ferme la connexion à la base
-            $dbh = null;
-        } catch (PDOException $e) {
-            print 'Erreur !: ' . $e->getMessage() . '<br/>';
-            die();
-        }
-	}
-
-	public function deleteparties(){
-
-        // 127.0.0.1 est l'adresse ip locale du serveur (le fichier php étant exécuté sur le serveur, l'adresse du serveur est donc l'adresse locale)
-        try {
-            // connexion à la base de donnée
-            $dbh = new PDO(DB_NAME, DB_USER, DB_PASS,array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
-			$stmt = $dbh->prepare('DELETE FROM parties WHERE id = :id');
-			$stmt->bindParam(':id', $this->id);
-			$stmt->execute();//ferme la connexion à la base
-            $dbh = null;
-        } catch (PDOException $e) {
-            print 'Erreur !: ' . $e->getMessage() . '<br/>';
-            die();
-        }
-	}
+	// public function deleteparties(){
+  //   $dbh = new PDO(DB_NAME, DB_USER, DB_PASS,array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+  //   $stmt = $dbh->prepare('DELETE FROM parties WHERE id = :id');
+  //   $stmt->bindParam(':id', $this->id, PDO::PARAM_INT);
+  //   $stmt->execute();
+  //   $dbh = null;
+	// }
 
     function getManches(){
     $temp = array();
-
-    // 127.0.0.1 est l'adresse ip locale du serveur (le fichier php étant exécuté sur le serveur, l'adresse du serveur est donc l'adresse locale)
-    try {
-    // connexion à la base de donnée
-      $dbh = new PDO(DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
-			$stmt = $dbh->prepare('SELECT * FROM manches WHERE id_partie = :id');
-			$stmt->bindParam(':id', $this->id);
-      $stmt->execute();
-
-      while ($row = $stmt->fetch()) {
-        $singlemanche = new manches($row['id'], $row['id_partie']); //ferme la connexion à la base
-        array_push($temp, $singlemanche);
-      }
-      //ferme la connexion à la base
-      $dbh = null;
-    } catch (PDOException $e) {
-      print 'Erreur !: ' . $e->getMessage() . '<br/>';
-      // die();
+    $dbh = new PDO(DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+    $stmt = $dbh->prepare('SELECT * FROM manches WHERE id_partie = :id');
+    $stmt->bindParam(':id', $this->id, PDO::PARAM_INT);
+    $stmt->execute();
+    while ($row = $stmt->fetch()) {
+      $singlemanche = new manches($row['id'], $row['id_partie']);
+      array_push($temp, $singlemanche);
     }
-
+    $dbh = null;
     return $temp;
   }
 
   function getJoueurs(){
     $temp = array();
-
-    // 127.0.0.1 est l'adresse ip locale du serveur (le fichier php étant exécuté sur le serveur, l'adresse du serveur est donc l'adresse locale)
-    try {
-    // connexion à la base de donnée
-      $dbh = new PDO(DB_NAME, DB_USER, DB_PASS,array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8')  );
-			$stmt = $dbh->prepare('SELECT * FROM joueurs WHERE id_partie = :id');
-			$stmt->bindParam(':id', $this->id);
-      $stmt->execute();
-
-      while ($row = $stmt->fetch()) {
-        $singleJoueur = new joueurs($row['id'], $row['id_partie'], $row['id_joueur'], $row['nom_joueur'], $row['score_joueur'], $row['avatar_joueur']);//ferme la connexion à la base
-        array_push($temp, $singleJoueur);
-      }
-      //ferme la connexion à la base
-      $dbh = null;
-    } catch (PDOException $e) {
-      print 'Erreur !: ' . $e->getMessage() . '<br/>';
-      // die();
+    $dbh = new PDO(DB_NAME, DB_USER, DB_PASS,array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8')  );
+    $stmt = $dbh->prepare('SELECT * FROM joueurs WHERE id_partie = :id');
+    $stmt->bindParam(':id', $this->id, PDO::PARAM_INT);
+    $stmt->execute();
+    while ($row = $stmt->fetch()) {
+      $singleJoueur = new joueurs($row['id'], $row['id_partie'], $row['id_joueur'], $row['nom_joueur'], $row['score_joueur'], $row['avatar_joueur']);//ferme la connexion à la base
+      array_push($temp, $singleJoueur);
     }
-
+    $dbh = null;
     return $temp;
   }
 
-
 	// permet de créer un json contenant les objets des objets
-    public function toArray(){
-        $array = get_object_vars($this);
-        unset($array['_parent'], $array['_index']);
-        array_walk_recursive($array, function (&$property) {
-            if (is_object($property) && method_exists($property, 'toArray')) {
-                $property = $property->toArray();
-            }
-        });
-        return $array;
-    }
+  public function toArray(){
+    $array = get_object_vars($this);
+    unset($array['_parent'], $array['_index']);
+    array_walk_recursive($array, function (&$property) {
+      if (is_object($property) && method_exists($property, 'toArray')) {
+        $property = $property->toArray();
+      }
+    });
+    return $array;
+  }
 
 }
 ?>

@@ -1,10 +1,10 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'; // import ActiveRoute
 import { OfflineService } from '../services/offline.service'; // import service
+import { IonChip } from '@ionic/angular';
 
 //import classes
 import { Joueur } from '../classes/joueur';
-import { IonChip } from '@ionic/angular';
 
 @Component({
   selector: 'app-vote-joueur',

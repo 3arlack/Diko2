@@ -10,7 +10,7 @@ Class joueurs {
 	private $avatar_joueur;
 
 	//S'appelle automatiquement à la création d'instance
-    function __construct($ID, $ID_PARTIE, $ID_JOUEUR, $NOM_JOUEUR, $SCORE_JOUEUR, $AVATAR_JOUEUR){
+  function __construct($ID, $ID_PARTIE, $ID_JOUEUR, $NOM_JOUEUR, $SCORE_JOUEUR, $AVATAR_JOUEUR){
 		$this->_ID = $ID;
 		$this->_ID_PARTIE = $ID_PARTIE;
 		$this->id_joueur = $ID_JOUEUR;
@@ -68,94 +68,61 @@ Class joueurs {
 	}
 
 	public function createjoueurs(){
-
-        // 127.0.0.1 est l'adresse ip locale du serveur (le fichier php étant exécuté sur le serveur, l'adresse du serveur est donc l'adresse locale)
-        try {
-            // connexion à la base de donnée
-            $dbh = new PDO(DB_NAME, DB_USER, DB_PASS,array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
-			$stmt = $dbh->prepare('INSERT INTO joueurs (id_partie, id_joueur, nom_joueur, score_joueur, avatar_joueur) VALUES (:id_partie, :id_joueur, :nom_joueur, :score_joueur, :avatar_joueur)');
-			$stmt->bindParam(':id_partie', $this->_ID_PARTIE);
-			$stmt->bindParam(':id_joueur', $this->id_joueur);
-			$stmt->bindParam(':nom_joueur', $this->nom_joueur);
-			$stmt->bindParam(':score_joueur', $this->score_joueur);
-			$stmt->bindParam(':avatar_joueur', $this->avatar_joueur);
-			$stmt->execute();//ferme la connexion à la base
-            $dbh = null;
-        } catch (PDOException $e) {
-            print 'Erreur !: ' . $e->getMessage() . '<br/>';
-            die();
-        }
+    $dbh = new PDO(DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+    $stmt = $dbh->prepare('INSERT INTO joueurs (id_partie, id_joueur, nom_joueur, score_joueur, avatar_joueur) VALUES (:id_partie, :id_joueur, :nom_joueur, :score_joueur, :avatar_joueur)');
+    $stmt->bindParam(':id_partie', $this->_ID_PARTIE,PDO::PARAM_INT);
+    $stmt->bindParam(':id_joueur', $this->id_joueur,PDO::PARAM_INT);
+    $stmt->bindParam(':nom_joueur', $this->nom_joueur,PDO::PARAM_STR);
+    $stmt->bindParam(':score_joueur', $this->score_joueur,PDO::PARAM_INT);
+    $stmt->bindParam(':avatar_joueur', $this->avatar_joueur,PDO::PARAM_STR);
+    $stmt->execute();
+    $dbh = null;
 	}
 
-	public function readjoueurs(){
-
-        // 127.0.0.1 est l'adresse ip locale du serveur (le fichier php étant exécuté sur le serveur, l'adresse du serveur est donc l'adresse locale)
-        try {
-            // connexion à la base de donnée
-            $dbh = new PDO(DB_NAME, DB_USER, DB_PASS,array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
-			$stmt = $dbh->prepare('SELECT * FROM joueurs WHERE id = :id');
-			$stmt->bindParam(':id', $this->_ID);
-			$stmt->execute();
-            $row = $stmt->fetch();
-            $singlejoueurs = new joueurs($row['id'], $row['id_partie'], $row['id_joueur'], $row['nom_joueur'], $row['score_joueur'], $row['avatar_joueur']);//ferme la connexion à la base
-            $dbh = null;
-        } catch (PDOException $e) {
-            print 'Erreur !: ' . $e->getMessage() . '<br/>';
-            die();
-        }
-		$monjSon = '{$singlejoueurs:'.json_encode(array($singlejoueurs->toArray($singlejoueurs))).'}';
-        // Je l'affiche
-        return $monjSon;
-  }
+	// public function readjoueurs(){
+  //   $dbh = new PDO(DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+  //   $stmt = $dbh->prepare('SELECT * FROM joueurs WHERE id = :id');
+  //   $stmt->bindParam(':id', $this->_ID,PDO::PARAM_INT);
+  //   $stmt->execute();
+  //   $row = $stmt->fetch();
+  //   $singlejoueurs = new joueurs($row['id'], $row['id_partie'], $row['id_joueur'], $row['nom_joueur'], $row['score_joueur'], $row['avatar_joueur']);//ferme la connexion à la base
+  //   $dbh = null;
+	// 	$monjSon = '{$singlejoueurs:'.json_encode(array($singlejoueurs->toArray($singlejoueurs))).'}';
+  //   return $monjSon;
+  // }
 
   public function updatejoueurs(){
-
-    // 127.0.0.1 est l'adresse ip locale du serveur (le fichier php étant exécuté sur le serveur, l'adresse du serveur est donc l'adresse locale)
-    try {
-      // connexion à la base de donnée
-      $dbh = new PDO(DB_NAME, DB_USER, DB_PASS,array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
-      $stmt = $dbh->prepare('UPDATE joueurs SET nom_joueur = :nom_joueur, score_joueur = :score_joueur, avatar_joueur = :avatar_joueur WHERE id = :id');
-      $stmt->bindParam(':id', $this->_ID);
-      // $stmt->bindParam(':id_partie', $this->_ID_PARTIE);
-      // $stmt->bindParam(':id_joueur', $this->id_joueur);
-      $stmt->bindParam(':nom_joueur', $this->nom_joueur);
-      $stmt->bindParam(':score_joueur', $this->score_joueur);
-      $stmt->bindParam(':avatar_joueur', $this->avatar_joueur);
-      $stmt->execute();//ferme la connexion à la base
-      $dbh = null;
-    } catch (PDOException $e) {
-      print 'Erreur !: ' . $e->getMessage() . '<br/>';
-      die();
-    }
+    $dbh = new PDO(DB_NAME, DB_USER, DB_PASS,array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+    $stmt = $dbh->prepare('UPDATE joueurs SET nom_joueur = :nom_joueur, score_joueur = :score_joueur, avatar_joueur = :avatar_joueur WHERE id = :id');
+    $stmt->bindParam(':id', $this->_ID);
+    // $stmt->bindParam(':id_partie', $this->_ID_PARTIE, PDO::PARAM_INT);
+    // $stmt->bindParam(':id_joueur', $this->id_joueur, PDO::PARAM_INT);
+    $stmt->bindParam(':nom_joueur', $this->nom_joueur, PDO::PARAM_STR);
+    $stmt->bindParam(':score_joueur', $this->score_joueur, PDO::PARAM_INT);
+    $stmt->bindParam(':avatar_joueur', $this->avatar_joueur, PDO::PARAM_STR);
+    $stmt->execute();
+    $dbh = null;
 	}
 
 	public function deletejoueurs(){
-
-        // 127.0.0.1 est l'adresse ip locale du serveur (le fichier php étant exécuté sur le serveur, l'adresse du serveur est donc l'adresse locale)
-        try {
-            // connexion à la base de donnée
-            $dbh = new PDO(DB_NAME, DB_USER, DB_PASS,array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
-			$stmt = $dbh->prepare('DELETE FROM joueurs WHERE id = :id');
-			$stmt->bindParam(':id', $this->_ID);
-			$stmt->execute();//ferme la connexion à la base
-            $dbh = null;
-        } catch (PDOException $e) {
-            print 'Erreur !: ' . $e->getMessage() . '<br/>';
-            die();
-        }
+    $dbh = new PDO(DB_NAME, DB_USER, DB_PASS,array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+    $stmt = $dbh->prepare('DELETE FROM joueurs WHERE id = :id');
+    $stmt->bindParam(':id', $this->_ID, PDO::PARAM_INT);
+    $stmt->execute();
+    $dbh = null;
 	}
 
 	// permet de créer un json contenant les objets des objets
-    public function toArray(){
-        $array = get_object_vars($this);
-        unset($array['_parent'], $array['_index']);
-        array_walk_recursive($array, function (&$property) {
-            if (is_object($property) && method_exists($property, 'toArray')) {
-                $property = $property->toArray();
-            }
-        });
-        return $array;
-    }
+  public function toArray(){
+    $array = get_object_vars($this);
+    unset($array['_parent'], $array['_index']);
+    array_walk_recursive($array, function (&$property) {
+      if (is_object($property) && method_exists($property, 'toArray')) {
+        $property = $property->toArray();
+      }
+    });
+    return $array;
+  }
 
 }
 ?>
