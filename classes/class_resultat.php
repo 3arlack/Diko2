@@ -10,7 +10,6 @@ Class resultat {
 	private $_ID_TOUR;
   private $id_vote = array();
 
-	//S'appelle automatiquement à la création d'instance
     function __construct($ID, $DEFINITION, $ID_JOUEUR, $ID_TOUR){
 		$this->_ID = $ID;
 		$this->definition = $DEFINITION;
@@ -79,7 +78,7 @@ Class resultat {
     $stmt->bindParam(':id_tour', $this->_ID_TOUR);
     $stmt->execute();
     $row = $stmt->fetch();
-    $singleresultat = new resultat($row['id'], $row['definition'], $row['id_joueur'], $row['id_tour']);//ferme la connexion à la base
+    $singleresultat = new resultat($row['id'], $row['definition'], $row['id_joueur'], $row['id_tour']);
     $dbh = null;
 
     return $singleresultat->get_ID();

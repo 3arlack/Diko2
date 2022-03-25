@@ -115,7 +115,7 @@ Class tours {
       $stmt->execute();
 
       while ($row = $stmt->fetch()) {
-        $singleResultat = new resultat($row['id'], $row['definition'], $row['id_joueur'], $row['id_tour']);//ferme la connexion à la base
+        $singleResultat = new resultat($row['id'], $row['definition'], $row['id_joueur'], $row['id_tour']);
         array_push($temp, $singleResultat);
       }
 
@@ -145,8 +145,6 @@ Class tours {
 
 
 
-  
-	// permet de créer un json contenant les objets des objets
     public function toArray(){
         $array = get_object_vars($this);
         unset($array['_parent'], $array['_index']);

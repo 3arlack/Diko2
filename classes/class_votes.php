@@ -4,9 +4,7 @@ Class votes {
 	private $_ID;
 	private $id_resultat;
 	private $id_vote;
-    
 
-	//S'appelle automatiquement à la création d'instance
     function __construct($ID, $ID_RESULTAT, $ID_VOTE){
 		$this->_ID = $ID;
 		$this->id_resultat = $ID_RESULTAT;
@@ -43,7 +41,7 @@ Class votes {
         $stmt = $dbh->prepare('INSERT INTO votes (id_resultat, id_vote) VALUES (:id_resultat, :id_vote)');
         $stmt->bindParam(':id_resultat', $this->id_resultat);
         $stmt->bindParam(':id_vote', $this->id_vote);
-        $stmt->execute();//ferme la connexion à la base
+        $stmt->execute();
         $dbh = null;
         
 	}
