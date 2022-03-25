@@ -59,7 +59,7 @@ Class resultat {
 
     $dbh = new PDO(DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
     $stmt = $dbh->prepare('SELECT * FROM votes WHERE id_resultat = :id_resultat');
-    $stmt->bindParam(':id_resultat', $this->_ID);
+    $stmt->bindParam(':id_resultat', $this->_ID, PDO::PARAM_INT);
     $stmt->execute();
     while ($row = $stmt->fetch()) {
       $singlevotes = intval($row['id_vote']);
@@ -74,8 +74,8 @@ Class resultat {
 
     $dbh = new PDO(DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
     $stmt = $dbh->prepare('SELECT * FROM resultat WHERE id_joueur = :id_joueur AND id_tour = :id_tour');
-    $stmt->bindParam(':id_joueur', $this->id_joueur);
-    $stmt->bindParam(':id_tour', $this->_ID_TOUR);
+    $stmt->bindParam(':id_joueur', $this->id_joueur, PDO::PARAM_INT);
+    $stmt->bindParam(':id_tour', $this->_ID_TOUR, PDO::PARAM_INT);
     $stmt->execute();
     $row = $stmt->fetch();
     $singleresultat = new resultat($row['id'], $row['definition'], $row['id_joueur'], $row['id_tour']);
@@ -90,7 +90,7 @@ Class resultat {
 
     $dbh = new PDO(DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
     $stmt = $dbh->prepare('SELECT * FROM resultat WHERE id_tour = :id_tour');
-    $stmt->bindParam(':id_tour', $this->_ID_TOUR);
+    $stmt->bindParam(':id_tour', $this->_ID_TOUR, PDO::PARAM_INT);
     $stmt->execute();
     while ($row = $stmt->fetch()) {
       $singleresultat = new resultat($row['id'], $row['definition'], $row['id_joueur'], $row['id_tour']);
@@ -117,8 +117,8 @@ Class resultat {
 	public function updateresultat(){
     $dbh = new PDO(DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
     $stmt = $dbh->prepare('UPDATE resultat SET definition = :definition WHERE id = :id');
-    $stmt->bindParam(':id', $this->_ID);
-    $stmt->bindParam(':definition', $this->definition);
+    $stmt->bindParam(':id', $this->_ID, PDO::PARAM_INT);
+    $stmt->bindParam(':definition', $this->definition, PDO::PARAM_STR);
     $stmt->execute();
     $dbh = null;
 	}

@@ -39,8 +39,8 @@ Class votes {
 
         $dbh = new PDO(DB_NAME, DB_USER, DB_PASS,array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
         $stmt = $dbh->prepare('INSERT INTO votes (id_resultat, id_vote) VALUES (:id_resultat, :id_vote)');
-        $stmt->bindParam(':id_resultat', $this->id_resultat);
-        $stmt->bindParam(':id_vote', $this->id_vote);
+        $stmt->bindParam(':id_resultat', $this->id_resultat, PDO::PARAM_INT);
+        $stmt->bindParam(':id_vote', $this->id_vote, PDO::PARAM_INT);
         $stmt->execute();
         $dbh = null;
         
@@ -50,8 +50,8 @@ Class votes {
 
         $dbh = new PDO(DB_NAME, DB_USER, DB_PASS,array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
         $stmt = $dbh->prepare('DELETE FROM votes WHERE id_resultat = :id_resultat AND id_vote = :id_vote');
-        $stmt->bindParam(':id_resultat', $this->id_resultat);
-        $stmt->bindParam(':id_vote', $this->id_vote);
+        $stmt->bindParam(':id_resultat', $this->id_resultat, PDO::PARAM_INT);
+        $stmt->bindParam(':id_vote', $this->id_vote, PDO::PARAM_INT);
         $stmt->execute();
         $dbh = null;
      
