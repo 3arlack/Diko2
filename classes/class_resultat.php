@@ -85,12 +85,12 @@ Class resultat {
 	}
 
     
-	public function readAllResultat(){
+	public static function readAllResultat($idTour){
     $liste_resultat = array();
 
     $dbh = new PDO(DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
     $stmt = $dbh->prepare('SELECT * FROM resultat WHERE id_tour = :id_tour');
-    $stmt->bindParam(':id_tour', $this->_ID_TOUR, PDO::PARAM_INT);
+    $stmt->bindParam(':id_tour', $idTour, PDO::PARAM_INT);
     $stmt->execute();
     while ($row = $stmt->fetch()) {
       $singleresultat = new resultat($row['id'], $row['definition'], $row['id_joueur'], $row['id_tour']);
@@ -98,7 +98,7 @@ Class resultat {
     }
 
     $dbh = null;
-   
+
     $monTab = array();
     $i = 0;   
 
