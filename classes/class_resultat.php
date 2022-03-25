@@ -58,91 +58,52 @@ Class resultat {
   function getVote(){
     $liste_vote = array();
 
-    // 127.0.0.1 est l'adresse ip locale du serveur (le fichier php étant exécuté sur le serveur, l'adresse du serveur est donc l'adresse locale)
-    try {
-      // connexion à la base de donnée
-      $dbh = new PDO(DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
-			$stmt = $dbh->prepare('SELECT * FROM votes WHERE id_resultat = :id_resultat');
-			$stmt->bindParam(':id_resultat', $this->_ID);
-			$stmt->execute();
-      while ($row = $stmt->fetch()) {
-        $singlevotes = intval($row['id_vote']);//ferme la connexion à la base
-        array_push($liste_vote, $singlevotes);
+    $dbh = new PDO(DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+    $stmt = $dbh->prepare('SELECT * FROM votes WHERE id_resultat = :id_resultat');
+    $stmt->bindParam(':id_resultat', $this->_ID);
+    $stmt->execute();
+    while ($row = $stmt->fetch()) {
+      $singlevotes = intval($row['id_vote']);
+      array_push($liste_vote, $singlevotes);
     }
-      $dbh = null;
-    }catch (PDOException $e) {
-      print 'Erreur !: ' . $e->getMessage() . '<br/>';
-      die();
-    }
-
+    
+    $dbh = null;
     return $liste_vote;
   }
 
-	public function createresultat(){
-    try {
-
-      $dbh = new PDO(DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
-			$stmt = $dbh->prepare('INSERT INTO resultat (definition, id_joueur, id_tour) VALUES (:definition, :id_joueur, :id_tour)');
-			$stmt->bindParam(':definition', $this->definition);
-			$stmt->bindParam(':id_joueur', $this->id_joueur);
-			$stmt->bindParam(':id_tour', $this->_ID_TOUR);
-			$stmt->execute();
-      $this->_ID = $dbh->lastInsertId(); 
-      $dbh = null;
-    } catch (PDOException $e) {
-      print 'Erreur !: ' . $e->getMessage() . '<br/>';
-      die();
-    }
-	}
-
-
-
-  
 	public function readresultat(){
 
-    // 127.0.0.1 est l'adresse ip locale du serveur (le fichier php étant exécuté sur le serveur, l'adresse du serveur est donc l'adresse locale)
-    try {
-      // connexion à la base de donnée
-      $dbh = new PDO(DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
-			$stmt = $dbh->prepare('SELECT * FROM resultat WHERE id_joueur = :id_joueur AND id_tour = :id_tour');
-			$stmt->bindParam(':id_joueur', $this->id_joueur);
-			$stmt->bindParam(':id_tour', $this->_ID_TOUR);
-			$stmt->execute();
-      $row = $stmt->fetch();
-      $singleresultat = new resultat($row['id'], $row['definition'], $row['id_joueur'], $row['id_tour']);//ferme la connexion à la base
-      $dbh = null;
-    } catch (PDOException $e) {
-      print 'Erreur !: ' . $e->getMessage() . '<br/>';
-      die();
-    }
-      return $singleresultat->get_ID();
-		}
+    $dbh = new PDO(DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+    $stmt = $dbh->prepare('SELECT * FROM resultat WHERE id_joueur = :id_joueur AND id_tour = :id_tour');
+    $stmt->bindParam(':id_joueur', $this->id_joueur);
+    $stmt->bindParam(':id_tour', $this->_ID_TOUR);
+    $stmt->execute();
+    $row = $stmt->fetch();
+    $singleresultat = new resultat($row['id'], $row['definition'], $row['id_joueur'], $row['id_tour']);//ferme la connexion à la base
+    $dbh = null;
 
+    return $singleresultat->get_ID();
+	}
 
     
 	public function readAllResultat(){
     $liste_resultat = array();
 
-    // 127.0.0.1 est l'adresse ip locale du serveur (le fichier php étant exécuté sur le serveur, l'adresse du serveur est donc l'adresse locale)
-    try {
-      // connexion à la base de donnée
-      $dbh = new PDO(DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
-			$stmt = $dbh->prepare('SELECT * FROM resultat WHERE id_tour = :id_tour');
-			$stmt->bindParam(':id_tour', $this->_ID_TOUR);
-			$stmt->execute();
-      while ($row = $stmt->fetch()) {
-      $singleresultat = new resultat($row['id'], $row['definition'], $row['id_joueur'], $row['id_tour']);//ferme la connexion à la base
+    $dbh = new PDO(DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+    $stmt = $dbh->prepare('SELECT * FROM resultat WHERE id_tour = :id_tour');
+    $stmt->bindParam(':id_tour', $this->_ID_TOUR);
+    $stmt->execute();
+    while ($row = $stmt->fetch()) {
+      $singleresultat = new resultat($row['id'], $row['definition'], $row['id_joueur'], $row['id_tour']);
       array_push($liste_resultat, $singleresultat);
     }
-      $dbh = null;
-    }catch (PDOException $e) {
-      print 'Erreur !: ' . $e->getMessage() . '<br/>';
-      die();
-    }
+
+    $dbh = null;
+   
     $monTab = array();
     $i = 0;   
 
-    // on transforme l'objet en tableau (récursif sur les objets)
+
     foreach($liste_resultat as $monResultat){
       $array = $monResultat->toArray($monResultat);
       $monTab[$i] = $array;
@@ -151,41 +112,37 @@ Class resultat {
 
     $monJSON = json_encode($monTab);
     return $monJSON;
-		}
+	}
 
 
 	public function updateresultat(){
-
-    // 127.0.0.1 est l'adresse ip locale du serveur (le fichier php étant exécuté sur le serveur, l'adresse du serveur est donc l'adresse locale)
-    try {
-      // connexion à la base de donnée
-      $dbh = new PDO(DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
-			$stmt = $dbh->prepare('UPDATE resultat SET definition = :definition WHERE id = :id');
-			$stmt->bindParam(':id', $this->_ID);
-			$stmt->bindParam(':definition', $this->definition);
-			$stmt->execute();//ferme la connexion à la base
-      $dbh = null;
-    } catch (PDOException $e) {
-      print 'Erreur !: ' . $e->getMessage() . '<br/>';
-      die();
-    }
+    $dbh = new PDO(DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+    $stmt = $dbh->prepare('UPDATE resultat SET definition = :definition WHERE id = :id');
+    $stmt->bindParam(':id', $this->_ID);
+    $stmt->bindParam(':definition', $this->definition);
+    $stmt->execute();
+    $dbh = null;
 	}
 
-	public function deleteresultat(){
+	// public function deleteresultat(){
+  //   $dbh = new PDO(DB_NAME, DB_USER, DB_PASS);
+  //   $stmt = $dbh->prepare('DELETE FROM resultat WHERE id = :id');
+  //   $stmt->bindParam(':id', $this->_ID);
+  //   $stmt->execute();//ferme la connexion à la base
+  //   $dbh = null;
+	// }
 
-        // 127.0.0.1 est l'adresse ip locale du serveur (le fichier php étant exécuté sur le serveur, l'adresse du serveur est donc l'adresse locale)
-        try {
-            // connexion à la base de donnée
-            $dbh = new PDO(DB_NAME, DB_USER, DB_PASS);
-			$stmt = $dbh->prepare('DELETE FROM resultat WHERE id = :id');
-			$stmt->bindParam(':id', $this->_ID);
-			$stmt->execute();//ferme la connexion à la base
-            $dbh = null;
-        } catch (PDOException $e) {
-            print 'Erreur !: ' . $e->getMessage() . '<br/>';
-            die();
-        }
-	}
+  	// public function createresultat(){
+  //   $dbh = new PDO(DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+  //   $stmt = $dbh->prepare('INSERT INTO resultat (definition, id_joueur, id_tour) VALUES (:definition, :id_joueur, :id_tour)');
+  //   $stmt->bindParam(':definition', $this->definition);
+  //   $stmt->bindParam(':id_joueur', $this->id_joueur);
+  //   $stmt->bindParam(':id_tour', $this->_ID_TOUR);
+  //   $stmt->execute();
+  //   $this->_ID = $dbh->lastInsertId(); 
+  //   $dbh = null;
+	// }
+
 
 	// permet de créer un json contenant les objets des objets
     public function toArray(){
