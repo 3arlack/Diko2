@@ -52,8 +52,8 @@ Class tours {
   
     $dbh = new PDO(DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
     $stmt = $dbh->prepare('INSERT INTO tours (id_manche, mot_choisi) VALUES (:id_manche, :mot_choisi)');
-    $stmt->bindParam(':id_manche', $this->_ID_MANCHE);
-    $stmt->bindParam(':mot_choisi', $this->mot_choisi);
+    $stmt->bindParam(':id_manche', $this->_ID_MANCHE, PDO::PARAM_INT);
+    $stmt->bindParam(':mot_choisi', $this->mot_choisi, PDO::PARAM_STR);
     $stmt->execute();
     $this->_ID = $dbh->lastInsertId(); //get the last ID
     $dbh = null;
@@ -65,7 +65,7 @@ Class tours {
 
     $dbh = new PDO(DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
     $stmt = $dbh->prepare('SELECT * FROM tours WHERE id_manche = :id_manche');
-    $stmt->bindParam(':id_manche', $this->_ID_MANCHE);
+    $stmt->bindParam(':id_manche', $this->_ID_MANCHE, PDO::PARAM_INT);
     $stmt->execute();
     while ($row = $stmt->fetch()) {
       $singletours = new tours($row['id'], $row['id_manche'], $row['mot_choisi']);
@@ -111,7 +111,7 @@ Class tours {
 
       $dbh = new PDO(DB_NAME, DB_USER, DB_PASS,array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
 			$stmt = $dbh->prepare('SELECT * FROM resultat WHERE id_tour = :id');
-			$stmt->bindParam(':id', $this->_ID);
+			$stmt->bindParam(':id', $this->_ID, PDO::PARAM_INT);
       $stmt->execute();
 
       while ($row = $stmt->fetch()) {
