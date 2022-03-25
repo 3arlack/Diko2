@@ -55,10 +55,6 @@ export class PartieService {
     return this.http.put(this.apiURL+"ws_createPartie.php", partie, this.httpOptions);
   }
 
-  updatePartie(partie:Partie):Observable<any>{
-    return this.http.put(this.apiURL+"ws_updatePartie.php", partie, this.httpOptions);
-  }
-
 
 //TOURS
   createTour(id_partie:number):Observable<any>{
@@ -83,10 +79,6 @@ export class PartieService {
   }
 
 //JOUEURS
-  deleteJoueurs(joueurs:Array<Joueur>):Observable<any>{
-    return this.http.put(this.apiURL+"ws_deleteJoueurs.php", joueurs ,this.httpOptions)
-  }
-
   updateJoueur(nomDuJoueur:string,idJoueur:number):Observable<any>{
     return this.http.post(this.apiURL+"ws_updateJoueur.php", "nomDuJoueur="+nomDuJoueur+"&&idJoueur="+idJoueur,this.httpOptions2)
   }

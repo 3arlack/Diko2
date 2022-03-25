@@ -15,16 +15,12 @@ require_once("../classes/class_parties.php");
   foreach($partie->getmanche() as $i => $manche){ // loop on rounds (manches)...
 
     for ($j=0 ; $j<$nbDeJoueurs ; $j++){ // as many as players conneted ...
-
-      //... we create a instance of "tours" (set), with the round ID and we choose a word (with the randomWord function)
-      $tour = new tours(0,$manche->get_ID(),tours::randomWord(),[]); 
+      $tour = new tours(0,$manche->get_ID(),tours::randomWord(),[]); //... we create a instance of "tours" (set), with the round ID and we choose a word (with the randomWord function)
       $tour->createtours(); // we create the set in DB
       $arrayResultat = array(); //we initialize an array of "Resultat"
 
       for ($r =0; $r<$nbDeJoueurs ; $r++){//as many as players connected in the current set ...
-
-        //... we create an instance of "resultat" with an empty definition, a player ID, and the current set ID
-        $resultat = new resultat(0,"",$r,$tour->get_ID()); 
+        $resultat = new resultat(0,"",$r,$tour->get_ID()); //... we create an instance of "resultat" with an empty definition, a player ID, and the current set ID
         array_push($arrayResultat,$resultat);//we push the resultat in the array
       }
       

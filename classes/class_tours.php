@@ -8,7 +8,7 @@ Class tours {
 	private $mot_choisi;
   private $resultat;
 
-	//S'appelle automatiquement à la création d'instance
+
     function __construct($ID, $ID_MANCHE, $MOT_CHOISI){
 		$this->_ID = $ID;
 		$this->_ID_MANCHE = $ID_MANCHE;
@@ -49,46 +49,33 @@ Class tours {
 	}
 
 	public function createtours(){
-
-    // 127.0.0.1 est l'adresse ip locale du serveur (le fichier php étant exécuté sur le serveur, l'adresse du serveur est donc l'adresse locale)
-    try {
-      // connexion à la base de donnée
-      $dbh = new PDO(DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
-			$stmt = $dbh->prepare('INSERT INTO tours (id_manche, mot_choisi) VALUES (:id_manche, :mot_choisi)');
-			$stmt->bindParam(':id_manche', $this->_ID_MANCHE);
-			$stmt->bindParam(':mot_choisi', $this->mot_choisi);
-			$stmt->execute();//ferme la connexion à la base
-      $this->_ID = $dbh->lastInsertId(); // récupère l'id de la partie créée
-      $dbh = null;
-    } catch (PDOException $e) {
-      print 'Erreur !: ' . $e->getMessage() . '<br/>';
-      die();
-    }
+  
+    $dbh = new PDO(DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+    $stmt = $dbh->prepare('INSERT INTO tours (id_manche, mot_choisi) VALUES (:id_manche, :mot_choisi)');
+    $stmt->bindParam(':id_manche', $this->_ID_MANCHE);
+    $stmt->bindParam(':mot_choisi', $this->mot_choisi);
+    $stmt->execute();
+    $this->_ID = $dbh->lastInsertId(); //get the last ID
+    $dbh = null;
+   
 	}
 
 	public function readtours(){
     $liste_tours = array();
 
-    // 127.0.0.1 est l'adresse ip locale du serveur (le fichier php étant exécuté sur le serveur, l'adresse du serveur est donc l'adresse locale)
-    try {
-      // connexion à la base de donnée
-      $dbh = new PDO(DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
-			$stmt = $dbh->prepare('SELECT * FROM tours WHERE id_manche = :id_manche');
-			$stmt->bindParam(':id_manche', $this->_ID_MANCHE);
-			$stmt->execute();
-      while ($row = $stmt->fetch()) {
-        $singletours = new tours($row['id'], $row['id_manche'], $row['mot_choisi']);//ferme la connexion à la base
-        array_push($liste_tours, $singletours);
-      }
-      $dbh = null;
-    } catch (PDOException $e) {
-      print 'Erreur !: ' . $e->getMessage() . '<br/>';
-      die();
+    $dbh = new PDO(DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+    $stmt = $dbh->prepare('SELECT * FROM tours WHERE id_manche = :id_manche');
+    $stmt->bindParam(':id_manche', $this->_ID_MANCHE);
+    $stmt->execute();
+    while ($row = $stmt->fetch()) {
+      $singletours = new tours($row['id'], $row['id_manche'], $row['mot_choisi']);
+      array_push($liste_tours, $singletours);
     }
+    $dbh = null;
+
     $monTab = array();
     $i = 0;   
 
-    // on transforme l'objet en tableau (récursif sur les objets)
     foreach($liste_tours as $tour){
       $array = $tour->toArray($tour);
       $monTab[$i] = $array;
@@ -97,68 +84,46 @@ Class tours {
 
     $monJSON = json_encode($monTab);
     return $monJSON;
-		}
-
-	public function updatetours(){
-
-        // 127.0.0.1 est l'adresse ip locale du serveur (le fichier php étant exécuté sur le serveur, l'adresse du serveur est donc l'adresse locale)
-        try {
-            // connexion à la base de donnée
-            $dbh = new PDO(DB_NAME, DB_USER, DB_PASS,array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
-			$stmt = $dbh->prepare('UPDATE tours SET id_manche = :id_manche, mot_choisi = :mot_choisi WHERE id = :id');
-			$stmt->bindParam(':id', $this->_ID);
-			$stmt->bindParam(':id_manche', $this->_ID_MANCHE);
-			$stmt->bindParam(':mot_choisi', $this->mot_choisi);
-			$stmt->execute();//ferme la connexion à la base
-            $dbh = null;
-        } catch (PDOException $e) {
-            print 'Erreur !: ' . $e->getMessage() . '<br/>';
-            die();
-        }
 	}
 
-	public function deletetours(){
 
-        // 127.0.0.1 est l'adresse ip locale du serveur (le fichier php étant exécuté sur le serveur, l'adresse du serveur est donc l'adresse locale)
-        try {
-            // connexion à la base de donnée
-            $dbh = new PDO(DB_NAME, DB_USER, DB_PASS,array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
-			$stmt = $dbh->prepare('DELETE FROM tours WHERE id = :id');
-			$stmt->bindParam(':id', $this->_ID);
-			$stmt->execute();//ferme la connexion à la base
-            $dbh = null;
-        } catch (PDOException $e) {
-            print 'Erreur !: ' . $e->getMessage() . '<br/>';
-            die();
-        }
-	}
+
+	// public function updatetours(){
+  //   $dbh = new PDO(DB_NAME, DB_USER, DB_PASS,array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+  //   $stmt = $dbh->prepare('UPDATE tours SET id_manche = :id_manche, mot_choisi = :mot_choisi WHERE id = :id');
+  //   $stmt->bindParam(':id', $this->_ID);
+  //   $stmt->bindParam(':id_manche', $this->_ID_MANCHE);
+  //   $stmt->bindParam(':mot_choisi', $this->mot_choisi);
+  //   $stmt->execute();//ferme la connexion à la base
+  //   $dbh = null;
+	// }
+
+	// public function deletetours(){
+  //   $dbh = new PDO(DB_NAME, DB_USER, DB_PASS,array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+  //   $stmt = $dbh->prepare('DELETE FROM tours WHERE id = :id');
+  //   $stmt->bindParam(':id', $this->_ID);
+  //   $stmt->execute();//ferme la connexion à la base
+  //   $dbh = null;
+	// }
 
   function getResultats(){
     $temp = array();
 
-    // 127.0.0.1 est l'adresse ip locale du serveur (le fichier php étant exécuté sur le serveur, l'adresse du serveur est donc l'adresse locale)
-    try {
-    // connexion à la base de donnée
       $dbh = new PDO(DB_NAME, DB_USER, DB_PASS,array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
 			$stmt = $dbh->prepare('SELECT * FROM resultat WHERE id_tour = :id');
 			$stmt->bindParam(':id', $this->_ID);
       $stmt->execute();
 
       while ($row = $stmt->fetch()) {
-        $singleResultat = new resultat($row['id'], $row['definition'], $row['id_joueur'], $row['id_tour']);//ferme la connexion à la base
+        $singleResultat = new resultat($row['id'], $row['definition'], $row['id_joueur'], $row['id_tour']);
         array_push($temp, $singleResultat);
       }
-      //ferme la connexion à la base
-      $dbh = null;
-    } catch (PDOException $e) {
-      print 'Erreur !: ' . $e->getMessage() . '<br/>';
-      // die();
-    }
 
+      $dbh = null;
     return $temp;
   }
 
-
+  //get a random word from our json of word 
   public static function randomWord(){
     $data = file_get_contents('mots_rares.json');
     $data = json_decode($data);
@@ -180,8 +145,6 @@ Class tours {
 
 
 
-  
-	// permet de créer un json contenant les objets des objets
     public function toArray(){
         $array = get_object_vars($this);
         unset($array['_parent'], $array['_index']);

@@ -48,7 +48,7 @@ export class A2_LobbyPage implements OnInit {
         message:"Etes-vous sûr de vouloir lancer la partie avec les joueurs actuellement connectés ?",
         buttons:[
           {text:"J'annule et j'attends",handler:()=>{}}, //he can choose to cancel and wait ...
-          {text:'Je confirme',handler:()=>{this.OK()}} // or to confirm and start the game -> go to OK()
+          {text:'Je confirme',handler:()=>{this.launchPartie()}} // or to confirm and start the game -> go to OK()
         ]
       }).then( res=>{
         res.present();
@@ -56,8 +56,8 @@ export class A2_LobbyPage implements OnInit {
     }
   }
 
-  OK(){
-    this.service.createTour(this.service.partieEnCours).subscribe(() => { //Retreive current game from DB
+  launchPartie(){
+    this.service.createTour(this.service.partieEnCours).subscribe(() => { //creation of set and resultat for the current game
       this.router.navigate(['current-manche-online']);
       // //we can delete the players without name in the DB, then go to the current-manche-online page.
     });
@@ -77,11 +77,13 @@ export class A2_LobbyPage implements OnInit {
             this.button.disabled = false; //the button is disabled
           }
           if(this.votes == this.joueurs.length){//when all the players expected are connected ...
-            this.OK(); //-> go to OK()
+            this.launchPartie(); //-> go to launchPartie()
           } else {
             this.waitingPlayers(service,router,chips);//else, the current player have to wait ...
           }
         });
     },1000);
   };
+
+
 }
