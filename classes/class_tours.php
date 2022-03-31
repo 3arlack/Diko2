@@ -9,10 +9,10 @@ Class tours {
   private $resultat;
 
 
-    function __construct($ID, $ID_MANCHE, $MOT_CHOISI){
-		$this->_ID = $ID;
-		$this->_ID_MANCHE = $ID_MANCHE;
-		$this->mot_choisi = $MOT_CHOISI;
+  function __construct($ID, $ID_MANCHE, $MOT_CHOISI){
+    $this->_ID = $ID;
+    $this->_ID_MANCHE = $ID_MANCHE;
+    $this->mot_choisi = $MOT_CHOISI;
     $this->resultat = $this->getResultats();
 	}
 
@@ -55,7 +55,7 @@ Class tours {
     $stmt->bindParam(':id_manche', $this->_ID_MANCHE, PDO::PARAM_INT);
     $stmt->bindParam(':mot_choisi', $this->mot_choisi, PDO::PARAM_STR);
     $stmt->execute();
-    $this->_ID = $dbh->lastInsertId(); //get the last ID
+    $this->_ID = $dbh->lastInsertId(); 
     $dbh = null;
   
 	}
