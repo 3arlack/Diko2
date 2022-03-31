@@ -128,7 +128,7 @@ Class tours {
     $data = file_get_contents('mots_rares.json');
     $data = json_decode($data);
 
-    $randomIndex = rand(0,count($data->data));
+    $randomIndex = rand(0,count($data->data)-1);
 
     return $data->data[$randomIndex]->word;
   }

@@ -12,10 +12,26 @@ require_once("../classes/class_parties.php");
   $partie = new parties($_POST['id_partie'],0,0);//we initialize a Game instance with the current id_partie
   $nbDeJoueurs = count(array_filter($partie->getjoueur(),"filtre")); //number of players conneted (name is not null)
 
-  foreach($partie->getmanche() as $i => $manche){ // loop on rounds (manches)...
+	$randomWords = array();
 
-    for ($j=0 ; $j<$nbDeJoueurs ; $j++){ // as many as players conneted ...
+  foreach($partie->getmanche() as $manche){ // loop on rounds (manches)...
+
+    for ($j=0 ; $j<$nbDeJoueurs ; $j++){ // as many as players connected ...
       $tour = new tours(0,$manche->get_ID(),tours::randomWord(),[]); //... we create a instance of "tours" (set), with the round ID and we choose a word (with the randomWord function)
+
+			if(count($randomWords) > 1 ){
+				loop:
+				foreach($randomWords as $word){
+					if($word == $tour->getmot_choisi()){
+						$tour->setmot_choisi(tours::randomWord());
+						goto loop;
+					}
+				}
+				array_push($randomWords, $tour->getmot_choisi());
+			} else {
+				array_push($randomWords, $tour->getmot_choisi());
+			}
+
       $tour->createtours(); // we create the set in DB
       $arrayResultat = array(); //we initialize an array of "Resultat"
 
