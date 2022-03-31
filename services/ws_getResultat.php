@@ -8,8 +8,10 @@ error_reporting(E_ALL); // affiche toutes les erreurs
 require_once("../classes/class_resultat.php");
 
 // Creates a new resultat object with POSTed input data
+// print_r($_POST);
 $resultat = new resultat(0, "", $_POST["id_joueur"], $_POST["id_tour"]);
 // Sends back result
+// print_r($resultat);
 echo($resultat->readresultat());
 
 ?>

@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { OfflineService } from '../services/offline.service'; // import service
-import { ModalController } from '@ionic/angular'; // import ModalController 
+import { AlertController, IonButton, IonChip, ModalController } from '@ionic/angular'; // import ModalController 
 
 //import classes
 import { Resultat } from '../classes/resultat';
 import { Joueur } from '../classes/joueur';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-propositions',
@@ -13,13 +14,16 @@ import { Joueur } from '../classes/joueur';
 })
 export class C6_PropositionsPage implements OnInit {
 
-    mot:string;
-    resultats:Array<Resultat>;
-    idMj:number;
-    joueurs:Array<Joueur>;
+	@ViewChildren(IonChip) chips:QueryList<IonChip>;
+	@ViewChild('button') button:IonButton;
 
-  constructor(private ModalController:ModalController, private service:OfflineService) {
-      this.joueurs = this.service.joueurs; // retrieve players
+	mot:string;
+	resultats:Array<Resultat>;
+	idMj:number;
+	joueurs:Array<Joueur>;
+
+  constructor(private ModalController:ModalController, private service:OfflineService, private router:Router, private alert:AlertController) {
+		this.joueurs = this.service.joueurs; // retrieve players
   } //inject service and modalController
 
   ngOnInit() {
@@ -34,14 +38,22 @@ export class C6_PropositionsPage implements OnInit {
 
     // Loop to find resultat of id_mj and insert real definition instead
     for (let i=0;i<this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].resultat.length;i++){
-        if (this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].resultat[i].id_joueur == this.idMj){
-            this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].resultat[i].definition = this.service.definition;
-        }
+			if (this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].resultat[i].id_joueur == this.idMj){
+				this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].resultat[i].definition = this.service.definition;
+			}
     }
   }
 
   // dismiss Modal
-  dismiss(){
+  dismiss():void{
     this.ModalController.dismiss();
   }
+
+	ionViewWillEnter(){
+		if (this.chips.length == this.joueurs.length-1){
+			this.button.disabled = false;
+		} else {
+			this.button.disabled = true;
+		}
+	}
 }

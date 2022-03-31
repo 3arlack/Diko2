@@ -1,7 +1,7 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'; // import ActiveRoute
 import { OfflineService } from '../services/offline.service'; // import service
-import { IonChip } from '@ionic/angular';
+import { IonChip, NavController } from '@ionic/angular';
 
 //import classes
 import { Joueur } from '../classes/joueur';
@@ -22,7 +22,7 @@ export class C7_VoteJoueurPage implements OnInit {
   //View Children Decorator : retrieve all IonChip Elements as a QueryList (looks like an array)
   @ViewChildren(IonChip) chips:QueryList<HTMLIonChipElement>;
 
-  constructor(private route:ActivatedRoute, private service:OfflineService) { // inject service, and ActivatedRoute to retrieve Route queryparams
+  constructor(private route:ActivatedRoute, private service:OfflineService, private NavCtrl:NavController) { // inject service, and ActivatedRoute to retrieve Route queryparams
 
     // retrieve Game Master ID (MJ)
     this.idMj = this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].id_mj;
@@ -35,7 +35,7 @@ export class C7_VoteJoueurPage implements OnInit {
 
       //retrieve word definition
       this.definition = this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].resultat[this.indexDefinition].definition;
-      })
+		})
   }
 
   ngOnInit() {
@@ -86,4 +86,8 @@ export class C7_VoteJoueurPage implements OnInit {
       this.chips.get(id_joueur).color = "success"; // sets color on chip
     }
   }
+
+	goBack():void{
+		this.NavCtrl.back();
+	}
 }

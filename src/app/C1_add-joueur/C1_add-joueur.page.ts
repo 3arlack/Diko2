@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Router } from '@angular/router';
+import { AlertController, IonInput } from '@ionic/angular';
 import { Joueur } from '../classes/joueur';
 import { OfflineService } from '../services/offline.service'; //import our offline data service
 
@@ -9,9 +11,11 @@ import { OfflineService } from '../services/offline.service'; //import our offli
 })
 export class C1_AddJoueurPage implements OnInit {
 
-    tableauJoueurs:Array<string>=[]; //local array of player names
+	@ViewChildren(IonInput) playerNames:QueryList<IonInput>;
 
-  constructor(private service:OfflineService) { } //inject the service
+	tableauJoueurs:Array<string>=[]; //local array of player names
+
+  constructor(private service:OfflineService, private alert:AlertController, private router:Router) { } //inject the service
 
   ngOnInit() {
   }
@@ -27,10 +31,30 @@ export class C1_AddJoueurPage implements OnInit {
 
   // When user clicks OK, add each player name to the "joueurs" Array in the service
   OK(){
-      this.service.joueurs.length=0;
-      for(let i=0;i<this.tableauJoueurs.length;i++){
-        this.service.joueurs.push(new Joueur(i,(<HTMLInputElement>document.getElementById("Joueur"+i)).value,0,""));
-    }
-  }
+    if (this.checkInput(this.playerNames) == false){
+      this.alert.create({
+        header:"Erreur",
+        message:"Merci de saisir tous les noms de joueurs !",
+        buttons:['OK']
+      }).then( res=>{
+        res.present();
+      })
+    } else {
+			this.service.joueurs.length=0;
+			let index = 0;
+			for(let input of this.playerNames){ // for/of = forEach 'input' 
+				this.service.joueurs.push(new Joueur(index,String(input.value),0,""));
+				index++;
+			}
+			this.router.navigate(['add-manche']);
+		}
+	}
 
+	checkInput(listOfInputs:QueryList<IonInput>):boolean{
+		for (let input of listOfInputs){
+			if (input.value == ""){
+				return false;
+			}
+		}
+	}
 }

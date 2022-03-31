@@ -57,7 +57,7 @@ Class tours {
     $stmt->execute();
     $this->_ID = $dbh->lastInsertId(); //get the last ID
     $dbh = null;
-   
+  
 	}
 
 	public function readtours(){

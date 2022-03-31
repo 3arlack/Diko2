@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OfflineService } from '../services/offline.service'; //import service
-import { ModalController } from '@ionic/angular'; //import modalController
+import { AlertController, ModalController } from '@ionic/angular'; //import modalController
 import { Router } from '@angular/router'; // import Router
 import { Joueur } from '../classes/joueur'; // import Joueur class
 
@@ -17,7 +17,7 @@ export class C5_DefinitionJoueurPage implements OnInit {
     indexJoueur:number=0;
 
   // inject service, ModalController (to dismiss modals) and router (to navigate to new route at the end)
-  constructor(private service:OfflineService, public modalController:ModalController, private router: Router) { }
+  constructor(private service:OfflineService, public modalController:ModalController, private router: Router, private alert:AlertController) { }
 
   ngOnInit() {
     // Retrieve current word from service
@@ -30,21 +30,31 @@ export class C5_DefinitionJoueurPage implements OnInit {
 
   //on dismiss Modal
   dismiss(index:any){
-    this.indexJoueur++; // increment indexJoueur
-    // We retrieve current player's definition and put it in the service
-    this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].resultat[index].definition = (<HTMLIonTextareaElement>document.getElementById("definition"+index)).value;
+    if ((<HTMLIonTextareaElement>document.getElementById("definition"+index)).value == ""){
+      this.alert.create({
+        header:"Erreur",
+        message:"Merci de saisir une définition !",
+        buttons:['OK']
+      }).then( res=>{
+        res.present();
+      })
+    } else {
+			this.indexJoueur++; // increment indexJoueur
+			// We retrieve current player's definition and put it in the service
+			this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].resultat[index].definition = (<HTMLIonTextareaElement>document.getElementById("definition"+index)).value;
 
-    // Also retrieve player's id
-    this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].resultat[index].id_joueur = 
-    this.joueurs[index].id_joueur;
-    
-    //Check : if we get to the last modal, we navigate to next page and dismiss modal ; else, just dismiss current modal.
-    if(this.indexJoueur == this.joueurs.length -1){
-      this.indexJoueur = 0;
-      this.router.navigate(['/','propositions']);
-      this.modalController.dismiss();
-    } else{
-      this.modalController.dismiss();
-    }
-  }
+			// Also retrieve player's id
+			this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].resultat[index].id_joueur = 
+			this.joueurs[index].id_joueur;
+			
+			//Check : if we get to the last modal, we navigate to next page and dismiss modal ; else, just dismiss current modal.
+			if(this.indexJoueur == this.joueurs.length -1){
+				this.indexJoueur = 0;
+				this.router.navigate(['/','propositions']);
+				this.modalController.dismiss();
+			} else {
+				this.modalController.dismiss();
+			}
+		}
+	}
 }

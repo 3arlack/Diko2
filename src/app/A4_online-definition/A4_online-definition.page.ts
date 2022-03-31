@@ -54,9 +54,12 @@ export class A4_OnlineDefinitionPage implements OnInit {
 
       // A OPTIMISER ??
       this.service.getPartie(this.partie).subscribe(u => {
+        console.log(u);
         this.service.getTour(u.manche[this.service.mancheEnCours]._ID).subscribe(tableauTours=>{
+          console.log(tableauTours);
           let idTour = tableauTours[this.service.tourEnCours]._ID; 
           this.service.getResultat(idTour,this.service.joueurEnCours).subscribe(idResultat => {
+            console.log(idResultat);
             this.service.updateResultat(idResultat,this.definition.value).subscribe(()=>{
               this.router.navigate(['loading'], {queryParams: {status:"definitionOK"}})
             });
