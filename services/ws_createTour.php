@@ -20,17 +20,30 @@ require_once("../classes/class_parties.php");
       $tour = new tours(0,$manche->get_ID(),tours::randomWord(),[]); //... we create a instance of "tours" (set), with the round ID and we choose a word (with the randomWord function)
 
 			if(count($randomWords) > 1 ){
-				loop:
-				foreach($randomWords as $word){
-					if($word == $tour->getmot_choisi()){
+				for ($index = 0 ; $index < count($randomWords);$index++){
+					if($randomWords[$index] == $tour->getmot_choisi()){
 						$tour->setmot_choisi(tours::randomWord());
-						goto loop;
+						$index = -1;
 					}
 				}
 				array_push($randomWords, $tour->getmot_choisi());
 			} else {
 				array_push($randomWords, $tour->getmot_choisi());
 			}
+	
+
+			// if(count($randomWords) > 1 ){
+			// 	loop:
+			// 	foreach($randomWords as $word){
+			// 		if($word == $tour->getmot_choisi()){
+			// 			$tour->setmot_choisi(tours::randomWord());
+			// 			goto loop;
+			// 		}
+			// 	}
+			// 	array_push($randomWords, $tour->getmot_choisi());
+			// } else {
+			// 	array_push($randomWords, $tour->getmot_choisi());
+			// }
 
       $tour->createtours(); // we create the set in DB
       $arrayResultat = array(); //we initialize an array of "Resultat"
