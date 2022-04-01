@@ -12,23 +12,24 @@ require_once("../classes/class_parties.php");
   $partie = new parties($_POST['id_partie'],0,0);//we initialize a Game instance with the current id_partie
   $nbDeJoueurs = count(array_filter($partie->getjoueur(),"filtre")); //number of players conneted (name is not null)
 
-	$randomWords = array();
+	$randomWords = array(); //initialize a new array, i'll push all the chosen words in the set creation loop.
 
   foreach($partie->getmanche() as $manche){ // loop on rounds (manches)...
 
     for ($j=0 ; $j<$nbDeJoueurs ; $j++){ // as many as players connected ...
       $tour = new tours(0,$manche->get_ID(),tours::randomWord(),[]); //... we create a instance of "tours" (set), with the round ID and we choose a word (with the randomWord function)
 
-			if(count($randomWords) > 1 ){
-				for ($index = 0 ; $index < count($randomWords);$index++){
-					if($randomWords[$index] == $tour->getmot_choisi()){
-						$tour->setmot_choisi(tours::randomWord());
+      //to verify that every choosen word is unique in the same game
+			if(count($randomWords) > 1 ){ //if i've only one word in my array, it's not necessary to verify. In the other case...
+				for ($index = 0 ; $index < count($randomWords);$index++){// loop on randomWord array
+					if($randomWords[$index] == $tour->getmot_choisi()){ //if the word is the same as the one chosen when i instantiated the set earlier..
+						$tour->setmot_choisi(tours::randomWord());//i choose a new randomWord
 						$index = -1;
 					}
 				}
-				array_push($randomWords, $tour->getmot_choisi());
+				array_push($randomWords, $tour->getmot_choisi());//i push the choosen word in the randomWord array to verify each time we choose a new word for a new set
 			} else {
-				array_push($randomWords, $tour->getmot_choisi());
+				array_push($randomWords, $tour->getmot_choisi());//i push the first word choosen in the randomWord array
 			}
 	
 
