@@ -1,36 +1,36 @@
 <ion-content>
-	<ion-grid>
-		<ion-row>
-			<ion-col>
-				<h1>Propositions</h1>
-			</ion-col>
-		</ion-row>
-		<ion-row>
-			<ion-col>
-				<h2>{{mot}}</h2>
-			</ion-col>
-		</ion-row>
-		<ion-row>
-			<ion-col>
-				<p>Clique sur les définitions pour les lire et récolte les votes des joueurs !</p>
-			</ion-col>
-		</ion-row>
-		<!-- for every entry in current Tour's resultats, we create a line so we can enter votes -->
-		<ion-row *ngFor="let resultat of resultats; let index = index" routerLink="/vote-joueur" [queryParams]="{ indexDefinition : [index]}" >
-			<ion-col>
-				<h4>Définition n°{{index+1}}</h4>
-			</ion-col>
-			<ion-col *ngFor="let vote of resultat.id_vote">
-				<ion-chip>
-					<ion-avatar>
-						<img src="../../assets/avatarexemple.jpg">
-					</ion-avatar>
-					<ion-label>
-						{{joueurs[vote].nom_joueur}}
-					</ion-label>
-				</ion-chip>
-			</ion-col>
-		</ion-row>
+	<ion-grid class="custom_propositions">
+			<ion-row>
+					<ion-col>
+							<h1>PROPOSITIONS</h1>
+					</ion-col>
+			</ion-row>
+			<ion-row>
+					<ion-col>
+							<h2>{{mot}}</h2>
+					</ion-col>
+			</ion-row>
+			<ion-row>
+					<ion-col>
+							<p>Clique sur les définitions pour les lire et récolte les votes des joueurs !</p>
+					</ion-col>
+			</ion-row>
+			<!-- for every entry in current Tour's resultats, we create a line so we can enter votes -->
+			<ion-row *ngFor="let resultat of resultats; let index = index" routerLink="/vote-joueur" [queryParams]="{ indexDefinition : [index]}" >
+					<ion-col>
+							<h4>Définition n°{{index+1}}</h4>
+					</ion-col>
+					<ion-col *ngFor="let vote of resultat.id_vote">
+							<ion-chip>
+									<ion-avatar>
+											<img src="../../assets/avatarexemple.jpg">
+									</ion-avatar>
+									<ion-label>
+											{{joueurs[vote].nom_joueur}}
+									</ion-label>
+							</ion-chip>
+					</ion-col>
+			</ion-row>
 
 		<ion-row>
 			<ion-col>

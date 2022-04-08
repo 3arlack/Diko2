@@ -51,3 +51,51 @@ h2 {
 	height:100%;
 	clip-path: ellipse(16vh 6vw);
 }
+.custom_propositions{
+    background:linear-gradient(190deg, #F68F59 20%, #384AF0 0%);
+    height: 100%;
+}
+
+.custom_propositions h1{
+    font-size: 40px;
+    text-align: center;
+    text-shadow: 1px 4px 3px rgba(0,0,0,0.46);
+    color:white;
+    font-weight: bold;
+}
+
+.custom_propositions h2{
+    font-size: 35px;
+    text-align: right;
+    margin-right: 20px;
+    // text-shadow: 1px 4px 3px rgba(0,0,0,0.46);
+    font-family:"Rancho";
+}
+
+.custom_propositions p{
+    font-size: 20px;
+    text-align: center;
+    margin-top: 10px;
+    color:white;
+}
+
+.custom_propositions h4{
+    font-size: 35px;
+    text-align: left;
+    font-family:"Rancho";
+    color:white;
+    margin: 20px;
+}
+
+ion-button{
+    float: right;
+    --border-radius: 19px;
+    --box-shadow: 1px 1px 3px #635c63;
+    font-size: 24px;
+    --background: #F68F59;
+    --background-activated:#f66f26;
+
+}
+
+
+
