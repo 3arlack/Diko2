@@ -29,7 +29,8 @@ export class C5_DefinitionJoueurPage implements OnInit {
   }
 
   //on dismiss Modal
-  dismiss(index:any){
+  dismiss(index:number){
+		// debugger;
     if ((<HTMLIonTextareaElement>document.getElementById("definition"+index)).value == ""){
       this.alert.create({
         header:"Erreur",
@@ -41,20 +42,28 @@ export class C5_DefinitionJoueurPage implements OnInit {
     } else {
 			this.indexJoueur++; // increment indexJoueur
 			// We retrieve current player's definition and put it in the service
-			this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].resultat[index].definition = (<HTMLIonTextareaElement>document.getElementById("definition"+index)).value;
+			for (let b=0;b<this.joueurs.length;b++){
+				if (this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].resultat[b].id_joueur == index){
+					this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].resultat[b].definition = (<HTMLIonTextareaElement>document.getElementById("definition"+index)).value;
+				}
+			}
 
 			// Also retrieve player's id
-			this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].resultat[index].id_joueur = 
-			this.joueurs[index].id_joueur;
+			// this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].resultat[index].id_joueur = 
+			// this.joueurs[index].id_joueur;
 			
 			//Check : if we get to the last modal, we navigate to next page and dismiss modal ; else, just dismiss current modal.
 			if(this.indexJoueur == this.joueurs.length -1){
 				this.indexJoueur = 0;
-				this.router.navigate(['/','propositions']);
+				this.router.navigate(['propositions']);
 				this.modalController.dismiss();
 			} else {
 				this.modalController.dismiss();
 			}
 		}
+	}
+
+	ionViewWillEnter(){
+		console.log(this.service.manches);
 	}
 }

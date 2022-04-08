@@ -51,9 +51,9 @@ h2 {
 	height:100%;
 	clip-path: ellipse(16vh 6vw);
 }
-.custom_propositions{
-    background:linear-gradient(190deg, #F68F59 20%, #384AF0 0%);
-    height: 100%;
+
+ion-content {
+	--background:linear-gradient(190deg, #F68F59 20%, #384AF0 0%);
 }
 
 .custom_propositions h1{

@@ -23,7 +23,6 @@ export class C4_SelectMjPage implements OnInit {
   ionViewWillEnter(){
     // retrieves values from service : current tour, id_mj to know who's the game master, its name...
     this.tourEnCours = this.service.toursEnCours;
-    console.log(this.service.manches);
     this.idMJ = this.service.manches[this.service.mancheEnCours].tours[this.tourEnCours].id_mj;
     this.nomMJ = this.service.joueurs[this.idMJ].nom_joueur;
     // We also search randomly for a word in db
@@ -42,7 +41,6 @@ export class C4_SelectMjPage implements OnInit {
 
   // Dismiss modal
   dismiss(){
-      console.log(this.service.joueurs);
     this.modalController.dismiss(); //Calls dismiss method from ModalController
   }
 }

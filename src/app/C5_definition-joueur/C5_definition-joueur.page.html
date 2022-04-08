@@ -1,38 +1,38 @@
 <ion-content>
 	<!-- We create a modal for every player, so player can input its definition. They're displayed on top of each other and so hide each other. -->
-	<ng-container *ngFor="let joueur of joueurs;let index = index">
+	<ng-container *ngFor="let joueur of joueurs ; let indexElement = index">
 		<!-- Only create element if player is NOT MJ -->
 		<ion-modal *ngIf="idMj!=joueur.id_joueur"
 		[swipeToClose]="false"
 		[isOpen]="true"
 		>
-		<ng-template>
-			<h1 class="ion-text-center" id="{{joueur.id_joueur}}">{{joueur.nom_joueur}}</h1>
-			<ion-grid fixed="true">
-				<ion-row class="ion-justify-content-center">
-					<ion-col class="ion-text-center" size="12">
-						<!--the word-->
-						<h2>{{mot}}</h2>
-					</ion-col>
-				</ion-row>
-				<ion-row class="ion-justify-content-center">
-					<ion-col class="ion-text-center" size="12">
-						<p>Quelle est ta définition ?</p>
-					</ion-col>
-				</ion-row>
-				<ion-row class="ion-justify-content-center">
-					<ion-col size="12">
-						<!--input to enter the definition-->
-						<ion-textarea rows="8" id="{{'definition' + index}}" inputmode="text"></ion-textarea>
-					</ion-col>
-				</ion-row>
-				<ion-row class="ion-justify-content-center">
-					<ion-col class="ion-text-center" size="12">
-						<ion-button (click)="dismiss(index)">Valider</ion-button>
-					</ion-col>
-				</ion-row>
-			</ion-grid>
-		</ng-template>
+			<ng-template>
+				<h1 class="ion-text-center" id="{{joueur.id_joueur}}">{{joueur.nom_joueur}}</h1>
+				<ion-grid fixed="true">
+					<ion-row class="ion-justify-content-center">
+						<ion-col class="ion-text-center" size="12">
+							<!--the word-->
+							<h2>{{mot}}</h2>
+						</ion-col>
+					</ion-row>
+					<ion-row class="ion-justify-content-center">
+						<ion-col class="ion-text-center" size="12">
+							<p>Quelle est ta définition ?</p>
+						</ion-col>
+					</ion-row>
+					<ion-row class="ion-justify-content-center">
+						<ion-col size="12">
+							<!--input to enter the definition-->
+							<ion-textarea rows="8" id="{{'definition' + indexElement}}" inputmode="text"></ion-textarea>
+						</ion-col>
+					</ion-row>
+					<ion-row class="ion-justify-content-center">
+						<ion-col class="ion-text-center" size="12">
+							<ion-button (click)="dismiss(indexElement)">Valider</ion-button>
+						</ion-col>
+					</ion-row>
+				</ion-grid>
+			</ng-template>
 		</ion-modal>
 	</ng-container>
 </ion-content>

@@ -1,11 +1,10 @@
 import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { OfflineService } from '../services/offline.service'; // import service
-import { AlertController, IonButton, IonChip, ModalController } from '@ionic/angular'; // import ModalController 
+import { IonButton, IonChip, ModalController } from '@ionic/angular'; // import ModalController 
 
 //import classes
 import { Resultat } from '../classes/resultat';
 import { Joueur } from '../classes/joueur';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-propositions',
@@ -22,7 +21,7 @@ export class C6_PropositionsPage implements OnInit {
 	idMj:number;
 	joueurs:Array<Joueur>;
 
-  constructor(private ModalController:ModalController, private service:OfflineService, private router:Router, private alert:AlertController) {
+  constructor(private ModalController:ModalController, private service:OfflineService) {
 		this.joueurs = this.service.joueurs; // retrieve players
   } //inject service and modalController
 
@@ -35,6 +34,8 @@ export class C6_PropositionsPage implements OnInit {
 
     // Also retrieve the "resultats" Array, containing each player's definition
     this.resultats = this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].resultat
+		console.log(this.joueurs);
+		console.log(this.resultats);
 
     // Loop to find resultat of id_mj and insert real definition instead
     for (let i=0;i<this.service.manches[this.service.mancheEnCours].tours[this.service.toursEnCours].resultat.length;i++){

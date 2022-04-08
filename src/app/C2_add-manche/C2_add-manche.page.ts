@@ -42,6 +42,7 @@ export class C2_AddManchePage implements OnInit {
     for (let y=0;y<value;y++){ //puts the rounds in the service !
 			this.service.manches.push(new Manche(JSON.parse(JSON.stringify(tours)))); // JSON Parse & stringify : solution to do a deep copy of source array
     }
+
   }
 
 }
