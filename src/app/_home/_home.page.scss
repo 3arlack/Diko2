@@ -1,17 +1,3 @@
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
-
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
-}
-
 // modal background
 ion-modal {
 	font-family:"Sansation Bold";
@@ -22,8 +8,9 @@ ion-modal {
 
 // modal buttons
 ion-modal ion-button{
+	margin-top:10vh;
 	text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
-	font-size:9vw;
+	font-size:7vw;
 	--background: transparent;
 	--background-activated: transparent;
 	--background-focused: transparent;
@@ -67,4 +54,8 @@ ion-img{
 	--border-radius:8px;
 	height: 60px;
 	font-weight: bold;
+}
+ion-modal p{
+
+	margin-bottom: 10vh	;
 }
