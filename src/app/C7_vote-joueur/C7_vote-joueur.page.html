@@ -29,10 +29,12 @@
         </ion-chip>
       </ion-col>
     </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-fab>
+        <ion-fab-button (click)="goBack()">
+          <ion-icon name="chevron-back-sharp"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+    </ion-row>
   </ion-grid>
-	<ion-fab>
-		<ion-fab-button (click)="goBack()">
-			<ion-icon name="chevron-back-sharp"></ion-icon>
-		</ion-fab-button>
-	</ion-fab>
 </ion-content>
