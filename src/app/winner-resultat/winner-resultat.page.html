@@ -27,24 +27,9 @@
 	(click)="dismiss()"
 	>
 		<ng-template>
-			<ion-grid>
-				<ion-row class="ion-justify-content-center">
-					<ion-col class="ion-text-center" size="12">
-						<h1>LE GRAND GAGNANT EST</h1>
-					</ion-col>
-				</ion-row>
-				<ion-row class="ion-justify-content-center">
-					<ion-col class="ion-text-center" size="12">
-						<!--name of the winner-->
-						<p>{{winner}}</p>
-					</ion-col>
-				</ion-row>
-				<ion-row class="ion-justify-content-center">
-					<ion-col class="ion-text-center" size="12">
-						<div id="image"></div>
-					</ion-col>
-				</ion-row>
-			</ion-grid>
+			<h1 class="ion-text-center">LE GRAND GAGNANT EST</h1>
+			<p class="ion-text-center">{{winner}}</p>
+			<div class="ion-text-center" id="image"></div>
 		</ng-template>
 	</ion-modal>
 </ion-content>

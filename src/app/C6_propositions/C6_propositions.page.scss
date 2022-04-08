@@ -1,0 +1,53 @@
+ion-modal{
+	--background:var(--orange);
+	color:white;
+}
+
+h1 {
+	font-family: "Sansation Bold";
+	font-size:6vh;
+	text-shadow: 6px 6px 6px rgba(0, 0, 0, 0.25);
+}
+
+h2 {
+	text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+#imgCol{
+	background-image: url("../../assets/annonce.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: 50%;
+	position:relative;
+	width:auto;
+	min-height: 25vh;
+	height:60vh;
+}
+
+//support
+#imgCol::before{
+	display:block;
+	content:'';
+	position:absolute;
+	z-index: -1;
+	bottom:-40%;
+	left:7%;
+	background: white;
+	width: 100%;
+	height:100%;
+	clip-path: ellipse(16vh 6vw);
+}
+
+// shadow
+#imgCol::after{
+	display:block;
+	content:'';
+	position:absolute;
+	z-index: -2;
+	bottom:-41%;
+	left:8%;
+	background: rgba(0,0,0,0.5);
+	width: 100%;
+	height:100%;
+	clip-path: ellipse(16vh 6vw);
+}

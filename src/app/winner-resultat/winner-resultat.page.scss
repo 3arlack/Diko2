@@ -1,7 +1,7 @@
 ion-content {
 	--background: linear-gradient(180deg, var(--blue) 0%, var(--orange) 100%);
 	--color:white;
-	font-size:25px;
+	font-size:5vh;
 }
 
 // modal background
@@ -16,7 +16,7 @@ ion-grid {
 
 h1{
 	font-family:"Sansation Bold";
-	font-size:50px;
+	font-size:7vh;
 	text-shadow: 6px 6px 6px rgba(0, 0, 0, 0.25);
 }
 
@@ -25,13 +25,7 @@ h4{
 }
 
 ion-modal p{
-	font-size:60px;
-}
-
-ion-img{
-	min-height: 30vh;
-	height: 65vh;
-	
+	font-size:6vh;
 }
 
 //image
