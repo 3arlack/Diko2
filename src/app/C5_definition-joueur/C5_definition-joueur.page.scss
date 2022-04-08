@@ -4,20 +4,19 @@ ion-modal {
 
 ion-modal h1 {
 	font-family: "Sansation Bold";
-	font-size:10vh;
+	font-size:8vh;
 	text-shadow: 6px 6px 6px rgba(0, 0, 0, 0.25);
 	color:var(--white);
-	padding-bottom: 6vh;
+	padding-bottom: 5vh;
 }
 
 ion-modal ion-grid {
 	background: rgba(255, 244, 244, 0.95);
 	border: 6px solid var(--orange);
-	// box-sizing: border-box;
+	box-sizing: border-box;
 	box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 	border-radius: 5%;
-	--ion-grid-width:80vw;
-	margin-bottom: 10vh;
+	flex:0 0 0%;
 }
 
 ion-modal ion-textarea {
@@ -41,9 +40,13 @@ ion-modal ion-button {
 
 ion-modal h2{
 	font-family: "Rancho";
-	font-size:8vh;
+	font-size:6vh;
 }
 
 ion-modal p{
-	font-size:6vw;
+	font-size:5vw;
+}
+
+ion-page{
+	display: block;
 }
