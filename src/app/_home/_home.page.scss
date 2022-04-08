@@ -27,5 +27,38 @@
 }
 
 ion-content{
-    --ion-background-color:rgba(12, 35, 242, 0.7);
+	--ion-background-color:rgba(12, 35, 242, 0.7);
+}
+
+// modal background
+ion-modal {
+	font-family:"Sansation Bold";
+	font-size:20px;
+	color:var(--white);
+	--background: linear-gradient(0deg, var(--white) 0%, var(--blue) 100%);
+}
+
+// modal buttons
+ion-modal ion-button{
+	text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+	font-size:39px;
+	--background: transparent;
+	--background-activated: transparent;
+	--background-focused: transparent;
+	--background-hover : transparent;
+	--border-style: transparent;
+	--box-shadow: transparent;
+	--color-hover:rgb(230,230,230);
+}
+
+// Center modal grid content
+ion-grid{
+	height:100%;
+}
+
+ion-row{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
 }

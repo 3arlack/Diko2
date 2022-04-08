@@ -7,11 +7,19 @@
 }
 
 @font-face {
+	font-family: "Sansation Bold";
+	src: url("/assets/Sansation_Bold.ttf");
+}
+
+@font-face {
 	font-family: "Rancho";
 	src: url("/assets/Rancho-Regular.ttf");
 }
 /** Ionic CSS Variables **/
 :root {
+	--white:rgba(255,255,255,1);
+	--blue:#384af0;
+	--orange:#F68F59;
   /** primary **/
 	--ion-font-family: "Sansation";
   --ion-color-primary: #3880ff;
