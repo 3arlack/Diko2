@@ -26,10 +26,6 @@
   text-decoration: none;
 }
 
-ion-content{
-	--ion-background-color:rgba(12, 35, 242, 0.7);
-}
-
 // modal background
 ion-modal {
 	font-family:"Sansation Bold";
@@ -61,4 +57,7 @@ ion-row{
 	align-items: center;
 	justify-content: center;
 	height: 100%;
+}
+* {
+    --ion-background-color:linear-gradient(160deg, #3A4CF0 50%, #F68F59 0%);
 }
