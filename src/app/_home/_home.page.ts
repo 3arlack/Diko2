@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular'; //Import ModalController
+import { HomePageModule } from './_home.module';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +19,4 @@ export class _HomePage {
   dismiss(){
     this.modalController.dismiss(); // Call the dismiss() method of ModalController
   }
-
- 
 }
