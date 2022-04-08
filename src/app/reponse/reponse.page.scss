@@ -1,3 +1,33 @@
 ion-content{
-    background-color : linear-gradient(110deg, #3A4CF0 30%, #F68F59 70%);
+    --ion-background-color:linear-gradient(170deg, #3A4CF0 20%, #F68F59 0%);
+}
+
+ion-content h1{
+    font-size: 40px;
+    text-align: center;
+    text-shadow: 1px 4px 3px rgba(0,0,0,0.46);
+    color:white;
+    font-weight: bold;
+}
+
+ion-content h2{
+    font-size: 35px;
+    text-align: left;
+    font-family:"Rancho";
+}
+
+ion-content h3{
+    margin-top: 70px;
+    font-size: 25px;
+    text-align: center;
+    text-shadow: 1px 4px 3px rgba(0,0,0,0.46);
+    color:white;
+}
+
+ion-content p{
+    font-size: 30px;
+    text-align: center;
+    margin: 30px;
+    font-family:"Rancho";
+    margin-top: 70px;
 }
