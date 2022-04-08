@@ -9,3 +9,30 @@
 
 
 
+.custom_content_selectMJ{
+    height: 100%;
+    background: linear-gradient(195deg ,#384AF0 40%, #7882e1 60%, #aeb4e8 70%, #F68F59 0% );
+}
+
+.custom_content_selectMJ h1{
+    font-size: 50px;
+    text-align: center;
+    color:white;
+    margin-top: 30px;
+}
+
+.custom_content_selectMJ h2{
+    font-size: 50px;
+    text-align: center;
+    color:white;
+    margin: 20px;
+}
+
+.custom_content_selectMJ p{
+    font-size: 20px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    color:white;
+    margin: 20px;
+}
