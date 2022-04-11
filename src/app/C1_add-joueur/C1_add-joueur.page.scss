@@ -1,28 +1,12 @@
-
+//background color 
 ion-content {
     --ion-background-color: linear-gradient(195deg ,#384AF0 40%, #7882e1 60%, #aeb4e8 70%, #F68F59 0% );
 }
 
+// input transparent 
 ion-item {
     --background: transparent;
     --border-style: transparent;
-}
-
-h1 {
- color:white;
- font-size: 40px;
- margin-top:60px;
-}
-
-ion-range{
-    margin-top: 30px;
-    --knob-size:10px;
-    --bar-height:5px;
-}
-
-h3{
-    font-size: 30px;
-    color:white;
 }
 
 ion-input{
@@ -30,6 +14,26 @@ ion-input{
     margin:5px;
 }
 
+//title custom 
+h1 {
+ color:white;
+ font-size: 40px;
+ margin-top:60px;
+}
+
+//range custom
+ion-range{
+    margin-top: 30px;
+    --knob-size:10px;
+    --bar-height:5px;
+}
+// start and end of the range
+h3{
+    font-size: 30px;
+    color:white;
+}
+
+//button custom
 ion-button{
     --background: transparent;
     --border-style: transparent;
@@ -40,6 +44,4 @@ ion-button{
 	--background-hover : transparent;
 	--box-shadow: transparent;
 	--color-hover:rgb(230,230,230);
-
-
 }

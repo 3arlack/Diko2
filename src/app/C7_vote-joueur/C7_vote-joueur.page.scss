@@ -6,11 +6,12 @@
     display:none;
 }
 
+//background color
 ion-content{
     --background:linear-gradient(190deg, #F68F59 20%, #384AF0 0%);
     
 }
-
+//title
 ion-content h1{
     font-size: 40px;
     text-align: center;
@@ -18,7 +19,7 @@ ion-content h1{
     color:white;
     font-weight: bold;
 }
-
+//title
 ion-content h2{
     font-size: 35px;
     text-align: right;
@@ -35,6 +36,7 @@ ion-content p{
     margin-top: 80px;
 }
 
+//position and color of the button
 ion-fab-button{
     --background:#F68F59;
     position: fixed;
