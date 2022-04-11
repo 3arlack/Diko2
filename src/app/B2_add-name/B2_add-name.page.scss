@@ -1,6 +1,6 @@
 //background color 
 ion-content {
-    --ion-background-color: linear-gradient(195deg ,#384AF0 40%, #7882e1 60%, #aeb4e8 70%, #F68F59 0% );
+    --ion-background-color: linear-gradient(195deg ,var(--blue) 40%, #7882e1 60%, #aeb4e8 70%, var(--orange) 0% );
 }
 
 // input custom 
