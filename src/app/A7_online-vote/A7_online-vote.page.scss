@@ -1,0 +1,30 @@
+
+//background color
+ion-content{
+    --background:linear-gradient(190deg, #F68F59 20%, #384AF0 0%);
+    
+}
+//title
+ion-content h1{
+    font-size: 40px;
+    text-align: center;
+    text-shadow: 1px 4px 3px rgba(0,0,0,0.46);
+    color:white;
+    font-weight: bold;
+}
+//title
+ion-content h2{
+    font-size: 35px;
+    text-align: right;
+    margin-right: 20px;
+    font-family:"Rancho";
+}
+
+
+ion-content p{
+    font-size: 35px;
+    text-align: center;
+    margin: 30px;
+    font-family:"Rancho";
+    margin-top: 80px;
+}
