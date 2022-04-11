@@ -31,3 +31,42 @@ ion-content p{
     font-family:"Rancho";
     margin-top: 70px;
 }
+
+
+#imgCol{
+	background-image: url("../../assets/reponse.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+	position:relative;
+	left:5%;
+	width:auto;
+	height:35vh;
+}
+
+//support
+#imgCol::before{
+	display:block;
+	content:'';
+	position:absolute;
+	z-index: -1;
+	bottom:-48%;
+	left:-25%;
+	background: rgb(217, 215, 215);
+	width: 100%;
+	height:100%;
+	clip-path: ellipse(12vh 5vw);
+}
+
+// shadow
+#imgCol::after{
+	display:block;
+	content:'';
+	position:absolute;
+	z-index: -2;
+	bottom:-49%;
+	left:-24%;
+	background: rgba(0,0,0,0.5);
+	width: 100%;
+	height:100%;
+	clip-path: ellipse(12vh 5vw);
+}
