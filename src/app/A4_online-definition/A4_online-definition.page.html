@@ -1,38 +1,16 @@
 <ion-content>
-    <ion-grid>
-        <ion-row>
-            <ion-col class="ion-text-center">
-                <!--player's name-->
-                <h1>{{joueur}}</h1>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col class="ion-text-center">
-                <!-- word-->
-                <h2>{{mot}}</h2>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col class="ion-text-center">
-                Quelle est ta définition ?
-            </ion-col>
-        </ion-row>
-        <ion-row class="ion-justify-content-center">
-            <ion-col size="8">
-                <!-- input to enter the definition-->
-                <ion-textarea inputmode="text"></ion-textarea>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col class="ion-text-center">
-                <!-- button to validate the definition-->
-                <ion-button (click)="onClick()">Valider</ion-button>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>
-                <img src="../../assets/joueur2.png">
-            </ion-col>
-        </ion-row>
-    </ion-grid>
+	<div class="main">
+		<!--player's name-->
+		<h1>{{joueur}}</h1>
+		<div class="cadre ion-text-center">
+			<!-- word-->
+			<h2>{{mot}}</h2>
+			<p>Quelle est ta définition ?</p>
+			<!-- input to enter the definition-->
+			<ion-textarea rows=8 inputmode="text"></ion-textarea>
+			<!-- button to validate the definition-->
+			<ion-button (click)="onClick()">Valider</ion-button>
+		</div>
+		<div id="imgCol"></div>
+	</div>
 </ion-content>

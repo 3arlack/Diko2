@@ -1,0 +1,31 @@
+ion-content {
+	--background: linear-gradient(0deg, rgb(210,210,210) 0%, var(--blue) 100%);
+}
+
+ion-grid {
+	font-family:"Sansation Bold";
+	font-size:5vw;
+	color:white;
+}
+
+h1{
+	font-size:12vw;
+	text-shadow: 7px 7px 7px rgba(0, 0, 0, 0.25);
+}
+
+ion-button {
+	margin-top:10vh;
+	text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+	font-size:7vw;
+	--background: transparent;
+	--background-activated: transparent;
+	--background-focused: transparent;
+	--background-hover : transparent;
+	--border-style: transparent;
+	--box-shadow: transparent;
+	--color-hover:rgb(230,230,230);
+}
+
+ion-chip {
+	font-size: 5vw;
+}

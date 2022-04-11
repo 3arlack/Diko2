@@ -1,0 +1,32 @@
+ion-content {
+	--background: linear-gradient(180deg, var(--blue) 15%, rgba(150,150,150,0.7) 50%, var(--blue) 85%);
+	color:white;
+}
+
+ion-grid {
+	color:white;
+}
+
+ion-grid h3,h1 {
+	font-size: 12vw;
+	font-family: 'Sansation Bold';
+	text-transform: uppercase;
+	text-shadow: 7px 7px 7px rgba(0, 0, 0, 0.25);
+}
+
+ion-grid p {
+	font-size: 6vw;
+	font-family: 'Sansation';
+	text-transform: uppercase;
+	// text-shadow: 7px 7px 7px rgba(0, 0, 0, 0.25);
+}
+
+ion-chip {
+	font-size: 5vw;
+}
+
+ion-spinner {
+	transform: scale(2);
+	margin-top: 5vw;
+	margin-bottom: 5vw;
+}
