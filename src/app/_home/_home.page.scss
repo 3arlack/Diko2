@@ -43,7 +43,7 @@ ion-row{
 
 // background color
 ion-content{
-	--ion-background-color:linear-gradient(160deg, #3A4CF0 50%, #F68F59 0%);
+	--ion-background-color:linear-gradient(160deg, var(--blue) 50%, var(--orange) 0%);
 }
 
 // logo custom 
@@ -62,7 +62,7 @@ ion-img{
 .custom_home ion-button{
 	margin-top: 25px;
 	font-size: 25px;
-	--background: #3A4CF0;
+	--background: var(--blue);
 	--border-radius:8px;
 	height: 60px;
 	font-weight: bold;

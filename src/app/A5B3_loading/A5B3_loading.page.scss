@@ -1,0 +1,22 @@
+ion-grid {
+	height:100vh;
+	background: linear-gradient(180deg, var(--blue) 15%, rgba(184, 195, 251, 0.7) 50%, var(--blue) 85%);
+}
+
+
+//title custom 
+h1{
+    color:white;
+    font-size: 40px;
+    margin-top:100px;
+    font-weight: bold;
+}
+
+ion-spinner{
+    transform: scale(2);
+    margin-top: 30px;
+}
+
+ion-progress-bar{
+    --color: var(--orange);
+}

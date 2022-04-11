@@ -6,27 +6,17 @@
         <h1>{{message}}</h1>
       </ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col class="ion-text-center">
-        <!-- spinner-->
-        <ion-spinner></ion-spinner>
-      </ion-col>
-    </ion-row>
+
     <ion-row *ngIf="counter2 !=0">
       <ion-col class="ion-text-center">
         <!-- counter to know how many definition are complete -->
         Définitions remplies : {{counter}}/{{counter2}}
       </ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col class="ion-text-center">
-        <!-- progress bar -->
-        <ion-progress-bar [value]="progress"></ion-progress-bar>
-      </ion-col>
-    </ion-row>
+
     <ion-row *ngIf="joueurs.length > 0">
       <ion-col class="ion-text-center">
-        <h3>Joueurs connectés :</h3>
+        <h1>JOUEURS CONNECTÉS</h1>
       </ion-col>
     </ion-row>
     <ion-row *ngFor="let joueur of joueurs;let index = index">
@@ -42,5 +32,20 @@
         </ion-chip>
       </ion-col>
     </ion-row>
+
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <!-- progress bar -->
+        <ion-progress-bar [value]="progress"></ion-progress-bar>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <!-- spinner-->
+        <ion-spinner></ion-spinner>
+      </ion-col>
+    </ion-row>
+    
   </ion-grid>
 </ion-content>
