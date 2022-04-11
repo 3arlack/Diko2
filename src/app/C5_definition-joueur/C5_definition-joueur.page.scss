@@ -10,19 +10,11 @@ ion-modal h1 {
 	padding-bottom: 5vh;
 }
 
-ion-modal ion-grid {
-	background: rgba(255, 244, 244, 0.95);
-	border: 6px solid var(--orange);
-	box-sizing: border-box;
-	box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
-	border-radius: 5%;
-	flex:0 0 0%;
-}
-
 ion-modal ion-textarea {
 	--background: rgba(246, 143, 89, 0.2);
 	padding:5px;
 	box-shadow: inset 4px 4px 4px rgba(0, 0, 0, 0.25);
+	margin-bottom: 3vh;
 }
 
 ion-modal ion-button {
@@ -47,6 +39,16 @@ ion-modal p{
 	font-size:5vw;
 }
 
-ion-page{
-	display: block;
+.main {
+	height: 100%;
+}
+
+.cadre {
+	background: rgba(255, 244, 244, 0.95);
+	border: 6px solid var(--orange);
+	box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 5%;
+	padding: 2vh;
+	margin: 3vh;
+	min-height: fit-content;
 }

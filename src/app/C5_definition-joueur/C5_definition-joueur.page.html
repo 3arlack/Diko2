@@ -7,31 +7,16 @@
 		[isOpen]="true"
 		>
 			<ng-template>
-				<h1 class="ion-text-center" id="{{joueur.id_joueur}}">{{joueur.nom_joueur}}</h1>
-				<ion-grid>
-					<ion-row class="ion-justify-content-center">
-						<ion-col class="ion-text-center" size="12">
-							<!--the word-->
-							<h2>{{mot}}</h2>
-						</ion-col>
-					</ion-row>
-					<ion-row class="ion-justify-content-center">
-						<ion-col class="ion-text-center" size="12">
-							<p>Quelle est ta définition ?</p>
-						</ion-col>
-					</ion-row>
-					<ion-row class="ion-justify-content-center">
-						<ion-col size="12">
-							<!--input to enter the definition-->
-							<ion-textarea rows="8" id="{{'definition' + indexElement}}" inputmode="text"></ion-textarea>
-						</ion-col>
-					</ion-row>
-					<ion-row class="ion-justify-content-center">
-						<ion-col class="ion-text-center" size="12">
-							<ion-button (click)="dismiss(indexElement)">Valider</ion-button>
-						</ion-col>
-					</ion-row>
-				</ion-grid>
+				<div class="main">
+					<h1 class="ion-text-center" id="{{joueur.id_joueur}}">{{joueur.nom_joueur}}</h1>
+					<div class="cadre ion-text-center">
+						<h2>{{mot}}</h2>
+						<p>Quelle est ta définition ?</p>
+						<!--input to enter the definition-->
+						<ion-textarea rows="14" id="{{'definition' + indexElement}}" inputmode="text"></ion-textarea>
+						<ion-button (click)="dismiss(indexElement)">Valider</ion-button>
+					</div>
+				</div>
 			</ng-template>
 		</ion-modal>
 	</ng-container>
