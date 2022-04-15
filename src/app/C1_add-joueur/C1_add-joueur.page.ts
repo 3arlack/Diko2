@@ -12,6 +12,7 @@ import { OfflineService } from '../services/offline.service'; //import our offli
 export class C1_AddJoueurPage implements OnInit {
 
 	@ViewChildren(IonInput) playerNames:QueryList<IonInput>;
+	@ViewChildren(Image) images:QueryList<HTMLImageElement>;
 
 	tableauJoueurs:Array<string>=[]; //local array of player names
 
@@ -56,5 +57,9 @@ export class C1_AddJoueurPage implements OnInit {
 				return false;
 			}
 		}
+	}
+
+	randomAvatar():string{
+		return "../../assets/avatars/adventurer-"+ Math.floor(Math.random()*20)+".png"
 	}
 }

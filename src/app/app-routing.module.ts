@@ -82,7 +82,11 @@ const routes: Routes = [
   {
     path: 'add-name',
     loadChildren: () => import('./B2_add-name/B2_add-name.module').then( m => m.AddNamePageModule)
+  },  {
+    path: 'select-avatar',
+    loadChildren: () => import('./select-avatar/select-avatar.module').then( m => m.SelectAvatarPageModule)
   }
+
 
 ];
 
