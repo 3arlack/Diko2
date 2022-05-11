@@ -1,1 +1,1 @@
-io.ionic.starter
+dikov1.bundle

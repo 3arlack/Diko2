@@ -1,6 +1,6 @@
 1<?xml version="1.0" encoding="utf-8"?>
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-3    package="io.ionic.starter"
+3    package="dikov1.bundle"
 4    android:versionCode="1"
 5    android:versionName="1.0" >
 6
@@ -50,16 +50,16 @@
 31-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:4:238-273
 32        <activity
 32-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:6:9-13:20
-33            android:name="io.ionic.starter.MainActivity"
-33-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:6:136-180
+33            android:name="dikov1.bundle.MainActivity"
+33-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:6:136-177
 34            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode"
 34-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:6:19-135
 35            android:label="@string/title_activity_main"
-35-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:6:181-224
+35-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:6:178-221
 36            android:launchMode="singleTask"
-36-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:6:275-306
+36-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:6:272-303
 37            android:theme="@style/AppTheme.NoActionBarLaunch" >
-37-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:6:225-274
+37-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:6:222-271
 38            <intent-filter>
 38-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:8:13-11:29
 39                <action android:name="android.intent.action.MAIN" />
@@ -75,7 +75,7 @@
 45        <provider
 46            android:name="androidx.core.content.FileProvider"
 46-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:15:19-68
-47            android:authorities="io.ionic.starter.fileprovider"
+47            android:authorities="dikov1.bundle.fileprovider"
 47-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:15:69-120
 48            android:exported="false"
 48-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:15:121-145

@@ -4,14 +4,14 @@
     "type": "BUNDLE",
     "kind": "RegularFile"
   },
-  "applicationId": "io.ionic.starter",
+  "applicationId": "dikov1.bundle",
   "variantName": "debug",
   "elements": [
     {
       "type": "SINGLE",
       "filters": [],
       "attributes": [],
-      "outputFile": "../../../outputs/bundle/debug/app-debug.aab"
+      "outputFile": "../../../../debug/app-debug.aab"
     }
   ],
   "elementType": "File"

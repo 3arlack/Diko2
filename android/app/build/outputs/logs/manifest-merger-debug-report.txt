@@ -65,7 +65,7 @@ INJECTED from C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidMa
 INJECTED from C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:2:1-23:12
 INJECTED from C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:2:1-23:12
 	package
-		ADDED from C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:2:70-96
+		ADDED from C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:2:70-93
 		INJECTED from C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml
 	android:versionName
@@ -106,18 +106,18 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\st
 		ADDED from C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:4:206-237
 	android:usesCleartextTraffic
 		ADDED from C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:4:238-273
-activity#io.ionic.starter.MainActivity
+activity#dikov1.bundle.MainActivity
 ADDED from C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:6:9-13:20
 	android:label
-		ADDED from C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:6:181-224
+		ADDED from C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:6:178-221
 	android:launchMode
-		ADDED from C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:6:275-306
+		ADDED from C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:6:272-303
 	android:configChanges
 		ADDED from C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:6:19-135
 	android:theme
-		ADDED from C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:6:225-274
+		ADDED from C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:6:222-271
 	android:name
-		ADDED from C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:6:136-180
+		ADDED from C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:6:136-177
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
 ADDED from C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:8:13-11:29
 action#android.intent.action.MAIN
