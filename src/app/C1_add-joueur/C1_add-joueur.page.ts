@@ -1,5 +1,5 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, IonInput } from '@ionic/angular';
 import { Joueur } from '../classes/joueur';
 import { OfflineService } from '../services/offline.service'; //import our offline data service
@@ -16,13 +16,23 @@ export class C1_AddJoueurPage implements OnInit {
 
 	tableauJoueurs:Array<string>=[]; //local array of player names
 
-  constructor(private service:OfflineService, private alert:AlertController, private router:Router) { } //inject the service
+	avatars:Array<number>=[];
 
-  ngOnInit() {
-  }
+  constructor(private service:OfflineService, private alert:AlertController, private router:Router, private route: ActivatedRoute) { } //inject the service
 
+  ngOnInit() { }
+
+	// Generate Random Avatars
   ionViewWillEnter(){
     this.tableauJoueurs.length = 2;
+		for (let i=0;i<13;i++){
+			this.avatars.push(this.randomAvatar());
+		}
+		this.route.queryParams.subscribe(param =>{
+			console.log(param);
+			//
+		})
+
   }
 
   // Executed each time the slider changes value, sets the length of tableauJoueurs array
@@ -59,7 +69,7 @@ export class C1_AddJoueurPage implements OnInit {
 		}
 	}
 
-	randomAvatar():string{
-		return "../../assets/avatars/adventurer-"+ Math.floor(Math.random()*20)+".png"
+	randomAvatar():number{
+		return Math.floor(Math.random()*20);
 	}
 }

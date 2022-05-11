@@ -35,13 +35,16 @@ h3{
 
 //button custom
 ion-button{
-    --background: transparent;
-    --border-style: transparent;
-    font-size: 50px;
-   
+	--background: transparent;
+	--border-style: transparent;
+	font-size: 50px;
 	--background-activated: transparent;
 	--background-focused: transparent;
 	--background-hover : transparent;
 	--box-shadow: transparent;
 	--color-hover:rgb(230,230,230);
+}
+
+ion-avatar {
+	width: 96/2px;
 }

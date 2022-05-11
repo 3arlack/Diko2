@@ -1,7 +1,7 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output, ViewChildren } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { IonAvatar, NavController } from '@ionic/angular';
 import { Joueur } from '../classes/joueur';
-import { OfflineService } from '../services/offline.service';
-import { PartieService } from '../services/partie.service';
 
 @Component({
   selector: 'app-select-avatar',
@@ -10,23 +10,28 @@ import { PartieService } from '../services/partie.service';
 })
 export class SelectAvatarPage implements OnInit {
 
-	@Input() inputAvatar:string;
-	@Output() outputAvatar:string;
-
 	joueurs:Array<Joueur>;
 	avatars:Array<string>=[];
+	@ViewChildren(IonAvatar) ionAvatars:any;
+	selection:number;
 
-  constructor(private offlineService:OfflineService, private service:PartieService) {
+  constructor(private route:ActivatedRoute, private router:Router) {
 		for (let i=0;i<21;i++){
 			this.avatars.push("../assets/avatars/adventurer-"+i+".png");
 		}
-		// console.log(this.avatars);
+		this.route.queryParams.subscribe(param =>{
+			console.log(param);
+			this.selection = param.number;
+		})
 	}
 
   ngOnInit() { }
 
-	ionViewWillEnter(){
-
+	select(index:number){
+		this.selection = index;
+		this.route.queryParams.subscribe(param =>{
+			console.log(param);
+			this.router.navigate(['add-joueur'],{queryParams: {'playerIndex':param.playerIndex,'number':index}})
+		})
 	}
-
 }

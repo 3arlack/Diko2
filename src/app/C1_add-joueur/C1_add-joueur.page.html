@@ -21,8 +21,8 @@
         <ion-col>
           <ion-item>
             <!-- Attribute a single ID to every input to retrieve values later -->
-						<ion-avatar>
-							<img>
+						<ion-avatar [routerLink]="['/select-avatar']" [queryParams]="{ 'number' : [avatars[index]], 'playerIndex': index}">
+							<img [src]="'../../assets/avatars/adventurer-'+avatars[index]+'.png'">
 						</ion-avatar>
             <ion-input id="{{'Joueur' + index}}" type="text" placeholder="Nom du joueur {{index+1}}"></ion-input>
           </ion-item>

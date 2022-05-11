@@ -1,7 +1,7 @@
 <ion-content>
 	<h1 class="ion-text-center">Sélection avatar</h1>
 	<div class="ion-text-center">
-		<ion-avatar *ngFor="let avatar of avatars">
+		<ion-avatar [ngClass]="{'selected':selection == index}" #ionAvatar *ngFor="let avatar of avatars; let index = index" (click)="select(index)">
 			<img [src]=avatar>
 		</ion-avatar>
 	</div>
