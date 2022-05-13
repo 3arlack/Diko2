@@ -1,6 +1,6 @@
 1<?xml version="1.0" encoding="utf-8"?>
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-3    package="dikov1.bundle"
+3    package="dikov2.bundle"
 4    android:versionCode="2"
 5    android:versionName="1.0" >
 6
@@ -50,7 +50,7 @@
 31-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:4:238-273
 32        <activity
 32-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:6:9-13:20
-33            android:name="dikov1.bundle.MainActivity"
+33            android:name="dikov2.bundle.MainActivity"
 33-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:6:136-177
 34            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode"
 34-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:6:19-135
@@ -75,7 +75,7 @@
 45        <provider
 46            android:name="androidx.core.content.FileProvider"
 46-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:15:19-68
-47            android:authorities="dikov1.bundle.fileprovider"
+47            android:authorities="dikov2.bundle.fileprovider"
 47-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:15:69-120
 48            android:exported="false"
 48-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:15:121-145
