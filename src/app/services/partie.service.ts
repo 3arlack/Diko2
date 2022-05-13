@@ -104,6 +104,4 @@ export class PartieService {
   getScores(id_partie:number):Observable<Partie>{
     return this.http.post<Partie>(this.apiURL+"ws_getScores.php", "id="+id_partie, this.httpOptions2);
   }
-
 }
-
