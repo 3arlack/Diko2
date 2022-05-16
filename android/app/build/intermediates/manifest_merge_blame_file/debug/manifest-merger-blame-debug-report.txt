@@ -45,50 +45,51 @@
 29-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:4:126-178
 30        android:supportsRtl="true"
 30-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:4:179-205
-31        android:theme="@style/AppTheme"
-31-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:4:206-237
-32        android:usesCleartextTraffic="true" >
-32-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:4:238-273
-33        <activity
-33-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:6:9-13:20
-34            android:name="dikov2.bundle.MainActivity"
-34-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:6:136-177
-35            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode"
-35-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:6:19-135
-36            android:label="@string/title_activity_main"
-36-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:6:178-221
-37            android:launchMode="singleTask"
-37-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:6:272-303
-38            android:theme="@style/AppTheme.NoActionBarLaunch" >
-38-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:6:222-271
-39            <intent-filter>
-39-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:8:13-11:29
-40                <action android:name="android.intent.action.MAIN" />
-40-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:9:17-68
-40-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:9:25-66
-41
-42                <category android:name="android.intent.category.LAUNCHER" />
-42-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:10:17-76
-42-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:10:27-74
-43            </intent-filter>
-44        </activity>
-45
-46        <provider
-47            android:name="androidx.core.content.FileProvider"
-47-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:15:19-68
-48            android:authorities="dikov2.bundle.fileprovider"
-48-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:15:69-120
-49            android:exported="false"
-49-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:15:121-145
-50            android:grantUriPermissions="true" >
-50-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:15:146-180
-51            <meta-data
-51-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:16:13-111
-52                android:name="android.support.FILE_PROVIDER_PATHS"
-52-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:16:24-74
-53                android:resource="@xml/file_paths" />
-53-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:16:75-109
-54        </provider>
-55    </application>
-56
-57</manifest>
+31        android:testOnly="true"
+32        android:theme="@style/AppTheme"
+32-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:4:206-237
+33        android:usesCleartextTraffic="true" >
+33-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:4:238-273
+34        <activity
+34-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:6:9-13:20
+35            android:name="dikov2.bundle.MainActivity"
+35-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:6:136-177
+36            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode"
+36-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:6:19-135
+37            android:label="@string/title_activity_main"
+37-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:6:178-221
+38            android:launchMode="singleTask"
+38-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:6:272-303
+39            android:theme="@style/AppTheme.NoActionBarLaunch" >
+39-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:6:222-271
+40            <intent-filter>
+40-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:8:13-11:29
+41                <action android:name="android.intent.action.MAIN" />
+41-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:9:17-68
+41-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:9:25-66
+42
+43                <category android:name="android.intent.category.LAUNCHER" />
+43-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:10:17-76
+43-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:10:27-74
+44            </intent-filter>
+45        </activity>
+46
+47        <provider
+48            android:name="androidx.core.content.FileProvider"
+48-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:15:19-68
+49            android:authorities="dikov2.bundle.fileprovider"
+49-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:15:69-120
+50            android:exported="false"
+50-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:15:121-145
+51            android:grantUriPermissions="true" >
+51-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:15:146-180
+52            <meta-data
+52-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:16:13-111
+53                android:name="android.support.FILE_PROVIDER_PATHS"
+53-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:16:24-74
+54                android:resource="@xml/file_paths" />
+54-->C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:16:75-109
+55        </provider>
+56    </application>
+57
+58</manifest>
