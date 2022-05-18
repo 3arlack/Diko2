@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="dikov2.bundle">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="dikov3.bundle">
 
     <application android:allowBackup="true" android:icon="@mipmap/nouvelleicone2" android:label="@string/app_name" android:roundIcon="@mipmap/nouvelleicone2_round" android:supportsRtl="true" android:theme="@style/AppTheme" android:usesCleartextTraffic="true">
 
-        <activity android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode" android:name="dikov2.bundle.MainActivity" android:label="@string/title_activity_main" android:theme="@style/AppTheme.NoActionBarLaunch" android:launchMode="singleTask">
+        <activity android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode" android:name="dikov3.bundle.MainActivity" android:label="@string/title_activity_main" android:theme="@style/AppTheme.NoActionBarLaunch" android:launchMode="singleTask">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

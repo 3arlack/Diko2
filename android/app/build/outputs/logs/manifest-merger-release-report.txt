@@ -106,7 +106,7 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\st
 		ADDED from C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:4:192-223
 	android:usesCleartextTraffic
 		ADDED from C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:4:224-259
-activity#dikov2.bundle.MainActivity
+activity#dikov3.bundle.MainActivity
 ADDED from C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:6:9-13:20
 	android:label
 		ADDED from C:\Users\stagiaire\Desktop\Dev\diko\android\app\src\main\AndroidManifest.xml:6:178-221

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="dikov2.bundle"
+    package="dikov3.bundle"
     android:versionCode="1"
     android:versionName="1.1" >
 
@@ -30,7 +30,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true" >
         <activity
-            android:name="dikov2.bundle.MainActivity"
+            android:name="dikov3.bundle.MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode"
             android:label="@string/title_activity_main"
             android:launchMode="singleTask"
@@ -44,7 +44,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="dikov2.bundle.fileprovider"
+            android:authorities="dikov3.bundle.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true" >
             <meta-data
