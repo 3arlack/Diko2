@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/ngx';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +6,8 @@ import { ScreenOrientation } from '@awesome-cordova-plugins/screen-orientation/n
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-	constructor(private screenOrientation: ScreenOrientation) {
-		this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+	constructor() {
+		// this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+		screen.orientation.lock('portrait');
 	}
 }
