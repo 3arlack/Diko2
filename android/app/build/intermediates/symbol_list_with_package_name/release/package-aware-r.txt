@@ -1128,6 +1128,8 @@ color mtrl_textinput_focused_box_stroke_color
 color mtrl_textinput_hovered_box_stroke_color
 color notification_action_color_filter
 color notification_icon_bg_color
+color nouvelleicone2_background
+color nouvelleicone_background
 color primary_dark_material_dark
 color primary_dark_material_light
 color primary_material_dark
@@ -2253,6 +2255,12 @@ mipmap ic_launcher
 mipmap ic_launcher_background
 mipmap ic_launcher_foreground
 mipmap ic_launcher_round
+mipmap nouvelleicone
+mipmap nouvelleicone2
+mipmap nouvelleicone2_foreground
+mipmap nouvelleicone2_round
+mipmap nouvelleicone_foreground
+mipmap nouvelleicone_round
 plurals mtrl_badge_content_description
 string abc_action_bar_home_description
 string abc_action_bar_up_description
