@@ -150,7 +150,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let AppComponent = class AppComponent {
-    constructor() { }
+    constructor() {
+        // this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+        screen.orientation.lock('portrait');
+    }
 };
 AppComponent.ctorParameters = () => [];
 AppComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
